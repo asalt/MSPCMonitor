@@ -18,9 +18,27 @@ import typer
 
 import logging
 
+
+from . import crud, models, schemas
+from .database import SessionLocal, engine
+
+models.Base.metadata.create_all(bind=engine)
+
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
+
 MIN_RAWFILE_SIZE = 5 * 10 ** 8
 MIN_WAIT_TIME = 100  # minutes
 MAX_BATCH_SIZE = 4
+
+
 
 
 def get_logger(name=__name__):
