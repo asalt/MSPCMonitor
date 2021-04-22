@@ -28,17 +28,14 @@ models.Base.metadata.create_all(bind=engine)
 def get_db():
     db = SessionLocal()
     try:
-        yield db
+        return db
     finally:
         db.close()
-
 
 
 MIN_RAWFILE_SIZE = 5 * 10 ** 8
 MIN_WAIT_TIME = 100  # minutes
 MAX_BATCH_SIZE = 4
-
-
 
 
 def get_logger(name=__name__):
@@ -118,29 +115,54 @@ def update_time(path, config=config, time=None):
     return
 
 
-def monitor_files(path, last_time=None, maxsize=10) -> list:
+def monitor_files(path, last_time=None, maxsize=10, inst_id=99995) -> list:
     if last_time is None:
         last_time = datetime(1, 1, 1, 0, 0, 0)
     new_rawfiles = list()
 
     nfound = 0
     for rawfile in path.glob("*raw"):
+
         statres = rawfile.stat()
 
-        #logger.debug(f"{rawfile.name} {statres}")
-        #logger.debug(f"{statres.st_mtime} gt {last_time.timestamp()} \
+        # logger.debug(f"{rawfile.name} {statres}")
+        # logger.debug(f"{statres.st_mtime} gt {last_time.timestamp()} \
         #            and {statres.st_size} gt {MIN_RAWFILE_SIZE} \
         #            and {statres.st_mtime} sub {statres.st_ctime} / 60 gt {MIN_WAIT_TIME} \
         #            ")
-                    
-        if (
-            statres.st_mtime > last_time.timestamp()
-            and statres.st_size > MIN_RAWFILE_SIZE
+
+        if not (
+            statres.st_mtime > last_time.timestamp() # change to some min timestamp so we 
+            and statres.st_size > MIN_RAWFILE_SIZE   # don't process all rawfiles in existance
             and (statres.st_mtime - statres.st_ctime) / 60 > MIN_WAIT_TIME
         ):
-            logger.info(f"Found {rawfile}")
-            new_rawfiles.append(rawfile)
-            nfound += 1
+            continue
+
+        rawfile_rec = crud.get_rawfile_by_name(get_db(), rawfile.name)
+        # import ipdb; ipdb.set_trace()
+        if rawfile_rec is not None and rawfile_rec.processed == True:
+            continue  # already exists and has been processed
+
+        logger.info(f"Found {rawfile}")
+
+        if rawfile_rec is None:  # need to add
+
+            inst = crud.get_instrument_by_qc_recno(get_db(), qc_recno=inst_id)
+
+            rawfile_rec = schemas.RawFileCreate(
+                name=rawfile.name,
+                #ctime=datetime.strptime(statres.st_ctime, "%Y-%m-%d %H:%M:%S"),
+                #mtime=datetime.strptime(statres.st_mtime, "%Y-%m-%d %H:%M:%S"),
+                ctime=datetime.fromtimestamp(statres.st_ctime),
+                mtime=datetime.fromtimestamp(statres.st_mtime),
+                #ctime=statres.st_ctime,
+                #mtime=statres.st_mtime,
+            )
+            crud.create_rawfile(get_db(), rawfile_rec, instrument_id=inst.id)
+            logger.info(f"Saved {rawfile} record in db")
+
+        new_rawfiles.append(rawfile)
+        nfound += 1
 
     return new_rawfiles
 
@@ -151,8 +173,8 @@ def move_files(files: List[Path], workdir: Path, dry=False):
         target = workdir / Path(file.name)
 
         if not dry:
-            logger.info(f"Copying {file} to {target}")
             if not target.exists():
+                logger.info(f"Copying {file} to {target}")
                 shutil.copy2(file, target)
             elif target.exists():
                 logger.info(f"{target} already exists. Not moving")
@@ -161,9 +183,28 @@ def move_files(files: List[Path], workdir: Path, dry=False):
         new_files.append(target)
     return new_files
 
+def summarize_results(p):
+
+    outfile = p.parent.glob(f"{p.name[:10]}*MSPCRunner*txt")
+    outfile = list(outfile)
+    if len(outfile) != 1:
+        logger.error(f'Could not find MSPCRunner output for {p}')
+        return
+
+    import pandas as pd
+    df = pd.read_table(outfile[0])
+    p.name[:10]
+
+    n_psms = len(df)
+
+    rawfile_rec = crud.get_rawfile_by_name(get_db(), p.name)
+    rawfile_rec.psms = n_psms
+    rawfile_rec.commit()
 
 def work(path, dry=False):
-
+    # TODO: look for existance of fragger and percolator outputs
+    # save completion in db
+    # do not re-run if data already exists
     last_time = get_last_time(path) or datetime(1990, 1, 1, 1, 0, 0)
 
     new_rawfiles = monitor_files(path, last_time, maxsize=MAX_BATCH_SIZE)
@@ -173,6 +214,9 @@ def work(path, dry=False):
 
     workdir = get_workdir()
     staged_rawfiles = move_files(new_rawfiles, workdir, dry=dry)
+    # now that they are staged, let's add to db
+    # for staged_rawfile in staged_rawfiles:
+
 
     QC_CMD = [
         "mspcrunner",
@@ -186,7 +230,7 @@ def work(path, dry=False):
         "OTIT-hs",
         "--ramalloc",
         "25",
-        #'percolate',
+        'percolate',
         #'quant'
     ]
 
@@ -197,9 +241,25 @@ def work(path, dry=False):
 
     CMD = QC_CMD
     result = subprocess.run(
-        CMD, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True
+        CMD,
+        capture_output=True,
+        universal_newlines=True,
+        # stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True
     )
-    print(result.returncode, result.stdout, result.stderr)
+    #print(result.returncode, result.stdout, result.stderr)
+
+
+
+    # TODO make nicer
+    from mspcrunner import psm_merge
+    psm_merge.main(workdir)
+
+    for f in staged_rawfiles:
+        summarize_results(f)
+        crud.update_rawfile(f.name, processed=True)
+    #summarize_results(f)
+    #subprocess.run
+    #import ipdb; ipdb.set_trace()
 
     # capture_output=True) need py3.7
     # *args, **kwargs,    stdout=subprocess.PIPE,stderr=subprocess.PIPE)
@@ -218,8 +278,10 @@ def watch(
     if APPDIR.exists():
         print(f"Monitoring {path}")
 
-    dry = True
-    schedule.every(2).seconds.do(work, path=path, dry=dry)
+    #schedule.run_pending()
+    work(path=path, dry=dry)
+
+    schedule.every(30).minutes.do(work, path=path, dry=dry)
 
     while True:
         schedule.run_pending()

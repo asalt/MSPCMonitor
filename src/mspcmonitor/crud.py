@@ -21,6 +21,20 @@ def get_instrument_by_qc_recno(db: Session, qc_recno: int):
 def get_experiment_by_recno(db: Session, recno: int):
     return db.query(models.Experiment).filter(models.Experiment.recno == recno).first()
 
+def get_exprun_by_recrun(db: Session, recno: int, runno:int):
+    return (db.query(models.ExperimentRun)
+        .join(models.Experiment)
+        .filter(models.Experiment.recno == recno and
+                models.ExperimentRun.runno == runno
+        )).first()
+
+
+def get_unprocessed_data(db: Session):
+    return (db.query(models.ExperimentRun).filter(models.ExperimentRun.is_plotted==False)
+            .join(models.Experiment))
+    
+
+
 
 def create_instrument(db: Session, instrument: schemas.InstrumentCreate):
     db_instrument = models.Instrument(

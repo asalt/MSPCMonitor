@@ -68,7 +68,10 @@ class ExperimentRun(Base):
     id = Column(Integer, primary_key=True)
     runno = Column(Integer)
     searchno = Column(Integer)
-    processedFlag = Column(Boolean)  # make more?
+    is_plotted = Column(Boolean, default=False)
+    is_searched = Column(Boolean, default=False)  # make more?
+    is_validated = Column(Boolean, default=False)  # make more?
+    is_grouped = Column(Boolean, default=False)  # make more?
 
     taxon = Column(String)
     refdb = Column(String)
