@@ -19,7 +19,7 @@ setup(
     [console_scripts]
     mspcmonitor=mspcmonitor.main:app
     """,
-    #py_modules = ['main'],
+    py_modules = ['main', 'api'],
     #package_data = {"mspcrunner": ['../../ext/*', '../../params/*']},
     include_package_data = True
 

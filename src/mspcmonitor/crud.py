@@ -11,6 +11,9 @@ def add_and_commit(db, obj):
 def get_rawfile_by_name(db: Session, name: str):
     return db.query(models.RawFile).filter(models.RawFile.name == name).first()
 
+def get_all_instruments(db: Session):
+    print(db.query(models.Instrument).all())
+    return db.query(models.Instrument).all()
 
 def get_instrument_by_name(db: Session, name: str):
     return db.query(models.Instrument).filter(models.Instrument.name == name).first()

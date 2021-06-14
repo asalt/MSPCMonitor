@@ -22,6 +22,8 @@ import logging
 from . import crud, models, schemas
 from .database import SessionLocal, engine
 
+MSFileInfoScanner = '~/tools/MSFileInfoScanner_Program/MSFileInfoScanner.exe'
+
 models.Base.metadata.create_all(bind=engine)
 
 
@@ -288,6 +290,25 @@ def watch(
         time.sleep(1)
     # worker(path.resolve())
 
+def scan(f):
+    CMD = [
+    MSFileInfoScanner,
+    "/I:{f.'",
+    ]
+
+# @app.command()
+# def run_api():
+#     from .api import app as api_app
+#     return api_app
+    
+
+@app.command()
+def archive(
+    path: Path = typer.Argument(
+        default=None,
+        help="Path with raw files to archive. Will process all raw files in path.",),
+ ):
+ pass
 
 @app.callback()
 def main():
