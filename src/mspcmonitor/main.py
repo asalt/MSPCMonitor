@@ -22,7 +22,7 @@ import logging
 from . import crud, models, schemas
 from .database import SessionLocal, engine
 
-MSFileInfoScanner = '~/tools/MSFileInfoScanner_Program/MSFileInfoScanner.exe'
+MSFileInfoScanner = "~/tools/MSFileInfoScanner_Program/MSFileInfoScanner.exe"
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -35,7 +35,7 @@ def get_db():
         db.close()
 
 
-MIN_RAWFILE_SIZE = 5 * 10 ** 8
+MIN_RAWFILE_SIZE = 5 * 10**8
 MIN_WAIT_TIME = 100  # minutes
 MAX_BATCH_SIZE = 4
 
@@ -134,8 +134,10 @@ def monitor_files(path, last_time=None, maxsize=10, inst_id=99995) -> list:
         #            ")
 
         if not (
-            statres.st_mtime > last_time.timestamp() # change to some min timestamp so we 
-            and statres.st_size > MIN_RAWFILE_SIZE   # don't process all rawfiles in existance
+            statres.st_mtime
+            > last_time.timestamp()  # change to some min timestamp so we
+            and statres.st_size
+            > MIN_RAWFILE_SIZE  # don't process all rawfiles in existance
             and (statres.st_mtime - statres.st_ctime) / 60 > MIN_WAIT_TIME
         ):
             continue
@@ -153,12 +155,12 @@ def monitor_files(path, last_time=None, maxsize=10, inst_id=99995) -> list:
 
             rawfile_rec = schemas.RawFileCreate(
                 name=rawfile.name,
-                #ctime=datetime.strptime(statres.st_ctime, "%Y-%m-%d %H:%M:%S"),
-                #mtime=datetime.strptime(statres.st_mtime, "%Y-%m-%d %H:%M:%S"),
+                # ctime=datetime.strptime(statres.st_ctime, "%Y-%m-%d %H:%M:%S"),
+                # mtime=datetime.strptime(statres.st_mtime, "%Y-%m-%d %H:%M:%S"),
                 ctime=datetime.fromtimestamp(statres.st_ctime),
                 mtime=datetime.fromtimestamp(statres.st_mtime),
-                #ctime=statres.st_ctime,
-                #mtime=statres.st_mtime,
+                # ctime=statres.st_ctime,
+                # mtime=statres.st_mtime,
             )
             crud.create_rawfile(get_db(), rawfile_rec, instrument_id=inst.id)
             logger.info(f"Saved {rawfile} record in db")
@@ -185,15 +187,17 @@ def move_files(files: List[Path], workdir: Path, dry=False):
         new_files.append(target)
     return new_files
 
+
 def summarize_results(p):
 
     outfile = p.parent.glob(f"{p.name[:10]}*MSPCRunner*txt")
     outfile = list(outfile)
     if len(outfile) != 1:
-        logger.error(f'Could not find MSPCRunner output for {p}')
+        logger.error(f"Could not find MSPCRunner output for {p}")
         return
 
     import pandas as pd
+
     df = pd.read_table(outfile[0])
     p.name[:10]
 
@@ -202,6 +206,7 @@ def summarize_results(p):
     rawfile_rec = crud.get_rawfile_by_name(get_db(), p.name)
     rawfile_rec.psms = n_psms
     rawfile_rec.commit()
+
 
 def work(path, dry=False):
     # TODO: look for existance of fragger and percolator outputs
@@ -219,7 +224,6 @@ def work(path, dry=False):
     # now that they are staged, let's add to db
     # for staged_rawfile in staged_rawfiles:
 
-
     QC_CMD = [
         "mspcrunner",
         *[
@@ -232,7 +236,7 @@ def work(path, dry=False):
         "OTIT-hs",
         "--ramalloc",
         "25",
-        'percolate',
+        "percolate",
         #'quant'
     ]
 
@@ -248,20 +252,19 @@ def work(path, dry=False):
         universal_newlines=True,
         # stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True
     )
-    #print(result.returncode, result.stdout, result.stderr)
-
-
+    # print(result.returncode, result.stdout, result.stderr)
 
     # TODO make nicer
     from mspcrunner import psm_merge
+
     psm_merge.main(workdir)
 
     for f in staged_rawfiles:
         summarize_results(f)
         crud.update_rawfile(f.name, processed=True)
-    #summarize_results(f)
-    #subprocess.run
-    #import ipdb; ipdb.set_trace()
+    # summarize_results(f)
+    # subprocess.run
+    # import ipdb; ipdb.set_trace()
 
     # capture_output=True) need py3.7
     # *args, **kwargs,    stdout=subprocess.PIPE,stderr=subprocess.PIPE)
@@ -277,10 +280,15 @@ def watch(
         help="Path with raw files to process. Will process all raw files in path.",
     ),
 ):
+    ## checking inputs
+    if path is None:
+        raise ValueError("[path] is required")
+
     if APPDIR.exists():
         print(f"Monitoring {path}")
 
-    #schedule.run_pending()
+    ## do work
+    # schedule.run_pending()
     work(path=path, dry=dry)
 
     schedule.every(30).minutes.do(work, path=path, dry=dry)
@@ -290,25 +298,29 @@ def watch(
         time.sleep(1)
     # worker(path.resolve())
 
+
 def scan(f):
     CMD = [
-    MSFileInfoScanner,
-    "/I:{f.'",
+        MSFileInfoScanner,
+        "/I:{f.'",
     ]
+
 
 # @app.command()
 # def run_api():
 #     from .api import app as api_app
 #     return api_app
-    
+
 
 @app.command()
 def archive(
     path: Path = typer.Argument(
         default=None,
-        help="Path with raw files to archive. Will process all raw files in path.",),
- ):
- pass
+        help="Path with raw files to archive. Will process all raw files in path.",
+    ),
+):
+    pass
+
 
 @app.callback()
 def main():
