@@ -1,42 +1,57 @@
-from sqlalchemy.orm import Session
+# from sqlalchemy.orm import Session
+from sqlmodel import Session
 
 from . import models, schemas
 
-def add_and_commit(db, obj):
+
+def add_and_commit(db: Session, obj):
     db.add(obj)
     db.commit()
     db.refresh(obj)
     return obj
 
+
 def get_rawfile_by_name(db: Session, name: str):
     return db.query(models.RawFile).filter(models.RawFile.name == name).first()
+
 
 def get_all_instruments(db: Session):
     print(db.query(models.Instrument).all())
     return db.query(models.Instrument).all()
 
+
 def get_instrument_by_name(db: Session, name: str):
     return db.query(models.Instrument).filter(models.Instrument.name == name).first()
 
+
 def get_instrument_by_qc_recno(db: Session, qc_recno: int):
-    return db.query(models.Instrument).filter(models.Instrument.qc_recno == qc_recno).first()
+    return (
+        db.query(models.Instrument)
+        .filter(models.Instrument.qc_recno == qc_recno)
+        .first()
+    )
+
 
 def get_experiment_by_recno(db: Session, recno: int):
     return db.query(models.Experiment).filter(models.Experiment.recno == recno).first()
 
-def get_exprun_by_recrun(db: Session, recno: int, runno:int):
-    return (db.query(models.ExperimentRun)
+
+def get_exprun_by_recrun(db: Session, recno: int, runno: int):
+    return (
+        db.query(models.ExperimentRun)
         .join(models.Experiment)
-        .filter(models.Experiment.recno == recno and
-                models.ExperimentRun.runno == runno
-        )).first()
+        .filter(
+            models.Experiment.recno == recno and models.ExperimentRun.runno == runno
+        )
+    ).first()
 
 
 def get_unprocessed_data(db: Session):
-    return (db.query(models.ExperimentRun).filter(models.ExperimentRun.is_plotted==False)
-            .join(models.Experiment))
-    
-
+    return (
+        db.query(models.ExperimentRun)
+        .filter(models.ExperimentRun.is_plotted == False)
+        .join(models.Experiment)
+    )
 
 
 def create_instrument(db: Session, instrument: schemas.InstrumentCreate):
@@ -48,22 +63,22 @@ def create_instrument(db: Session, instrument: schemas.InstrumentCreate):
     db.refresh(db_instrument)
     return db_instrument
 
+
 def create_experiment(db: Session, experiment: schemas.ExperimentCreate):
-    db_exp = models.Experiment(
-        recno = experiment.recno,
-        label = experiment.label
-    )
+    db_exp = models.Experiment(recno=experiment.recno, label=experiment.label)
     return add_and_commit(db, db_exp)
-    
-def create_experimentrun(db: Session, experimentrun: schemas.ExperimentRunCreate,
-    recno: int):
+
+
+def create_experimentrun(
+    db: Session, experimentrun: schemas.ExperimentRunCreate, recno: int
+):
     db_exp = get_experiment_by_recno(db, recno)
     db_exprun = models.ExperimentRun(
-        runno = experimentrun.runno,
-        searchno = experimentrun.searchno,
-        taxon = experimentrun.taxon,
-        refdb = experimentrun.taxon,
-        recno_id = db_exp.id
+        runno=experimentrun.runno,
+        searchno=experimentrun.searchno,
+        taxon=experimentrun.taxon,
+        refdb=experimentrun.taxon,
+        recno_id=db_exp.id,
     )
     return add_and_commit(db, db_exprun)
 
@@ -75,11 +90,13 @@ def create_rawfile(db: Session, rawfile: schemas.RawFileCreate, instrument_id: i
     db.refresh(db_rawfile)
     return db_rawfile
 
+
 def update_rawfile(db: Session, rawfile_name: str, processed=False, psms=None):
     rawfile = get_rawfile_by_name(db, rawfile_name)
     rawfile.processed = processed
     rawfile.psms = psms
     db.commit()
+
 
 def get_rawfiles(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.RawFile).offset(skip).limit(limit).all()

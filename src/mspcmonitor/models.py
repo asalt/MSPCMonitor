@@ -13,6 +13,8 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import relationship
 from typing import List, Optional, Dict, Any, Union, Tuple
+from sqlmodel import create_engine
+from sqlmodel import Field, Session, SQLModel, Relationship
 
 
 # ========================================
@@ -20,18 +22,17 @@ from typing import List, Optional, Dict, Any, Union, Tuple
 # import crud
 # from .database import Base, engine
 
-from sqlmodel import create_engine
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
+# SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
+#
+# engine = create_engine(
+#     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}, echo=True
+# )
+from .database import engine
 
-engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}, echo=True
-)
-
+# engine = engine
 # ========================================
 
-
-from sqlmodel import Field, Session, SQLModel, Relationship
 
 # these are the slots for PyDantic FieldInfo that can be added as kwargs to Field
 #
