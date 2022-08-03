@@ -10,6 +10,7 @@ import subprocess
 import shutil
 from datetime import datetime
 from typing import Optional, List, Tuple
+from sqlmodel import Session
 
 import schedule
 
@@ -20,19 +21,21 @@ import logging
 
 
 from . import crud, models, schemas
-from .database import SessionLocal, engine
+from .dbutils import get_db
+
+# from .database import engine
 
 MSFileInfoScanner = "~/tools/MSFileInfoScanner_Program/MSFileInfoScanner.exe"
 
-models.Base.metadata.create_all(bind=engine)
+# models.Base.metadata.create_all(bind=engine)
 
 
-def get_db():
-    db = SessionLocal()
-    try:
-        return db
-    finally:
-        db.close()
+# def get_db(engine=engine):
+#     db = Session(engine)
+#     try:
+#         return db
+#     finally:
+#         db.close()
 
 
 MIN_RAWFILE_SIZE = 5 * 10**8
@@ -65,6 +68,7 @@ def get_logger(name=__name__):
 
 logger = get_logger()
 
+# this is a file-based monitoring system, we replace this with storing in a database
 APPDIR = Path(typer.get_app_dir("mspcmonitor"))
 TIMESHEET = APPDIR / "timesheet.txt"
 if not TIMESHEET.exists():
@@ -84,11 +88,20 @@ config = configparser.RawConfigParser(delimiters=("?", "="))
 config.optionxform = lambda option: option
 config.read(TIMESHEET)
 
-app = typer.Typer(chain=True)
+
+app = typer.Typer()
+run_app = typer.Typer(chain=True)
+app.add_typer(run_app, name="run")
+
+from . import dbutils
+
+app.add_typer(dbutils.app, name="db", short_help="db utils")
+## ============================================================
+
 BASEDIR = Path(os.path.split(__file__)[0])
 
 
-@app.command()
+@run_app.command()
 def set_workdir(path: Path, config=config):
     config["workdir"]["processing"] = str(path.resolve())
     with open(TIMESHEET, "w") as f:
@@ -96,7 +109,7 @@ def set_workdir(path: Path, config=config):
     logger.info(f"Updated ['workdir']['processing'] to {path} ")
 
 
-@app.command()
+@run_app.command()
 def get_workdir(config=config):
     res = config["workdir"].get("processing")
     logger.info(f"['workdir']['processing'] : {res} ")
@@ -117,58 +130,78 @@ def update_time(path, config=config, time=None):
     return
 
 
-def monitor_files(path, last_time=None, maxsize=10, inst_id=99995) -> list:
-    if last_time is None:
-        last_time = datetime(1, 1, 1, 0, 0, 0)
-    new_rawfiles = list()
-
-    nfound = 0
-    for rawfile in path.glob("*raw"):
-
-        statres = rawfile.stat()
-
-        # logger.debug(f"{rawfile.name} {statres}")
-        # logger.debug(f"{statres.st_mtime} gt {last_time.timestamp()} \
-        #            and {statres.st_size} gt {MIN_RAWFILE_SIZE} \
-        #            and {statres.st_mtime} sub {statres.st_ctime} / 60 gt {MIN_WAIT_TIME} \
-        #            ")
-
-        if not (
-            statres.st_mtime
-            > last_time.timestamp()  # change to some min timestamp so we
-            and statres.st_size
-            > MIN_RAWFILE_SIZE  # don't process all rawfiles in existance
-            and (statres.st_mtime - statres.st_ctime) / 60 > MIN_WAIT_TIME
-        ):
-            continue
-
-        rawfile_rec = crud.get_rawfile_by_name(get_db(), rawfile.name)
-        # import ipdb; ipdb.set_trace()
-        if rawfile_rec is not None and rawfile_rec.processed == True:
-            continue  # already exists and has been processed
-
-        logger.info(f"Found {rawfile}")
-
-        if rawfile_rec is None:  # need to add
-
-            inst = crud.get_instrument_by_qc_recno(get_db(), qc_recno=inst_id)
-
-            rawfile_rec = schemas.RawFileCreate(
-                name=rawfile.name,
-                # ctime=datetime.strptime(statres.st_ctime, "%Y-%m-%d %H:%M:%S"),
-                # mtime=datetime.strptime(statres.st_mtime, "%Y-%m-%d %H:%M:%S"),
-                ctime=datetime.fromtimestamp(statres.st_ctime),
-                mtime=datetime.fromtimestamp(statres.st_mtime),
-                # ctime=statres.st_ctime,
-                # mtime=statres.st_mtime,
-            )
-            crud.create_rawfile(get_db(), rawfile_rec, instrument_id=inst.id)
-            logger.info(f"Saved {rawfile} record in db")
-
-        new_rawfiles.append(rawfile)
-        nfound += 1
-
-    return new_rawfiles
+# def monitor_for_rawfiles(
+#     path, engine, last_time=None, maxsize=10, inst_id=99995
+# ) -> list:
+#     if last_time is None:
+#         last_time = datetime(2, 1, 1, 1, 1, 1)
+#     new_rawfiles = list()
+#
+#     nfound = 0
+#     for rawfile in path.glob("**/*raw"):
+#         #
+#         logger.debug("=" * 80)
+#         logger.debug(f"{rawfile}")
+#
+#         statres = rawfile.stat()
+#
+#         MIN_RAWFILE_SIZE = -1
+#         MIN_WAIT_TIME = -1
+#         logger.debug(f"{rawfile.name} {statres}")
+#         logger.debug(
+#             f"{statres.st_mtime} gt {last_time.timestamp()} \
+#                    and {statres.st_size} gt {MIN_RAWFILE_SIZE} \
+#                    and {statres.st_mtime} sub {statres.st_ctime} / 60 gt {MIN_WAIT_TIME} \
+#                    "
+#         )
+#
+#         if not (
+#             statres.st_mtime
+#             > last_time.timestamp()  # change to some min timestamp so we
+#             and statres.st_size
+#             > MIN_RAWFILE_SIZE  # don't process all rawfiles in existance
+#             and (statres.st_mtime - statres.st_ctime) / 60 > MIN_WAIT_TIME
+#         ):
+#             logger.debug(f"Skipping {rawfile}")
+#             continue
+#
+#         rawfile_rec = crud.get_rawfile_by_name(get_db(engine), rawfile.name)
+#         new_rawfile = models.RawFile(
+#             name=rawfile.name,
+#             ctime=datetime.fromtimestamp(statres.st_ctime),
+#             mtime=datetime.fromtimestamp(statres.st_mtime),
+#             size=statres.st_size,
+#         )
+#         if rawfile_rec == new_rawfile:
+#             logger.debug(f"\n\tAlready IN DB\n{rawfile_rec}")
+#             # already in database, skip
+#             # see models.RawFile.__eq__ for details
+#             continue
+#
+#         if rawfile_rec is not None:
+#             exprun = rawfile_rec.exprun
+#             if exprun is None:
+#                 # missing
+#                 # try to find exprun
+#                 exprun = None
+#             # import ipdb; ipdb.set_trace()
+#             logger.debug(f"record linked to rawfile is {exprun}")
+#             if (
+#                 rawfile_rec is not None
+#                 and exprun is not None
+#                 and exprun.is_imported == True
+#             ):
+#                 continue  # already exists and has been processed
+#
+#         logger.debug(f"Found {rawfile}")
+#
+#         crud.create_rawfile(get_db(engine), new_rawfile)
+#         logger.info(f"Saved {rawfile} record in db")
+#
+#         new_rawfiles.append(rawfile)
+#         nfound += 1
+#
+#     return new_rawfiles
 
 
 def move_files(files: List[Path], workdir: Path, dry=False):
@@ -184,7 +217,7 @@ def move_files(files: List[Path], workdir: Path, dry=False):
                 logger.info(f"{target} already exists. Not moving")
         elif dry:
             logger.info(f"DRY RUN - Copying {file} to {target}")
-        new_files.append(target)
+        new_files.run_append(target)
     return new_files
 
 
@@ -214,7 +247,7 @@ def work(path, dry=False):
     # do not re-run if data already exists
     last_time = get_last_time(path) or datetime(1990, 1, 1, 1, 0, 0)
 
-    new_rawfiles = monitor_files(path, last_time, maxsize=MAX_BATCH_SIZE)
+    new_rawfiles = monitor_for_rawfiles(path, last_time, maxsize=MAX_BATCH_SIZE)
 
     if len(new_rawfiles) == 0:
         return
@@ -270,7 +303,7 @@ def work(path, dry=False):
     # *args, **kwargs,    stdout=subprocess.PIPE,stderr=subprocess.PIPE)
 
 
-@app.command()
+@run_app.command()
 def watch(
     dry: bool = typer.Option(
         False, "--dry", help="Dry run, do not actually execute commands"
@@ -306,13 +339,13 @@ def scan(f):
     ]
 
 
-# @app.command()
+# @run_app.command()
 # def run_api():
-#     from .api import app as api_app
-#     return api_app
+#     from .api import run_app as api_run_app
+#     return api_run_app
 
 
-@app.command()
+@run_app.command()
 def archive(
     path: Path = typer.Argument(
         default=None,
@@ -320,6 +353,10 @@ def archive(
     ),
 ):
     pass
+
+
+# @run_app.command()
+# db
 
 
 @app.callback()

@@ -1,4 +1,5 @@
 from sqlite3 import Date
+from datetime import datetime
 from matplotlib.pyplot import table
 from sqlalchemy import (
     Column,
@@ -28,7 +29,6 @@ from sqlmodel import Field, Session, SQLModel, Relationship
 # engine = create_engine(
 #     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}, echo=True
 # )
-from .database import engine
 
 # engine = engine
 # ========================================
@@ -63,28 +63,31 @@ from .database import engine
 #         'discriminator',
 #         'extra',
 
+from .database import engine
+
 
 def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
 
 
-# class Instrument(Base):
 class Instrument(SQLModel, table=True):
-    __tablename__ = "instrument"
-
-    class Meta:
-        load_instance = True
+    # class Meta:
+    #     load_instance = True
 
     # id = Column(Integer, primary_key=True)
     # name = Column(String)
     # qc_recno = Column(BigInteger)
-    id: int = Field(primary_key=True)
+    id: Optional[int] = Field(primary_key=True)
     name: str = Field(default=None)
     qc_recno: int = Field(default=None)
 
     # rawfiles = relationship("RawFile", back_populates="instrument")
     # rawfiles = relationship("RawFile")
     rawfiles: List["RawFile"] = Relationship(back_populates="instrument")
+    experimentruns: List["ExperimentRun"] = Relationship(back_populates="instrument")
+
+    # class Config:
+    #     immutable = True
 
 
 # class RawFile(Base):
@@ -94,18 +97,65 @@ class RawFile(SQLModel, table=True):
     class Meta:
         load_instance = True
 
-    id: int = Field(primary_key=True)
+    class Config:
+        schema_extra = {
+            "ispec_column_mapping": {
+                "RawFile:": "rawfile",
+                "Instrument:": "instrument",
+                "ExperimentMsOrder:": "",
+                "MS1Analyzer:": "MS1Analyzer",
+                "MS2Analyzer:": "MS2Analyzer",
+                "MS3Analyzer:": "MS3Analyzer",
+                "TotalAnalysisTime(min):": "TotalAnalysisTime",
+                "TotalScans:": "TotalScans",
+                "NumMs1Scans:": "NumMs1Scans",
+                "NumMs2Scans:": "NumMs2Scans",
+                "NumMs3Scans:": "NumMs3Scans",
+                "MeanMs2TriggerRate(/Ms1Scan):": "MeanMs2TriggerRate",
+                "Ms1ScanRate(/sec):": "Ms1ScanRate",
+                "Ms2ScanRate(/sec):": "Ms2ScanRate",
+                "MeanDutyCycle(s):": "MeanDutyCycle",
+                "MedianMs1FillTime(ms):": "MedianMs1FillTime",
+                "MedianMs2FillTime(ms):": "MedianMs2FillTime",
+                "MedianMs3FillTime(ms):": "MedianMs3FillTime",
+                "Ms2MedianSummedIntensity:": "Ms2MedianSummedIntensity",
+                "MedianMS1IsolationInterference:": "MedianMS1IsolationInterference",
+                "MedianPeakWidthAt10%H(s):": "MedianPeakWidthAt10",
+                "MedianPeakWidthAt50%H(s):": "MedianPeakWidthAt50",
+                "MedianAsymmetryFactor:": "MedianAsymmetryFactor",
+                "PeakCapacity:": "PeakCapacity",
+                "NumEsiInstabilityFlags:": "NumEsiInstabilityFlags",
+            }
+        }
+
+    id: Optional[int] = Field(primary_key=True)
     name: str
     # TODO datetime
-    ctime: str
-    mtime: str
-
-    instrument_id: int = Field(default=None, foreign_key="instrument.id")
+    ctime: datetime
+    mtime: datetime
+    size: int
+    # instrument: str = Field(default=None)
+    instrument_id: Optional[int] = Field(default=None, foreign_key="instrument.id")
     instrument: Instrument = Relationship(back_populates="rawfiles")
 
-    exprun_id: int = Field(default=None, foreign_key="experimentrun.id")
+    # flags
+    # we can use the flags from the linked exprun
+
+    # instrument_id: Optional[int] = Field(default=None, foreign_key="instrument.id")
+    # instrument: Instrument = Relationship(back_populates="rawfiles")
+
+    exprun_id: Optional[int] = Field(default=None, foreign_key="experimentrun.id")
     exprun: "ExperimentRun" = Relationship(back_populates="rawfiles")
     ## =========================================
+    def __eq__(self, other):
+        if other is None:
+            return
+        return (
+            self.name
+            == other.name
+            # and self.ctime == other.ctime
+            # and self.mtime == other.mtime
+        )
 
     # id = Column(Integer, primary_key=True)
     # name = Column(String)
@@ -130,6 +180,14 @@ class RawFile(SQLModel, table=True):
     # instrument = CharField(null=True)
 
 
+
+class Project(SQLModel, table=True):
+    __tablename__ = "project"
+    class Config:
+        schema_extra = dict() # TODO fill
+
+    id: Optional[int] = Field(primary_key=True)
+
 # class Experiment(Base):
 class Experiment(SQLModel, table=True):
     __tablename__ = "experiment"
@@ -139,9 +197,40 @@ class Experiment(SQLModel, table=True):
         include_relationships = True
         # model = SQLModel
 
-    id: int = Field(primary_key=True)
+    class Config:
+        schema_extra = {
+            "ispec_column_mapping": {
+                "recno": "exp_EXPRecNo",
+                # "label": "exp_EXPLabelFLAG",
+                "geno": "exp_Extract_Genotype",
+                "label": "exp_EXPLabelType",
+                # "": "exp_ExpType",
+                "extractno": "exp_Extract_No",
+                # "": "exp_Extract_Adjustments",
+                # "": "exp_Extract_Amount",
+                "cell_tissue": "exp_Extract_CellTissue",
+                # "": "exp_Extract_Fractions",
+                # "": "exp_Digest_Enzyme",
+                # "": "exp_Digest_Experimenter",
+                # "": "exp_Digest_Type",
+                "date": "exp_Exp_Date",
+                # "": "exp_Separation_1",
+                # "": "exp_Separation_1Detail",
+                # "": "exp_Separation_2,
+                # "": "exp_Separation_2Detail,
+                # "": "exp_Separation_3,
+                # "": "exp_Separation_3Detail,
+            }
+        }
+
+    id: Optional[int] = Field(primary_key=True)
     recno: int
-    label: str = Field(default=None)
+    label: str = Field(default=None)  # TMT, LF,
+    extractno: int = Field(default=None)
+    date: str = Field(default=None)
+    digest_enzyme: str = Field(default=None)
+    cell_tissue: str = Field(default=None)
+    geno: str = Field(default=None)
     experimentruns: Optional[List["ExperimentRun"]] = Relationship(
         back_populates="experiment"
     )
@@ -166,20 +255,77 @@ class Experiment(SQLModel, table=True):
 
 # class ExperimentRun(Base):
 class ExperimentRun(SQLModel, table=True):
+    class Config:
+        schema_extra = {
+            "ispec_column_mapping": {
+                "": "dev_exprun_u2g_check",
+                "runno": "exprun_AddedBy",
+                "date": "exprun_CreationTS",
+                "": "exprun_E2GFile0_expFileName",
+                "recno": "exprun_EXPRecNo",
+                "runno": "exprun_EXPRunNo",
+                "searchno": "exprun_EXPSearchNo",
+                "": "exprun_Fraction_10090",
+                "": "exprun_Fraction_9031",
+                "": "exprun_Fraction_9606",
+                "is_grouped": "exprun_Grouper_EndFLAG",
+                "": "exprun_Grouper_FailedFLAG",
+                "": "exprun_Grouper_Filter_modiMax",
+                "": "exprun_Grouper_FilterStamp",
+                "": "exprun_Grouper_RefDatabase",
+                "": "exprun_Grouper_StartFLAG",
+                "": "exprun_Grouper_Version",
+                "is_imported": "exprun_Import_EndFLAG",
+                "": "exprun_Import_FixFLAG",
+                "": "exprun_Import_StartFLAG",
+                "": "exprun_ImportTS",
+                "": "exprun_InputFileName",
+                "": "exprun_LabelType",
+                "": "exprun_ModificationTS",
+                "": "exprun_MS_Experimenter",
+                "instrument": "exprun_MS_Instrument",
+                "": "exprun_MSFFile_expFileName",
+                "": "exprun_nGeneCount",
+                "": "exprun_nGPGroupCount",
+                "": "exprun_niBAQ_0_Total",
+                "": "exprun_niBAQ_1_Total",
+                "": "exprun_nMSFilesCount",
+                "": "exprun_nMSFilesCount Total",
+                "": "exprun_nMShrs",
+                "": "exprun_nMShrs Total",
+                "": "exprun_nPSMCount",
+                "": "exprun_nTechRepeats",
+                "": "exprun_PSMCount_unmatched",
+                "": "exprun_PSMsFile_expFileName",
+                "": "exprun_Purpose",
+                "": "exprun_Search_Comments",
+                "": "exprun_Search_EnzymeSetting",
+                "": "exprun_Search_RefDatabase",
+                "": "exprun_TaxonID",
+                "": "exprun_Vali",
+                "": "iSPEC_Experiments::exp_Extract_CellTissue",
+            }
+        }
 
     __tablename__ = "experimentrun"
-    id: int = Field(primary_key=True)
+    id: Optional[int] = Field(primary_key=True)
     runno: int = Field(default=None)
     searchno: int = Field(default=6)
     tic: bool = Field(default=False)
-    # is_searched: bool = False
+    is_searched: bool = Field(default=False)
+    is_grouped: bool = Field(default=False)
+    is_imported: bool = Field(default=False)
+    refdb: Optional[str] = Field(default="")
     # is_validated: bool = False
-    # is_grouped: bool
+    date: str = Field(default=None)
+    # instrument: str = Field(default=None)
 
+    instrument_id: Optional[int] = Field(default=None, foreign_key="instrument.id")
+    instrument: Instrument = Relationship(back_populates="experimentruns")
     # taxon: str
     # refdb: str
 
-    experiment_id: int = Field(default=None, foreign_key="experiment.id")
+    experiment_id: Optional[int] = Field(default=None, foreign_key="experiment.id")
     experiment: Experiment = Relationship(back_populates="experimentruns")
     rawfiles: Optional[List["RawFile"]] = Relationship()
     e2gquants: Optional[List["E2GQuant"]] = Relationship(back_populates="experimentrun")
@@ -203,10 +349,13 @@ class ExperimentRun(SQLModel, table=True):
 
 
 class Gene(SQLModel, table=True):
+    class Config:
+        schema_extra = {"ispec_column_mapping": {}}
+
     class Meta:
         load_instance = True
 
-    id: int = Field(primary_key=True)
+    id: Optional[int] = Field(primary_key=True)
     symbol: str = Field()
     funcats: str = Field()
     # =======================================================================
@@ -219,10 +368,21 @@ class Gene(SQLModel, table=True):
 
 
 class E2GQual(SQLModel, table=True):
+    class Config:
+        schema_extra = {
+            "ispec_column_mapping": {
+                "peptidecount": "PeptideCount",
+                "peptidecount_u2g": "PeptideCount_u2g",
+                "peptidecount_s_u2g": "PeptideCount_S_u2g",
+                "peptideprint": "PeptidePrint",
+                "coverage": "Coverage",
+            }
+        }
+
     class Meta:
         load_instance = True
 
-    id: int = Field(primary_key=True)
+    id: Optional[int] = Field(primary_key=True)
     #
     experiment: Optional[Experiment] = Relationship(back_populates="e2gquals")
     experiment_id: Optional[int] = Field(default=None, foreign_key="experiment.id")
@@ -233,6 +393,7 @@ class E2GQual(SQLModel, table=True):
     #
     geneid: Optional[Gene] = Relationship(back_populates="e2gquals")
     geneid_id: Optional[int] = Field(foreign_key="gene.id")
+    peptideprint: Optional[str] = Field(default=None)
     #
     e2gquants: Optional[List["E2GQuant"]] = Relationship(back_populates="e2gqual")
     #
@@ -275,14 +436,36 @@ class E2GQual(SQLModel, table=True):
     # GeneCapacity: str = Field()
     proteingi_gidgroups: Optional[str] = Field()
     proteinref_gidgroups: Optional[str] = Field()
-    # EXPRecNo	EXPRunNo	EXPSearchNo	GeneID	LabelFLAG	ProteinRef_GIDGroupCount	TaxonID	SRA	GPGroups_All	IDGroup	IDGroup_u2g	ProteinGI_GIDGroupCount	HIDs	PeptideCount	IDSet	Coverage_u2g	Symbol	Coverage	PSMs_S_u2g	ProteinGIs	Description	PSMs	PeptideCount_S	ProteinRefs	PSMs_S	HomologeneID	PeptideCount_u2g	GeneSymbol	GPGroup	PeptideCount_S_u2g	PeptidePrint	PSMs_u2g	GeneCapacity	ProteinGI_GIDGroups	ProteinRef_GIDGroups
+
+
+class PSMQuant(SQLModel, table=True):
+    class Config:
+        schema_extra = {"ispec_column_mapping": {}}
+
+    id: Optional[int] = Field(primary_key=True)
+    label: str = Field(default=None)
+    ReporterIonIntensity: Optional[float] = Field()
+
+
+class PSMQual(SQLModel, table=True):
+    class Config:
+        schema_extra = {"ispec_column_mapping": {}}
+
+    label: str = Field(default=None)
+    id: Optional[int] = Field(primary_key=True)
+    quality: Optional[int] = Field()
+    quantity: Optional[int] = Field()
 
 
 class E2GQuant(SQLModel, table=True):
+    class Config:
+        schema_extra = {"ispec_column_mapping": {}}
+
     class Meta:
         load_instance = True
 
-    id: int = Field(primary_key=True)
+    id: Optional[int] = Field(primary_key=True)
+    label: str = Field(default=None)
     #
     experiment: Experiment = Relationship(back_populates="e2gquants")
     experiment_id: int = Field(default=None, foreign_key="experiment.id")
@@ -299,20 +482,20 @@ class E2GQuant(SQLModel, table=True):
     # label: Optional[str] = Relationship(back_populates="label")
     # label_id: Optional[int] = Field(default=None, foreign_key="label.id")
     #
-    areasum_u2g_0: float
-    areasum_u2g_all: float
-    areasum_max: float
-    areasum_dstradj: float
-    ibaq_dstradj: float
+    areasum_u2g_0: Optional[float] = Field(default=0)
+    areasum_u2g_all: Optional[float] = Field(default=0)
+    areasum_max: Optional[float] = Field(default=0)
+    areasum_dstradj: Optional[float] = Field(default=0)
+    ibaq_dstradj: Optional[float] = Field(default=0)
 
 
-class Label(SQLModel, table=True):
-    class Meta:
-        load_instance = True
-
-    id: int = Field(primary_key=True)
-    name: Optional[str] = Field(default="none")
-    primary_mass_shift: float = Field(default=0.0)
+# class Label(SQLModel, table=True):
+#     class Meta:
+#         load_instance = True
+#
+#     id: Optional[int] = Field(primary_key=True)
+#     name: Optional[str] = Field(default="none")
+#     primary_mass_shift: float = Field(default=0.0)
 
 
 # EXPRecNo	EXPRunNo	EXPSearchNo	LabelFLAG	GeneID	SRA
@@ -373,7 +556,7 @@ class Modification(SQLModel, table=True):
     # ntotal = Column(SmallInteger)
 
 
-def create_data():
+def _example_create_data():
     with Session(engine) as session:
         # inst = Instrument(name="amfusion", qc_recno=99999, id=1)
         # session.add(inst)
@@ -398,6 +581,9 @@ def create_data():
         session.commit()
 
 
+# create_db_and_tables()  # ?? bad?? yes
+
 if __name__ == "__main__":
-    create_db_and_tables()
-    create_data()
+    pass
+    # create_db_and_tables()
+    # _example_create_data()

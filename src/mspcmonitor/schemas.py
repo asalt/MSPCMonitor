@@ -3,6 +3,8 @@ from typing import List, Optional
 
 from pydantic import BaseModel
 
+# overhaul this using unified sqlmodel library
+
 
 class RawFileBase(BaseModel):
     name: str
@@ -27,12 +29,15 @@ class RawFile(RawFileBase):
 
 # =======================================
 
+
 class InstrumentBase(BaseModel):
     name: str
     qc_recno: Optional[int] = None
 
+
 class InstrumentCreate(InstrumentBase):
     pass
+
 
 class Instrument(InstrumentBase):
     id: int
@@ -44,20 +49,22 @@ class Instrument(InstrumentBase):
 
 # =======================================
 
+
 class ExperimentBase(BaseModel):
     recno: int
     label: str
 
+
 class ExperimentCreate(ExperimentBase):
     pass
 
+
 class Experiment(ExperimentBase):
     id: int
-    #rawfiles: List[RawFile]
+    # rawfiles: List[RawFile]
 
     class Config:
         orm_mode = True
-
 
 
 class ExperimentRunBase(BaseModel):
@@ -67,12 +74,13 @@ class ExperimentRunBase(BaseModel):
     taxon: str
     refdb: str
 
+
 class ExperimentRunCreate(ExperimentRunBase):
     pass
+
 
 class ExperimentRun(ExperimentRunBase):
     id: int
 
     class Config:
         orm_mode = True
-
