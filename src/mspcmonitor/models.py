@@ -180,13 +180,14 @@ class RawFile(SQLModel, table=True):
     # instrument = CharField(null=True)
 
 
-
 class Project(SQLModel, table=True):
     __tablename__ = "project"
+
     class Config:
-        schema_extra = dict() # TODO fill
+        schema_extra = dict()  # TODO fill
 
     id: Optional[int] = Field(primary_key=True)
+
 
 # class Experiment(Base):
 class Experiment(SQLModel, table=True):
@@ -440,19 +441,42 @@ class E2GQual(SQLModel, table=True):
 
 class PSMQuant(SQLModel, table=True):
     class Config:
-        schema_extra = {"ispec_column_mapping": {}}
+        schema_extra = {
+            "ispec_column_mapping": {
+                "label": "LabelFLAG",
+                "reporter_ion_intensity": "ReporterIntensity",
+                "precursor_ion_auc": "PrecursorArea",
+            }
+        }
 
     id: Optional[int] = Field(primary_key=True)
     label: str = Field(default=None)
-    ReporterIonIntensity: Optional[float] = Field()
+    reporter_ion_intensity: Optional[float] = Field()
+    precursor_ion_auc: Optional[float] = Field()
 
 
 class PSMQual(SQLModel, table=True):
     class Config:
-        schema_extra = {"ispec_column_mapping": {}}
+        schema_extra = {
+            "ispec_column_mapping": {
+                "sequence": "Sequence",
+                "rt": "RTmin",
+                "charge": "Charge",
+                "num_matched_ions": "num_matched_ions",
+                "precursor_neutral_mass": "precursor_neutral_mass",
+                "scan": "FirstScan",
+            }
+        }
 
-    label: str = Field(default=None)
     id: Optional[int] = Field(primary_key=True)
+    sequence: str = Field(default=None)
+    rt: float = Field()
+    charge: int = Field()
+    num_matched_ions: int = Field()
+    # num_matched_ions: int: Field()
+    scan: int = Field()
+    precursor_neutral_mass: float = Field()
+    label: str = Field(default=None)
     quality: Optional[int] = Field()
     quantity: Optional[int] = Field()
 

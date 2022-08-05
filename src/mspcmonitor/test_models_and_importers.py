@@ -8,6 +8,7 @@ import pandas as pd
 
 # from fastapi.testclient import TestClient
 import sqlalchemy
+from sqlalchemy.exc import IntegrityError
 from mspcmonitor import importers, crud
 import sqlmodel
 from sqlmodel import Session, SQLModel, create_engine
@@ -28,19 +29,31 @@ def sqlengine():
 
     SQLALCHEMY_DATABASE_URL = "sqlite://"
     engine = create_engine(
-        SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}, echo=True
+        SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}, echo=False
     )
     SQLModel.metadata.create_all(engine)
     yield engine
 
 
-@pytest.fixture
+@pytest.fixture(scope="module")
 def e2g_qual():
     f = Path(__file__).parent.joinpath("testdata/test_e2g_qual.tsv")
     return f
 
 
-@pytest.fixture
+@pytest.fixture(scope="module")
+def psm_qual():
+    f = Path(__file__).parent.joinpath("testdata/test_psms_qual.tsv")
+    return f
+
+
+@pytest.fixture(scope="module")
+def psm_quant():
+    f = Path(__file__).parent.joinpath("testdata/test_label0_psms_quant.tsv")
+    return f
+
+
+@pytest.fixture(scope="module")
 def e2g_quant():
     f = Path(__file__).parent.joinpath("testdata/test_e2g_quant.tsv")
     return f
@@ -94,10 +107,6 @@ def test_experiments_importer_import1(sqlengine, ispec_exp_export_table):
 #    # print(crud.get_all_experiments(db))
 
 
-def test_e2g_quan(sqlengine):
-    pass
-
-
 def test_crud_add_exprun_before_exp(sqlengine):
     model = models.ExperimentRun(recno=99999, runno=643, searchno=6)
     with pytest.raises(AttributeError):
@@ -114,74 +123,148 @@ def test_crud_add_exprun_after_exp(sqlengine):
 # snapshot test
 
 
-def test_first_snapshot(snapshot):
-    snapshot.assert_match(sqlmodel.engine)
+# def test_first_snapshot(snapshot):
+#     snapshot.assert_match(sqlmodel.engine)
 
 
-# todo fix
-def _test_e2g_qual(sqlengine, e2g_qual):
+def test_crud_exprun(sqlengine):
+    exp = models.Experiment(recno=99998)
+    crud.create_exp(get_db(sqlengine), exp)
+    model = models.ExperimentRun(runno=643, searchno=6)
+    crud.create_experimentrun(get_db(sqlengine), model, recno=99998)
+    # print(crud.get_all_experimentruns(get_db(sqlengine)))
+    # print(crud.get_exprun_by_recrun(get_db(sqlengine), recno=99998,runno=643,searchno=6))
+    res = crud.get_exprun_by_recrun(
+        get_db(sqlengine), recno=99998, runno=643, searchno=6
+    )
+    assert res is not None
+    assert len(res) == 2
+    exprun, fetchedexp = res
+    assert isinstance(exprun, models.ExperimentRun)
+    assert fetchedexp.recno == 99998
+    assert exprun.runno == 643
+
+
+def test_e2g_qual_without_exprecord(sqlengine, e2g_qual):
+
+    importer = importers.E2G_QUAL_Importer(e2g_qual, sqlengine)
+    importer.insert_data()
+    with get_db(sqlengine) as db:
+        e2gqual = db.exec("select * from e2gqual").fetchall()
+        assert len(e2gqual) == 0
+
+
+def test_e2g_qual(sqlengine, e2g_qual):
+    RECNO = 99999
+    exp = models.Experiment(recno=RECNO)
+    crud.create_experiment(get_db(sqlengine), exp)
+    model = models.ExperimentRun(runno=643, searchno=6)
+    crud.create_experimentrun(get_db(sqlengine), model, recno=RECNO)
+    # res0 = get_db(sqlengine).exec('select * from experimentrun').fetchall()
+    # res = crud.get_exprun_by_recrun(get_db(sqlengine), recno=RECNO,runno=643,searchno=6)
+
+    importer = importers.E2G_QUAL_Importer(e2g_qual, sqlengine)
+    importer.insert_data()
+    with get_db(sqlengine) as db:
+        e2gqual = db.exec("select * from e2gqual").fetchall()
+    assert len(e2gqual) != 0
+
+
+def test_psm_qual(sqlengine, psm_qual):
+    importer = importers.PSM_QUAL_Importer(psm_qual, sqlengine)
+    importer.insert_data()
+    with get_db(sqlengine) as db:
+        psmqual = db.exec("select * from psmqual").fetchall()
+    assert len(psmqual) != 0
+
+
+def test_psm_qual_wrongfile(sqlengine, psm_quant):
+    importer = importers.PSM_QUAL_Importer(psm_quant, sqlengine)
+    with pytest.raises(IntegrityError):
+        importer.insert_data()
+    # except IntegrityError: #expected
+    #     pass
+    with get_db(sqlengine) as db:
+        psmqual = db.exec("select * from psmqual").fetchall()
+    assert len(psmqual) != 0
+
+
+def test_psm_quant(sqlengine, psm_quant):
+    importer = importers.PSM_QUAL_Importer(psm_quant, sqlengine)
+    importer.insert_data()
+    with get_db(sqlengine) as db:
+        psmqual = db.exec("select * from psmqual").fetchall()
+    assert len(psmqual) != 0
+
+
+def test_e2g_quant(sqlengine, e2g_quant, e2g_qual):
     exp = models.Experiment(recno=99999)
     crud.create_exp(get_db(sqlengine), exp)
     model = models.ExperimentRun(runno=643, searchno=6)
     crud.create_experimentrun(get_db(sqlengine), model, recno=99999)
 
     importer = importers.E2G_QUAL_Importer(e2g_qual, sqlengine)
-    res = importer.insert_data()
-    with get_db(sqlengine) as db:
-        e2gqual = db.exec("select * from e2gqual").fetchall()
-        assert len(e2gqual) != 0
-
-
-def test_e2g_qual_wrongfile(sqlengine, e2g_quant):
-    importer = importers.E2G_QUAL_Importer(e2g_quant, sqlengine)
-    res = importer.insert_data()
-    with get_db(sqlengine) as db:
-        e2gqual = db.exec("select * from e2gqual").fetchall()
-        assert len(e2gqual) == 0
-
-
-def test_simple(sqlengine):
-
-    """
-    tests
-    importers.get_ispec_exp_export
-    split up
-    """
-
-    # test_engine = importers._make_inmemory_db_and_get_engine()
-    test_engine = sqlengine
-    file = importers.get_ispec_exp_export()
-    print(file)
-    file.seek(0)
-    Experiments_Importer = importers.Experiments_Importer
-    get_db = importers.get_db
-
-    importer = importers.Experiments_Importer(datafile=file, engine=test_engine)
     importer.insert_data()
-    # turn this into a test
-    with get_db(test_engine) as db:
-        exps = db.exec("select * from experiment").fetchall()
-        print()
-        print(
-            f"""experiments in database:
-        {e for e in exps}
-        \n
-        """
-        )
 
-    print("====\nclose the db, now open and query\n")
-    print(crud.get_all_experiments(db))
+    importer = importers.E2G_QUANT_Importer(e2g_quant, sqlengine)
+    importer.insert_data()
 
-    print("====\nclose the db, now open and query\n")
-    # turn this into a test
-    file.seek(0)
-    importer.insert_data(
-        before_db_close_func=lambda db: print(crud.get_all_experiments(db))
-    )
-    with get_db(importer.engine) as db:
-        print(crud.get_all_experiments(db))
+    with get_db(sqlengine) as db:
+        e2gquant = db.exec("select * from e2gquant").fetchall()
+        assert len(e2gquant) != 0
 
-    print(crud.get_all_experiments(db))
+
+# no longer include this "wrong file" logic inside the importers
+# def test_e2g_qual_wrongfile(sqlengine, e2g_quant):
+#     importer = importers.E2G_QUAL_Importer(e2g_quant, sqlengine)
+#     res = importer.insert_data()
+#     with get_db(sqlengine) as db:
+#         e2gqual = db.exec("select * from e2gqual").fetchall()
+#         assert len(e2gqual) == 0
+
+
+# def test_simple(sqlengine):
+#
+#     """
+#     tests
+#     importers.get_ispec_exp_export
+#     split up
+#     """
+#
+#     # test_engine = importers._make_inmemory_db_and_get_engine()
+#     test_engine = sqlengine
+#     file = importers.get_ispec_exp_export()
+#     print(file)
+#     file.seek(0)
+#     Experiments_Importer = importers.Experiments_Importer
+#     get_db = importers.get_db
+#
+#     importer = importers.Experiments_Importer(datafile=file, engine=test_engine)
+#     importer.insert_data()
+#     # turn this into a test
+#     with get_db(test_engine) as db:
+#         exps = db.exec("select * from experiment").fetchall()
+#         print()
+#         print(
+#             f"""experiments in database:
+#         {e for e in exps}
+#         \n
+#         """
+#         )
+#
+#     print("====\nclose the db, now open and query\n")
+#     print(crud.get_all_experiments(db))
+#
+#     print("====\nclose the db, now open and query\n")
+#     # turn this into a test
+#     file.seek(0)
+#     importer.insert_data(
+#         before_db_close_func=lambda db: print(crud.get_all_experiments(db))
+#     )
+#     with get_db(importer.engine) as db:
+#         print(crud.get_all_experiments(db))
+#
+#     print(crud.get_all_experiments(db))
 
 
 if __name__ == "__main__":

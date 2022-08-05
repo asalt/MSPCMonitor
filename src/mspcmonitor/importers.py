@@ -8,6 +8,8 @@ from . import crud
 from . import database
 from . import models
 
+import logging
+
 # Efrom .database import engine
 from typing import Optional, Dict, List, Any, Type
 
@@ -113,7 +115,11 @@ class Importer:
     engine: Any = database.engine  # TODO add type
     model: sqlmodel.SQLModel = None
 
-    def post_get_data(self, data):
+    # def __post_init__(self):
+    #     self.column_mapping = self.model.Config.schema_extra.get("ispec_column_mapping")
+    #     print(f"My field is {self.some_field}")
+
+    def post_get_data(self, data) -> pd.DataFrame:
         return data
 
     def get_data(self, **kwargs):
@@ -125,24 +131,22 @@ class Importer:
 
         # return pd.read_table(self.datafile, **kwargs)
 
-    def make_model(self, row, model: sqlmodel.SQLModel) -> sqlmodel.SQLModel:
+    def make_model(self, row: pd.Series, model: sqlmodel.SQLModel) -> sqlmodel.SQLModel:
         column_mapping = model.Config.schema_extra.get("ispec_column_mapping")
         if column_mapping is None:
             raise ValueError("column_mapping must be set in model config schema_extra")
-        column_mapping = column_mapping
         kws = dict()
         for dbcol, col in column_mapping.items():
-            if bool(dbcol) == False:
-                continue
-            if col not in row:
+            if bool(dbcol) == False or col not in row:
                 continue
             kws[dbcol] = row[col]
-        if bool(kws) == False:
-            return None
-        # import ipdb
+            # raise ValueError(f"no data mapped correctly")
+        # if bool(kws) == False:
+        #     return None
 
-        # ipdb.set_trace()
-        model_instance = model(**kws) # sqlmodel does not care about misc. kwargs (by default(
+        model_instance = model(
+            **kws
+        )  # sqlmodel does not care about misc. kwargs (by default(
         model_instance = self.post_make_model(model_instance)
         return model_instance
 
@@ -151,20 +155,29 @@ class Importer:
 
     def make_models(self, data=None):
         if data is None:
-            data = self.get_data()
+            return
         models = data.apply(self.make_model, axis=1, model=self.model)
         models = filter(None, models)
         return models
 
-    def insert_data(
-        self, data=None, data_kws=None, before_db_close_func: callable = None
-    ):
+    def insert_data(self, data_kws=None, before_db_close_func: callable = None):
         """
         this inserts models 1 by 1
         """
         if data_kws is None:
             data_kws = dict()
-        models = self.make_models(self.get_data(**data_kws))
+        # import pdb; pdb.set_trace()
+        data = self.get_data(**data_kws)
+        if data is None:
+            return
+
+        column_mapping = self.model.Config.schema_extra.get("ispec_column_mapping")
+        if all(x not in data.columns for x in column_mapping.values()):
+            logging.warning(f"No data")
+            return (None,)
+
+        print(f"{self}: added")
+        models = self.make_models(data)
 
         # with Session(bind=self.engine) as db:
         with get_db(self.engine) as db:
@@ -182,6 +195,19 @@ class Importer:
             # before_db_close_func(db)
 
         return models
+
+    def insert_data_multiple(
+        self, data=None, data_kws=None, before_db_close_func: callable = None
+    ):
+        if data_kws is None:
+            data_kws = dict()
+        models = self.make_models(self.get_data(**data_kws))
+        if models is None:
+            return
+        # if models is None:
+        #     return
+        with get_db(self.engine) as db:
+            crud.add_multiple_and_commit(db, models)
         #
         # check
         # if check_if_recno_exists(row.exp_EXPRecNo) == True:
@@ -190,6 +216,22 @@ class Importer:
         # exp = models.Experiment(**kws)
         # print(exp)
         # return exp
+
+
+class ImporterWithChecker(Importer):
+    def post_get_data(self, data: pd.DataFrame):
+        import pdb
+
+        pdb.set_trace()
+        if "EXPRecNo" not in data.columns:
+            return
+        _recno = data.iloc[0]["EXPRecNo"]
+        _runno = data.iloc[0]["EXPRunNo"]
+        _searchno = data.iloc[0]["EXPSearchNo"]
+        _res = crud.get_exprun_by_recrun(get_db(self.engine), _recno, _runno, _searchno)
+        if _res is None:
+            return
+        return data
 
 
 # =======================================================
@@ -277,21 +319,20 @@ class ExperimentRuns_Importer(Importer):
 class E2G_QUAL_Importer(Importer):
     model: models.E2GQual = models.E2GQual
 
-    def make_model(self, row, **kws):
-        column_mapping = self.model.Config.schema_extra.get("ispec_column_mapping")
-        _recno = row["EXPRecNo"]
-        _runno = row["EXPRunNo"]
-        _searchno = row["EXPSearchNo"]
-        exprun = crud.get_exprun_by_recrun(get_db(), _recno, _runno)
-        if exprun is None:
-            print(f"{_recno}_{_runno}_{_searchno} does not exist")
+    def post_get_data(self, data):
+        recno = int(data.iloc[0]["EXPRecNo"])
+        runno = int(data.iloc[0]["EXPRunNo"])
+        searchno = int(data.iloc[0]["EXPSearchNo"])
+        # crud.get_exprun_by_recrun(get_db(self.engine), recno, runno, searchno)
+        res = crud.get_exprun_by_recrun(get_db(self.engine), recno, runno, searchno)
+        # get_db(self.engine).exec('select * from experimentrun').fetchall()
+        if res is None:
+            logging.warning(f"{recno}_{runno}_{searchno} not found")
             return
-
-        for dbcol, col in column_mapping.items():
-            if col == "" or col not in row:
-                continue
-            kws[dbcol] = row[col]
-        return self.model(**kws)
+        return data
+        # models = data.apply(self.make_model, axis=1, model=self.model)
+        # models = filter(None, models)
+        # return models
 
 
 @dataclass(frozen=True)
@@ -299,13 +340,14 @@ class E2G_QUANT_Importer(Importer):
     model: models.E2GQuant = models.E2GQuant
 
 
-def get_ispec_exp_export():
-    ispec_import_headers = "\t".join(
-        Experiments_Importer.model.Config.schema_extra["ispec_column_mapping"].values()
-    )
-    file = StringIO(f"{ispec_import_headers}\n99999\t1\t\6")
-    file.seek(0)
-    return file
+@dataclass(frozen=True)
+class PSM_QUAL_Importer(Importer):
+    model: models.PSMQual = models.PSMQual
+
+
+@dataclass(frozen=True)
+class PSM_QUANT_Importer(Importer):
+    model: models.PSMQuant = models.PSMQuant
 
 
 # the important tests have been moved out into test
