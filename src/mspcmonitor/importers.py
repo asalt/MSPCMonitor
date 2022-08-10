@@ -1,4 +1,6 @@
 # importers.py
+from tqdm import tqdm # version 4.62.2
+
 from functools import lru_cache
 from io import StringIO
 from sqlmodel import Session
@@ -9,6 +11,7 @@ from . import database
 from . import models
 
 import logging
+logging.basicConfig(level=0)
 
 # Efrom .database import engine
 from typing import Optional, Dict, List, Any, Type
@@ -131,11 +134,12 @@ class Importer:
 
         # return pd.read_table(self.datafile, **kwargs)
 
-    def make_model(self, row: pd.Series, model: sqlmodel.SQLModel) -> sqlmodel.SQLModel:
+    def make_model(self, row: pd.Series, model: sqlmodel.SQLModel, **kws) -> sqlmodel.SQLModel:
+        if row.empty:
+            logging.warning("Empty row sent to make model")
         column_mapping = model.Config.schema_extra.get("ispec_column_mapping")
         if column_mapping is None:
             raise ValueError("column_mapping must be set in model config schema_extra")
-        kws = dict()
         for dbcol, col in column_mapping.items():
             if bool(dbcol) == False or col not in row:
                 continue
@@ -147,6 +151,7 @@ class Importer:
         model_instance = model(
             **kws
         )  # sqlmodel does not care about misc. kwargs (by default(
+        # import ipdb; ipdb.set_trace()
         model_instance = self.post_make_model(model_instance)
         return model_instance
 
@@ -154,10 +159,15 @@ class Importer:
         return model
 
     def make_models(self, data=None):
+        logging.info(f"making models")
         if data is None:
+            logging.warning(f"No data")
             return
-        models = data.apply(self.make_model, axis=1, model=self.model)
-        models = filter(None, models)
+        tqdm.pandas(desc='model making progress')
+        #models = data.apply(self.make_model, axis=1, model=self.model)
+        models = data.progress_apply(self.make_model, axis=1, model=self.model)
+        models = list(filter(None, models))
+        logging.info(f"Made {len(models)} models")
         return models
 
     def insert_data(self, data_kws=None, before_db_close_func: callable = None):
@@ -170,9 +180,17 @@ class Importer:
         data = self.get_data(**data_kws)
         if data is None:
             return
+        if data.empty == True:
+            logging.info("No data to load")
+            return
 
         column_mapping = self.model.Config.schema_extra.get("ispec_column_mapping")
         if all(x not in data.columns for x in column_mapping.values()):
+            _missing = set(column_mapping.values()) - set(data.columns)
+            logging.warning(f"Could not find the following columns:")
+            logging.warning(", ".join(_missing))
+            logging.warning(data.columns)
+            logging.warning(column_mapping)
             logging.warning(f"No data")
             return (None,)
 
@@ -228,7 +246,7 @@ class ImporterWithChecker(Importer):
         _recno = data.iloc[0]["EXPRecNo"]
         _runno = data.iloc[0]["EXPRunNo"]
         _searchno = data.iloc[0]["EXPSearchNo"]
-        _res = crud.get_exprun_by_recrun(get_db(self.engine), _recno, _runno, _searchno)
+        _res = crud.get_exprun_by_recrunsearch(get_db(self.engine), _recno, _runno, _searchno)
         if _res is None:
             return
         return data
@@ -254,7 +272,12 @@ class ImporterWithChecker(Importer):
 class Experiments_Importer(Importer):
     model: models.Experiment = models.Experiment
 
-    def post_get_data(self, data):
+    def post_get_data(self, data: pd.DataFrame) -> pd.DataFrame:
+        if "exp_EXPRecNo" not in data.columns:
+            logging.warning(f"could not find `exp_EXPRecNo` column. Check data file")
+            logging.warning(f"exiting")
+            return
+
         print(len(data))
         print(data.columns)
         _existing_recnos = _get_recnos()
@@ -265,8 +288,9 @@ class Experiments_Importer(Importer):
     def post_make_model(self, model):
         # check if already exists
         _recno = model.recno
+        # import ipdb; ipdb.set_trace()
         if check_if_recno_exists(_recno) == True:
-            print(f"{_recno} already exists")
+            logging.warning(f"{_recno} already exists")
             return
         return model
 
@@ -276,6 +300,10 @@ class ExperimentRuns_Importer(Importer):
     model: models.ExperimentRun = models.ExperimentRun
 
     def post_get_data(self, data):
+        if "exprun_EXPRecNo" not in data.columns:
+            logging.warning(f"could not find `exprun_EXPRecNo` column. Check data file")
+            logging.warning(f"exiting")
+            return
         _existing_recnos = _get_recnos()
         return data[data.exprun_EXPRecNo.isin(_existing_recnos)]
 
@@ -295,6 +323,7 @@ class ExperimentRuns_Importer(Importer):
         # check
         _recno = row["exprun_EXPRecNo"]
         _runno = row["exprun_EXPRunNo"]
+        _searchno = row["exprun_EXPSearchNo"]
         #
         if check_if_recno_exists(_recno) == False:
             print(f"{_recno} does not exist")
@@ -306,7 +335,7 @@ class ExperimentRuns_Importer(Importer):
         #
         #
         kws["experiment_id"] = experiment.id
-        exprun = crud.get_exprun_by_recrun(get_db(), _recno, _runno)
+        exprun = crud.get_exprun_by_recrunsearch(get_db(), _recno, _runno, _searchno)
         print(kws)
         if exprun is not None:
             print(f"{_recno}:{_runno} already exists")
@@ -319,25 +348,40 @@ class ExperimentRuns_Importer(Importer):
 class E2G_QUAL_Importer(Importer):
     model: models.E2GQual = models.E2GQual
 
-    def post_get_data(self, data):
+    def make_models(self, data: pd.DataFrame):
+        if data is None:
+            logging.warning(f"No data")
+            return
         recno = int(data.iloc[0]["EXPRecNo"])
         runno = int(data.iloc[0]["EXPRunNo"])
         searchno = int(data.iloc[0]["EXPSearchNo"])
         # crud.get_exprun_by_recrun(get_db(self.engine), recno, runno, searchno)
-        res = crud.get_exprun_by_recrun(get_db(self.engine), recno, runno, searchno)
         # get_db(self.engine).exec('select * from experimentrun').fetchall()
+        res = crud.get_exprun_by_recrunsearch(get_db(self.engine), recno, runno, searchno)
         if res is None:
             logging.warning(f"{recno}_{runno}_{searchno} not found")
             return
-        return data
-        # models = data.apply(self.make_model, axis=1, model=self.model)
-        # models = filter(None, models)
-        # return models
-
+        #assert len(res) == 2
+        exprun, exp = res
+        kws = dict(
+            experiment = exp,
+            experimentrun = exprun,
+            experiment_id = exp.id,
+            experimentrun_id = exprun.id,
+        )
+        logging.info(f"making models")
+        tqdm.pandas(desc='model making progress')
+        models = data.apply(self.make_model, axis=1, model=self.model, **kws)
+        # models = data.progress_apply(self.make_model, axis=1, model=self.model)
+        # models = list(filter(None, models))
+        # logging.info(f"Made {len(models)} models")
+        return models
 
 @dataclass(frozen=True)
 class E2G_QUANT_Importer(Importer):
     model: models.E2GQuant = models.E2GQuant
+    def post_make_model(self, model):
+        return model
 
 
 @dataclass(frozen=True)

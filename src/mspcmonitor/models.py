@@ -483,7 +483,19 @@ class PSMQual(SQLModel, table=True):
 
 class E2GQuant(SQLModel, table=True):
     class Config:
-        schema_extra = {"ispec_column_mapping": {}}
+        schema_extra = {"ispec_column_mapping": {
+            "": "",
+            "": "",
+            "": "",
+            "": "",
+            "": "",
+            "": "",
+            "areasum_u2g_0": "AreaSum_u2g_0",
+            "areasum_u2g_all": "AreaSum_u2g_all",
+            "areasum_max": "AreaSum_max",
+            "areasum_dstradj": "AreaSum_dstrAdj",
+            "ibaq_dstradj": "iBAQ_dstrAdj",
+        }}
 
     class Meta:
         load_instance = True

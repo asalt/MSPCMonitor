@@ -84,15 +84,16 @@ def create(
     #
 
 
+from . import importers
+
 @app.command("add-metadata")
 def add_metadata(ispec_export_file: Path):
     import_ispec_experiments(ispec_export_file)
     return
 
 
-from . import importers
 
-
+#20221904_ispec_cur_Experiments_metadata_export.xlsx
 @app.command("add-experiments-table")
 def add_exp_table(ispec_export_file: Path):
     # import_ispec_experiments(ispec_export_file)
@@ -109,8 +110,11 @@ def add_exprun_table(ispec_export_file: Path):
 
 
 @app.command("add-e2g-table")
-def add_e2g_table(e2g_qual: Path, e2g_quant_file: Path):
-    import_e2g(e2g_qual_file=e2g_qual, e2g_quant_file=e2g_quant_file)
+def add_e2g_table(e2g_qual_file: Path, e2g_quant_file: Path):
+    # these importers does not make any foreign keys yet
+    importers.E2G_QUAL_Importer(e2g_qual_file).insert_data(data_kws=dict())
+    #importers.E2G_QUANT_Importer(e2g_quant_file).insert_data(data_kws=dict())
+    # import_e2g(e2g_qual_file=e2g_qual, e2g_quant_file=e2g_quant_file)
     return
 
 

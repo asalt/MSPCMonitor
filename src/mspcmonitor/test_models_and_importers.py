@@ -186,15 +186,21 @@ def test_psm_qual_wrongfile(sqlengine, psm_quant):
     #     pass
     with get_db(sqlengine) as db:
         psmqual = db.exec("select * from psmqual").fetchall()
-    assert len(psmqual) != 0
+    assert len(psmqual) == 0
 
 
-def test_psm_quant(sqlengine, psm_quant):
-    importer = importers.PSM_QUAL_Importer(psm_quant, sqlengine)
+def test_psm_quant(sqlengine, psm_qual, psm_quant):
+
+    importer = importers.PSM_QUAL_Importer(psm_qual, sqlengine)
     importer.insert_data()
     with get_db(sqlengine) as db:
         psmqual = db.exec("select * from psmqual").fetchall()
     assert len(psmqual) != 0
+    importer = importers.PSM_QUANT_Importer(psm_quant, sqlengine)
+    importer.insert_data()
+    with get_db(sqlengine) as db:
+        psmquant = db.exec("select * from psmquant").fetchall()
+    assert len(psmquant) != 0
 
 
 def test_e2g_quant(sqlengine, e2g_quant, e2g_qual):
