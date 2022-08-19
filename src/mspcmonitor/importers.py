@@ -167,8 +167,8 @@ class Importer:
             logging.warning(f"No data")
             return
         tqdm.pandas(desc='model making progress')
-        #models = data.apply(self.make_model, axis=1, model=self.model)
         models = data.progress_apply(self.make_model, axis=1, model=self.model)
+        # models = data.apply(self.make_model, axis=1, model=self.model)
         models = list(filter(None, models))
         logging.info(f"Made {len(models)} models")
         return models
@@ -337,14 +337,20 @@ class ExperimentRuns_Importer(Importer):
             return
         #
         #
-        kws["experiment_id"] = experiment.id
-        exprun = crud.get_exprun_by_recrunsearch(get_db(), _recno, _runno, _searchno)
-        #print(kws)
-        if exprun is not None:
-            print(f"{_recno}:{_runno} already exists")
-            return
-        import ipdb; ipdb.set_trace()
-        exprun = models.ExperimentRun(**kws)
+        #kws["experiment_id"] = experiment.id
+        with get_db() as db:
+            experiment = crud.get_experiment_by_recno(db, _recno)
+            exprun = crud.get_exprun_by_recrunsearch(db, _recno, _runno, _searchno)
+            #print(kws)
+            if exprun is not None:
+                print(f"{_recno}:{_runno} already exists")
+                return
+            kws["experiment_id"] = experiment.id
+            #kws["experiment"] = experiment
+            #kws.pop('recno')
+            #kws.pop('model')
+            exprun = models.ExperimentRun(**kws)
+            #exprun = models.ExperimentRun(recno=recno,runno=runno,searchno=searchno, experiment=experiment, instrument=instrument, is_imported=is_imported, is_grouped=is_grouped)
         return exprun
 
 

@@ -70,24 +70,24 @@ def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
 
 
-class Instrument(SQLModel, table=True):
-    # class Meta:
-    #     load_instance = True
-
-    # id = Column(Integer, primary_key=True)
-    # name = Column(String)
-    # qc_recno = Column(BigInteger)
-    id: Optional[int] = Field(primary_key=True)
-    name: str = Field(default=None)
-    qc_recno: int = Field(default=None)
-
-    # rawfiles = relationship("RawFile", back_populates="instrument")
-    # rawfiles = relationship("RawFile")
-    rawfiles: List["RawFile"] = Relationship(back_populates="instrument")
-    experimentruns: List["ExperimentRun"] = Relationship(back_populates="instrument")
-
-    # class Config:
-    #     immutable = True
+# class Instrument(SQLModel, table=True):
+#     # class Meta:
+#     #     load_instance = True
+#
+#     # id = Column(Integer, primary_key=True)
+#     # name = Column(String)
+#     # qc_recno = Column(BigInteger)
+#     id: Optional[int] = Field(primary_key=True)
+#     name: str = Field(default=None)
+#     qc_recno: int = Field(default=None)
+#
+#     # rawfiles = relationship("RawFile", back_populates="instrument")
+#     # rawfiles = relationship("RawFile")
+#     rawfiles: List["RawFile"] = Relationship(back_populates="instrument")
+#     experimentruns: List["ExperimentRun"] = Relationship(back_populates="instrument")
+#
+#     # class Config:
+#     #     immutable = True
 
 
 # class RawFile(Base):
@@ -135,8 +135,8 @@ class RawFile(SQLModel, table=True):
     mtime: datetime
     size: int
     # instrument: str = Field(default=None)
-    instrument_id: Optional[int] = Field(default=None, foreign_key="instrument.id")
-    instrument: Instrument = Relationship(back_populates="rawfiles")
+    #instrument_id: Optional[int] = Field(default=None, foreign_key="instrument.id")
+    instrument: str = Field(default=None)
 
     # flags
     # we can use the flags from the linked exprun
@@ -321,8 +321,9 @@ class ExperimentRun(SQLModel, table=True):
     date: str = Field(default=None)
     # instrument: str = Field(default=None)
 
-    instrument_id: Optional[int] = Field(default=None, foreign_key="instrument.id")
-    instrument: Instrument = Relationship(back_populates="experimentruns")
+    # instrument_id: Optional[int] = Field(default=None, foreign_key="instrument.id")
+    # instrument: Instrument = Relationship(back_populates="experimentruns")
+    instrument: Optional[str] = Field(default=None)
     # taxon: str
     # refdb: str
 
