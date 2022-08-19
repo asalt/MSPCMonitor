@@ -144,8 +144,8 @@ class RawFile(SQLModel, table=True):
     # instrument_id: Optional[int] = Field(default=None, foreign_key="instrument.id")
     # instrument: Instrument = Relationship(back_populates="rawfiles")
 
-    exprun_id: Optional[int] = Field(default=None, foreign_key="experimentrun.id")
-    exprun: "ExperimentRun" = Relationship(back_populates="rawfiles")
+    experimentrun_id: Optional[int] = Field(default=None, foreign_key="experimentrun.id")
+    experimentrun: "ExperimentRun" = Relationship(back_populates="rawfiles")
     ## =========================================
     def __eq__(self, other):
         if other is None:
@@ -316,7 +316,7 @@ class ExperimentRun(SQLModel, table=True):
     is_searched: bool = Field(default=False)
     is_grouped: bool = Field(default=False)
     is_imported: bool = Field(default=False)
-    refdb: Optional[str] = Field(default="")
+    refdb: Optional[str] = Field(default=None)
     # is_validated: bool = False
     date: str = Field(default=None)
     # instrument: str = Field(default=None)
@@ -328,7 +328,7 @@ class ExperimentRun(SQLModel, table=True):
 
     experiment_id: Optional[int] = Field(default=None, foreign_key="experiment.id")
     experiment: Experiment = Relationship(back_populates="experimentruns")
-    rawfiles: Optional[List["RawFile"]] = Relationship()
+    rawfiles: Optional[List["RawFile"]] = Relationship(back_populates="experimentrun")
     e2gquants: Optional[List["E2GQuant"]] = Relationship(back_populates="experimentrun")
     e2gquals: Optional[List["E2GQual"]] = Relationship(back_populates="experimentrun")
 
