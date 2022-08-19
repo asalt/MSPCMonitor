@@ -12,6 +12,11 @@ def add_and_commit(db: Session, obj):
     db.refresh(obj)
     return obj
 
+def add_multiple_and_commit(db: Session, objs):
+    for obj in objs:
+        db.add(obj) # is this better than calling commit after adding each object?
+    db.commit()
+
 
 def get_rawfile_by_name(db: Session, name: str):
     return db.query(models.RawFile).filter(models.RawFile.name == name).first()
@@ -46,14 +51,21 @@ def get_all_experimentruns(db: Session):
     return db.query(models.ExperimentRun).join(models.Experiment).all()
 
 
-def get_exprun_by_recrun(db: Session, recno: int, runno: int):
+def get_exprun_by_recrunsearch(db: Session, recno: int, runno: int, searchno:int):
+
+    # if not isinstance(recno, int):
+    #     raise TypeError(f"recno should be of type int")
+    # if not isinstance(runno, int):
+    #     raise TypeError(f"recno should be of type int")
 
     statement = (
         sqlmodel.select(models.ExperimentRun, models.Experiment)
-        .where(models.Experiment.recno == recno and models.ExperimentRun.runno == runno)
-        .join(models.ExperimentRun)
-        .filter(models.ExperimentRun.runno == runno)
+        .where(models.Experiment.recno == recno and models.ExperimentRun.runno == runno and
+                models.ExperimentRun.searchno == searchno
+            )
+            .join(models.ExperimentRun)
     )
+        #.filter(models.ExperimentRun.runno == runno)
 
     qq = db.exec(statement)
     return qq.first()

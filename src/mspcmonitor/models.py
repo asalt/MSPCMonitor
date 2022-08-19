@@ -259,52 +259,52 @@ class ExperimentRun(SQLModel, table=True):
     class Config:
         schema_extra = {
             "ispec_column_mapping": {
-                "": "dev_exprun_u2g_check",
+                #"": "dev_exprun_u2g_check",
                 "runno": "exprun_AddedBy",
                 "date": "exprun_CreationTS",
-                "": "exprun_E2GFile0_expFileName",
+                # "": "exprun_E2GFile0_expFileName",
                 "recno": "exprun_EXPRecNo",
                 "runno": "exprun_EXPRunNo",
                 "searchno": "exprun_EXPSearchNo",
-                "": "exprun_Fraction_10090",
-                "": "exprun_Fraction_9031",
-                "": "exprun_Fraction_9606",
+                # "": "exprun_Fraction_10090",
+                # "": "exprun_Fraction_9031",
+                # "": "exprun_Fraction_9606",
                 "is_grouped": "exprun_Grouper_EndFLAG",
-                "": "exprun_Grouper_FailedFLAG",
-                "": "exprun_Grouper_Filter_modiMax",
-                "": "exprun_Grouper_FilterStamp",
-                "": "exprun_Grouper_RefDatabase",
-                "": "exprun_Grouper_StartFLAG",
-                "": "exprun_Grouper_Version",
+                # "": "exprun_Grouper_FailedFLAG",
+                # "": "exprun_Grouper_Filter_modiMax",
+                # "": "exprun_Grouper_FilterStamp",
+                # "": "exprun_Grouper_RefDatabase",
+                # "": "exprun_Grouper_StartFLAG",
+                # "": "exprun_Grouper_Version",
                 "is_imported": "exprun_Import_EndFLAG",
-                "": "exprun_Import_FixFLAG",
-                "": "exprun_Import_StartFLAG",
-                "": "exprun_ImportTS",
-                "": "exprun_InputFileName",
-                "": "exprun_LabelType",
-                "": "exprun_ModificationTS",
-                "": "exprun_MS_Experimenter",
+                #"": "exprun_Import_FixFLAG",
+                #"": "exprun_Import_StartFLAG",
+                #"": "exprun_ImportTS",
+                #"": "exprun_InputFileName",
+                #"": "exprun_LabelType",
+                #"": "exprun_ModificationTS",
+                #"": "exprun_MS_Experimenter",
                 "instrument": "exprun_MS_Instrument",
-                "": "exprun_MSFFile_expFileName",
-                "": "exprun_nGeneCount",
-                "": "exprun_nGPGroupCount",
-                "": "exprun_niBAQ_0_Total",
-                "": "exprun_niBAQ_1_Total",
-                "": "exprun_nMSFilesCount",
-                "": "exprun_nMSFilesCount Total",
-                "": "exprun_nMShrs",
-                "": "exprun_nMShrs Total",
-                "": "exprun_nPSMCount",
-                "": "exprun_nTechRepeats",
-                "": "exprun_PSMCount_unmatched",
-                "": "exprun_PSMsFile_expFileName",
-                "": "exprun_Purpose",
-                "": "exprun_Search_Comments",
-                "": "exprun_Search_EnzymeSetting",
-                "": "exprun_Search_RefDatabase",
-                "": "exprun_TaxonID",
-                "": "exprun_Vali",
-                "": "iSPEC_Experiments::exp_Extract_CellTissue",
+                # "": "exprun_MSFFile_expFileName",
+                # "": "exprun_nGeneCount",
+                # "": "exprun_nGPGroupCount",
+                # "": "exprun_niBAQ_0_Total",
+                # "": "exprun_niBAQ_1_Total",
+                # "": "exprun_nMSFilesCount",
+                # "": "exprun_nMSFilesCount Total",
+                # "": "exprun_nMShrs",
+                # "": "exprun_nMShrs Total",
+                # "": "exprun_nPSMCount",
+                # "": "exprun_nTechRepeats",
+                # "": "exprun_PSMCount_unmatched",
+                # "": "exprun_PSMsFile_expFileName",
+                # "": "exprun_Purpose",
+                # "": "exprun_Search_Comments",
+                # "": "exprun_Search_EnzymeSetting",
+                # "": "exprun_Search_RefDatabase",
+                # "": "exprun_TaxonID",
+                # "": "exprun_Vali",
+                # "": "iSPEC_Experiments::exp_Extract_CellTissue",
             }
         }
 
@@ -351,19 +351,43 @@ class ExperimentRun(SQLModel, table=True):
 
 class Gene(SQLModel, table=True):
     class Config:
-        schema_extra = {"ispec_column_mapping": {}}
+        schema_extra = {"ispec_column_mapping": {
+
+            "geneid":"GeneID",
+            "symbol":"GeneSymbol",
+            "funcats":"FunCats",
+            "taxonid":"TaxonID",
+            "synonyms":"Synonyms",
+            "description":"GeneDescription",
+            "chromosome":"GeneChromosome",
+            "gi":"gi",
+            "sequence":"sequence",
+            "AAlength":"AAlength",
+            "MW":"MW",
+            "maxMW":"maxMW",
+        }}
 
     class Meta:
         load_instance = True
 
-    id: Optional[int] = Field(primary_key=True)
+    #id: Optional[int] = Field(primary_key=True)
+    geneid: Optional[int] = Field(primary_key=True)
+    #geneid: str = Field()
     symbol: str = Field()
-    funcats: str = Field()
+    funcats: Optional[str] = Field()
+    synonyms: Optional[str] = Field()
+    description: Optional[str] = Field()
+    chromosome: Optional[str] = Field()
+    gi: Optional[str] = Field()
+    sequence: Optional[str] = Field()
+    AAlength: Optional[str] = Field()
+    MW: Optional[str] = Field()
+    maxMW: Optional[str] = Field()
     # =======================================================================
     # many to many relationship, do it later or not at all
     # experiments: List[Experiment] = Relationship(back_populates="genes")
     # =======================================================================
-    gene_capacity: int = Field(default=0)
+    # gene_capacity: int = Field(default=0)
     e2gquals: Optional[List["E2GQual"]] = Relationship(back_populates="geneid")
     e2gquants: Optional[List["E2GQuant"]] = Relationship(back_populates="geneid")
 
@@ -393,7 +417,7 @@ class E2GQual(SQLModel, table=True):
     )
     #
     geneid: Optional[Gene] = Relationship(back_populates="e2gquals")
-    geneid_id: Optional[int] = Field(foreign_key="gene.id")
+    geneid_id: Optional[int] = Field(foreign_key="gene.geneid")
     peptideprint: Optional[str] = Field(default=None)
     #
     e2gquants: Optional[List["E2GQuant"]] = Relationship(back_populates="e2gqual")
@@ -509,7 +533,7 @@ class E2GQuant(SQLModel, table=True):
     experimentrun_id: int = Field(default=None, foreign_key="experimentrun.id")
     #
     geneid: Optional[Gene] = Relationship(back_populates="e2gquants")
-    geneid_id: Optional[int] = Field(foreign_key="gene.id")
+    geneid_id: Optional[int] = Field(foreign_key="gene.geneid")
     #
     e2gqual_id: Optional[int] = Field(default=None, foreign_key="e2gqual.id")
     e2gqual: Optional["E2GQual"] = Relationship(back_populates="e2gquants")

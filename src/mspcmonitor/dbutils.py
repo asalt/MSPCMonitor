@@ -12,7 +12,7 @@ import sqlmodel
 from sqlmodel import Session
 
 from . import crud, models, schemas
-from .database import engine
+from .database import engine, get_engine
 
 app = typer.Typer(name="db", result_callback=None)
 
@@ -117,6 +117,11 @@ def add_e2g_table(e2g_qual_file: Path, e2g_quant_file: Path):
     # import_e2g(e2g_qual_file=e2g_qual, e2g_quant_file=e2g_quant_file)
     return
 
+
+@app.command("add-genes-table")
+def add_genes_table(gene_table_file: Path):
+    importers.GenesImporter(gene_table_file).insert_data(data_kws=dict())
+    return
 
 from datetime import datetime
 

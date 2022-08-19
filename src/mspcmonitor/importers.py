@@ -126,8 +126,11 @@ class Importer:
         return data
 
     def get_data(self, **kwargs):
+        sep=kwargs.pop('sep', '\t')
+        if str(self.datafile).endswith('.csv'):
+            sep=','
         try:
-            df = pd.read_table(self.datafile, **kwargs)
+            df = pd.read_table(self.datafile, sep=sep, **kwargs)
         except UnicodeDecodeError:
             df = pd.read_excel(self.datafile, **kwargs)
         return self.post_get_data(df)
@@ -336,10 +339,11 @@ class ExperimentRuns_Importer(Importer):
         #
         kws["experiment_id"] = experiment.id
         exprun = crud.get_exprun_by_recrunsearch(get_db(), _recno, _runno, _searchno)
-        print(kws)
+        #print(kws)
         if exprun is not None:
             print(f"{_recno}:{_runno} already exists")
             return
+        import ipdb; ipdb.set_trace()
         exprun = models.ExperimentRun(**kws)
         return exprun
 
@@ -352,11 +356,21 @@ class E2G_QUAL_Importer(Importer):
         if data is None:
             logging.warning(f"No data")
             return
+        #
         recno = int(data.iloc[0]["EXPRecNo"])
         runno = int(data.iloc[0]["EXPRunNo"])
         searchno = int(data.iloc[0]["EXPSearchNo"])
+        #
+        gene_identifiers = data['GeneID']
+        # TODO:
+        # query database for gene identifiers
+        # for any new genes, add them to the database?
+        ## added
+
+        #
         # crud.get_exprun_by_recrun(get_db(self.engine), recno, runno, searchno)
         # get_db(self.engine).exec('select * from experimentrun').fetchall()
+        import ipdb; ipdb.set_trace()
         res = crud.get_exprun_by_recrunsearch(get_db(self.engine), recno, runno, searchno)
         if res is None:
             logging.warning(f"{recno}_{runno}_{searchno} not found")
@@ -393,6 +407,9 @@ class PSM_QUAL_Importer(Importer):
 class PSM_QUANT_Importer(Importer):
     model: models.PSMQuant = models.PSMQuant
 
+@dataclass(frozen=True)
+class GenesImporter(Importer):
+    model: models.Gene = models.Gene
 
 # the important tests have been moved out into test
 def test_simple():
