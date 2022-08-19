@@ -199,17 +199,12 @@ class Importer:
 
         print(f"{self}: added")
         models = self.make_models(data)
+        if models is None:
+            return
 
-        # with Session(bind=self.engine) as db:
         with get_db(self.engine) as db:
             for model in models:
                 crud.add_and_commit(db, model)
-            # mapper = map(lambda model: crud.create_exp(db, model), models)
-            # [_ for _ in mapper]
-        # with get_db(self.engine) as db:
-        # mapper = map(lambda model: crud.create_exp(get_db(self.engine), model), models)
-        # walk
-        # [_ for _ in mapper]
 
         if before_db_close_func is not None:
             pass
@@ -376,22 +371,22 @@ class E2G_QUAL_Importer(Importer):
         #
         # crud.get_exprun_by_recrun(get_db(self.engine), recno, runno, searchno)
         # get_db(self.engine).exec('select * from experimentrun').fetchall()
-        import ipdb; ipdb.set_trace()
-        res = crud.get_exprun_by_recrunsearch(get_db(self.engine), recno, runno, searchno)
-        if res is None:
-            logging.warning(f"{recno}_{runno}_{searchno} not found")
-            return
-        #assert len(res) == 2
-        exprun, exp = res
-        kws = dict(
-            experiment = exp,
-            experimentrun = exprun,
-            experiment_id = exp.id,
-            experimentrun_id = exprun.id,
-        )
-        logging.info(f"making models")
-        tqdm.pandas(desc='model making progress')
-        models = data.apply(self.make_model, axis=1, model=self.model, **kws)
+        with get_db(self.engine) as db:
+            res = crud.get_exprun_by_recrunsearch(db, recno, runno, searchno)
+            if res is None:
+                logging.warning(f"{recno}_{runno}_{searchno} not found")
+                return
+            #assert len(res) == 2
+            exprun, exp = res
+            kws = dict(
+                experiment = exp,
+                experimentrun = exprun,
+                experiment_id = exp.id, #
+                experimentrun_id = exprun.id,
+            )
+            logging.info(f"making models")
+            tqdm.pandas(desc='model making progress')
+            models = data.apply(self.make_model, axis=1, model=self.model, **kws)
         # models = data.progress_apply(self.make_model, axis=1, model=self.model)
         # models = list(filter(None, models))
         # logging.info(f"Made {len(models)} models")

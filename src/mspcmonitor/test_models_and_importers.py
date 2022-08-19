@@ -134,7 +134,7 @@ def test_crud_exprun(sqlengine):
     crud.create_experimentrun(get_db(sqlengine), model, recno=99998)
     # print(crud.get_all_experimentruns(get_db(sqlengine)))
     # print(crud.get_exprun_by_recrun(get_db(sqlengine), recno=99998,runno=643,searchno=6))
-    res = crud.get_exprun_by_recrun(
+    res = crud.get_exprun_by_recrunsearch(
         get_db(sqlengine), recno=99998, runno=643, searchno=6
     )
     assert res is not None
@@ -158,8 +158,10 @@ def test_e2g_qual(sqlengine, e2g_qual):
     RECNO = 99999
     exp = models.Experiment(recno=RECNO)
     crud.create_experiment(get_db(sqlengine), exp)
+    #crud.create_experiment(sqlengine, exp)
     model = models.ExperimentRun(runno=643, searchno=6)
     crud.create_experimentrun(get_db(sqlengine), model, recno=RECNO)
+    #crud.create_experimentrun(sqlengine, model, recno=RECNO)
     # res0 = get_db(sqlengine).exec('select * from experimentrun').fetchall()
     # res = crud.get_exprun_by_recrun(get_db(sqlengine), recno=RECNO,runno=643,searchno=6)
 
