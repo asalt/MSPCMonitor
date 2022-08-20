@@ -36,6 +36,11 @@ def sqlengine():
 
 
 @pytest.fixture(scope="module")
+def genetable():
+    f = Path(__file__).parent.joinpath("testdata/genetable_short.tsv")
+    return f
+
+@pytest.fixture(scope="module")
 def e2g_qual():
     f = Path(__file__).parent.joinpath("testdata/test_e2g_qual.tsv")
     return f
@@ -145,6 +150,7 @@ def test_crud_exprun(sqlengine):
     assert exprun.runno == 643
 
 
+
 def test_e2g_qual_without_exprecord(sqlengine, e2g_qual):
 
     importer = importers.E2G_QUAL_Importer(e2g_qual, sqlengine)
@@ -153,8 +159,16 @@ def test_e2g_qual_without_exprecord(sqlengine, e2g_qual):
         e2gqual = db.exec("select * from e2gqual").fetchall()
         assert len(e2gqual) == 0
 
+def test_import_genestable(sqlengine, genetable):
+    importer = importers.GenesImporter(genetable, sqlengine)
+    importer.insert_data()
+    with get_db(sqlengine) as db:
+        res = db.exec("select * from gene").fetchall()
+        assert len(res) > 0
 
-def test_e2g_qual(sqlengine, e2g_qual):
+def test_e2g_qual(sqlengine, e2g_qual, genetable):
+    importer = importers.GenesImporter(genetable, sqlengine)
+    importer.insert_data()
     RECNO = 99999
     exp = models.Experiment(recno=RECNO)
     crud.create_experiment(get_db(sqlengine), exp)

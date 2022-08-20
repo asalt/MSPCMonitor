@@ -137,7 +137,7 @@ class Importer:
 
         # return pd.read_table(self.datafile, **kwargs)
 
-    def make_model(self, row: pd.Series, model: sqlmodel.SQLModel, **kws) -> sqlmodel.SQLModel:
+    def make_model(self, row: pd.Series, model: sqlmodel.SQLModel, db=None, **kws) -> sqlmodel.SQLModel:
         if row.empty:
             logging.warning("Empty row sent to make model")
         column_mapping = model.Config.schema_extra.get("ispec_column_mapping")
@@ -150,6 +150,8 @@ class Importer:
             # raise ValueError(f"no data mapped correctly")
         # if bool(kws) == False:
         #     return None
+        # if db is None:
+        #     db = get_db(self.engine)
 
         model_instance = model(
             **kws
@@ -203,7 +205,7 @@ class Importer:
             return
 
         with get_db(self.engine) as db:
-            for model in models:
+            for model in tqdm(models, desc=f"writing to database"):
                 crud.add_and_commit(db, model)
 
         if before_db_close_func is not None:
@@ -383,6 +385,7 @@ class E2G_QUAL_Importer(Importer):
                 experimentrun = exprun,
                 experiment_id = exp.id, #
                 experimentrun_id = exprun.id,
+                db=db # pass the same db connection instance
             )
             logging.info(f"making models")
             tqdm.pandas(desc='model making progress')
@@ -391,6 +394,40 @@ class E2G_QUAL_Importer(Importer):
         # models = list(filter(None, models))
         # logging.info(f"Made {len(models)} models")
         return models
+
+    def make_model(self, row, db=None, **kws):
+        column_mapping = self.model.Config.schema_extra.get("ispec_column_mapping")
+        kws = dict()
+        kws = dict()
+        # add all values
+
+        for dbcol, col in column_mapping.items():
+            if col == "":
+                continue
+            if col not in row:
+                continue
+            kws[dbcol] = row[col]
+
+
+        geneid = row['GeneID']
+        #
+        #generecord = crud.get_gene_by_id(get_db(self.engine), geneid)
+        if db is None: # not good
+            raise ValueError()
+        generecord = crud.get_gene_by_id(db, geneid)
+        if generecord is not None:
+            kws['geneid'] = generecord
+        else:
+            # or make a new record
+            #pass
+            return
+
+            #kws['geneid'] = geneid
+
+
+        #import pdb; pdb.set_trace()
+        model = self.model(**kws)
+        return model
 
 @dataclass(frozen=True)
 class E2G_QUANT_Importer(Importer):
@@ -411,6 +448,16 @@ class PSM_QUANT_Importer(Importer):
 @dataclass(frozen=True)
 class GenesImporter(Importer):
     model: models.Gene = models.Gene
+    def post_get_data(self, data) -> pd.DataFrame:
+        """
+        omit any geneids already present in the database
+        """
+        data = super().post_get_data(data)
+        genes = crud.get_all_genes(get_db(self.engine))
+        existing_geneids = [g.geneid for g in genes]
+        data = data[ ~data.GeneID.isin(existing_geneids) ]
+        return data
+
 
 # the important tests have been moved out into test
 def test_simple():

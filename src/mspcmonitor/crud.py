@@ -1,5 +1,6 @@
 # from sqlalchemy.orm import Session
 from typing import List
+from tqdm import tqdm
 import sqlmodel
 from sqlmodel import Session
 
@@ -13,9 +14,11 @@ def add_and_commit(db: Session, obj):
     return obj
 
 def add_multiple_and_commit(db: Session, objs):
-    for obj in objs:
+    # this is not useful actually
+    for obj in tqdm(objs, 'adding objects'):
         db.add(obj) # is this better than calling commit after adding each object?
     db.commit()
+    db.refresh
 
 
 def get_rawfile_by_name(db: Session, name: str):
@@ -46,6 +49,11 @@ def get_experiment_by_recno(db: Session, recno: int):
 def get_all_experiments(db: Session):
     return db.query(models.Experiment).all()
 
+def get_gene_by_id(db: Session, geneid):
+    return db.query(models.Gene).filter(models.Gene.geneid == geneid).first()
+
+def get_all_genes(db:Session):
+    return db.query(models.Gene).all()
 
 def get_all_experimentruns(db: Session):
     return db.query(models.ExperimentRun).join(models.Experiment).all()
