@@ -25,30 +25,9 @@ def get_db(engine=engine):
         db.close()
 
 
-def get_logger(name=__name__):
+from .logging_config import get_logger
 
-    logger = logging.getLogger(name)
-    logger.setLevel(logging.DEBUG)
-
-    fh = logging.FileHandler("MSPCMonitor.log")
-
-    # create console handler with a higher log level
-    ch = logging.StreamHandler(sys.stdout)
-    ch.setLevel(logging.INFO)
-
-    formatter = logging.Formatter(
-        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-    )
-    fh.setFormatter(formatter)
-    ch.setFormatter(formatter)
-    # add the handlers to the logger
-    logger.addHandler(fh)
-    logger.addHandler(ch)
-
-    return logger
-
-
-logger = get_logger()
+logger = get_logger(__name__)
 
 
 @lru_cache()
@@ -76,15 +55,19 @@ def create(
     create database tables
     """
     #
+    import ipdb
+
     if Path("ispec.db").exists() and not force:
-        print("ispec.db already exists")
+        logger.info("ispec.db already exists")
         return
 
     crud.create_tables(get_db())
+    logger.info("created new database")
     #
 
 
 from . import importers
+
 
 @app.command("add-metadata")
 def add_metadata(ispec_export_file: Path):
@@ -92,12 +75,11 @@ def add_metadata(ispec_export_file: Path):
     return
 
 
-
-#20221904_ispec_cur_Experiments_metadata_export.xlsx
+# 20221904_ispec_cur_Experiments_metadata_export.xlsx
 @app.command("add-experiments-table")
 def add_exp_table(ispec_export_file: Path):
     # import_ispec_experiments(ispec_export_file)
-    importers.Experiments_Importer(ispec_export_file).insert_data(data_kws=dict())
+    importers.Experiments_Importer(ispec_export_file).insert_data(data_kwargs=dict())
     return
 
 
@@ -105,23 +87,24 @@ def add_exp_table(ispec_export_file: Path):
 def add_exprun_table(ispec_export_file: Path):
     # import_ispec_expruns(ispec_export_file)
 
-    importers.ExperimentRuns_Importer(ispec_export_file).insert_data(data_kws=dict())
+    importers.ExperimentRuns_Importer(ispec_export_file).insert_data(data_kwargs=dict())
     return
 
 
 @app.command("add-e2g-table")
 def add_e2g_table(e2g_qual_file: Path, e2g_quant_file: Path):
     # these importers does not make any foreign keys yet
-    importers.E2G_QUAL_Importer(e2g_qual_file).insert_data(data_kws=dict())
-    #importers.E2G_QUANT_Importer(e2g_quant_file).insert_data(data_kws=dict())
+    importers.E2G_QUAL_Importer(e2g_qual_file).insert_data(data_kwargs=dict())
+    # importers.E2G_QUANT_Importer(e2g_quant_file).insert_data(data_kwargs=dict())
     # import_e2g(e2g_qual_file=e2g_qual, e2g_quant_file=e2g_quant_file)
     return
 
 
 @app.command("add-genes-table")
 def add_genes_table(gene_table_file: Path):
-    importers.GenesImporter(gene_table_file).insert_data(data_kws=dict())
+    importers.GenesImporter(gene_table_file).insert_data(data_kwargs=dict())
     return
+
 
 from datetime import datetime
 
@@ -281,14 +264,14 @@ def import_ispec_expruns(ispec_export_file: Path):
 
     def make_model(row):
 
-        kws = dict()
+        kwargs = dict()
         # add all values
         for dbcol, col in column_mapping.items():
             if col == "":
                 continue
             if col not in row:
                 continue
-            kws[dbcol] = row[col]
+            kwargs[dbcol] = row[col]
 
         #
         # check
@@ -296,20 +279,20 @@ def import_ispec_expruns(ispec_export_file: Path):
         _runno = row["exprun_EXPRunNo"]
         #
         if check_if_recno_exists(_recno) == False:
-            print(f"{_recno} does not exist")
+            logger.warning(f"{_recno} does not exist")
             return
         experiment = crud.get_experiment_by_recno(get_db(), _recno)
         if experiment is None:
-            print(f"{_recno} does not exist")
+            logger.warning(f"{_recno} does not exist")
             return
         #
         #
-        kws["experiment_id"] = experiment.id
+        kwargs["experiment_id"] = experiment.id
         exprun = crud.get_exprun_by_recrun(get_db(), _recno, _runno)
         if exprun is not None:
-            print(f"{_recno}:{_runno} already exists")
+            logger.warning(f"{_recno}:{_runno} already exists")
             return
-        exprun = models.ExperimentRun(**kws)
+        exprun = models.ExperimentRun(**kwargs)
         return exprun
 
     expruns = df.apply(make_model, axis=1)
@@ -320,6 +303,7 @@ def import_ispec_expruns(ispec_export_file: Path):
         [_ for _ in mapper]
 
 
+# old, not using
 def import_ispec_experiments(ispec_export_file: Path):
     """
 
@@ -393,18 +377,18 @@ def import_ispec_experiments(ispec_export_file: Path):
 
     def make_model(row):
 
-        kws = dict()
+        kwargs = dict()
         # add all values
         for dbcol, col in column_mapping.items():
             if col not in row:
                 continue
-            kws[dbcol] = row[col]
+            kwargs[dbcol] = row[col]
         #
         # check
         if check_if_recno_exists(row.exp_EXPRecNo) == True:
-            print(f"{row.exp_EXPRecNo} already exists")
+            logger.warning(f"{row.exp_EXPRecNo} already exists")
             return
-        exp = models.Experiment(**kws)
+        exp = models.Experiment(**kwargs)
         print(exp)
         return exp
 
@@ -416,6 +400,7 @@ def import_ispec_experiments(ispec_export_file: Path):
         [_ for _ in mapper]
 
 
+# old not using
 def import_e2g(e2g_qual_file: Path, e2g_quant_file: Path):
     """Import a single e2g file (one rec-run)"""
     column_mapping = {
@@ -483,26 +468,26 @@ def import_e2g(e2g_qual_file: Path, e2g_quant_file: Path):
     runno = df.iloc[0]["EXPRunNo"]
 
     if check_if_recno_exists(recno) == False:
-        print(f"{recno} does not exist")
+        logger.warning(f"{recno} does not exist")
         return
     experimentrun = crud.get_exprun_by_recrun(
         get_db(), recno=int(recno), runno=int(runno)
     )
 
     if experimentrun is None:
-        print(f"{recno}:{runno} does not exist")
+        logger.warning(f"{recno}:{runno} does not exist")
         return
     experimentrun = experimentrun[0]
 
     # ================================
     def make_model(row, model):
-        kws = dict()
+        kwargs = dict()
         for dbcol, col in column_mapping.items():
             if dbcol == "":
                 continue
             if col not in row:
                 continue
-            kws[dbcol] = row[col]
+            kwargs[dbcol] = row[col]
 
         recno = row["EXPRecNo"]
         runno = row["EXPRunNo"]
@@ -513,10 +498,10 @@ def import_e2g(e2g_qual_file: Path, e2g_quant_file: Path):
             return
         experimentrun = experimentrun[0]
         #
-        kws["experimentrun_id"] = experimentrun.id
-        kws["experiment_id"] = experimentrun.experiment_id
-        return model(**kws)
-        # return models.E2GQual(**kws)
+        kwargs["experimentrun_id"] = experimentrun.id
+        kwargs["experiment_id"] = experimentrun.experiment_id
+        return model(**kwargs)
+        # return models.E2GQual(**kwargs)
         #
         #
 
