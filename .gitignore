@@ -1,3 +1,4 @@
-MSPCRunner.log
+*log
 workspace.code-workspace
-__pycache__/*
+__pycache__/
+ispec.db
