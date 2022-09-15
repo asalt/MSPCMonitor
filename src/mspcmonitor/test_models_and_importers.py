@@ -22,45 +22,55 @@ from .importers import Experiments_Importer, get_db
 # return (raw1, raw2)
 
 
-@pytest.fixture
+@pytest.fixture(scope="function")
 def sqlengine():
 
     from sqlmodel import create_engine, SQLModel
 
-    SQLALCHEMY_DATABASE_URL = "sqlite://"
+
+    #SQLALCHEMY_DATABASE_URL = "sqlite:///ispec.db"
+    SQLALCHEMY_DATABASE_URL = "sqlite:///"
     engine = create_engine(
         SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}, echo=False
     )
+
+
+    # if not Path("ispec.db").exists() or True: # TODO separate teardown ?
+    #     # import pdb; pdb.set_trace()
+    #     SQLModel.metadata.create_all(engine)
+        # crud.create_tables(get_db(SQLALCHEMY_DATABASE_URL))
+
     SQLModel.metadata.create_all(engine)
     yield engine
 
 
 @pytest.fixture(scope="module")
 def genetable():
-    f = Path(__file__).parent.joinpath("testdata/genetable_short.tsv")
+    f = Path(__file__).parent.joinpath("testdata/genetable_short100.tsv")
     return f
+
 
 @pytest.fixture(scope="module")
 def e2g_qual():
-    f = Path(__file__).parent.joinpath("testdata/test_e2g_qual.tsv")
+    f = Path(__file__).parent.joinpath("testdata/99995_426_6_labelnone_e2g_QUAL_short.tsv")
     return f
 
 
 @pytest.fixture(scope="module")
 def psm_qual():
-    f = Path(__file__).parent.joinpath("testdata/test_psms_qual.tsv")
+    f = Path(__file__).parent.joinpath("testdata/99995_426_6_labelnone_psms_QUAL_short.tsv")
     return f
 
 
 @pytest.fixture(scope="module")
 def psm_quant():
-    f = Path(__file__).parent.joinpath("testdata/test_label0_psms_quant.tsv")
+    f = Path(__file__).parent.joinpath("testdata/99995_426_6_labelnone_0_psms_QUANT_short.tsv")
     return f
 
 
 @pytest.fixture(scope="module")
 def e2g_quant():
-    f = Path(__file__).parent.joinpath("testdata/test_e2g_quant.tsv")
+    f = Path(__file__).parent.joinpath("testdata/99995_426_6_labelnone_e2g_QUANT_short.tsv")
     return f
 
 
@@ -143,12 +153,10 @@ def test_crud_exprun(sqlengine):
         get_db(sqlengine), recno=99998, runno=643, searchno=6
     )
     assert res is not None
-    assert len(res) == 2
-    exprun, fetchedexp = res
-    assert isinstance(exprun, models.ExperimentRun)
-    assert fetchedexp.recno == 99998
-    assert exprun.runno == 643
-
+    # assert len(res) == 1
+    assert isinstance(res, models.ExperimentRun)
+    assert res.experiment.recno == 99998
+    assert res.runno == 643
 
 
 def test_e2g_qual_without_exprecord(sqlengine, e2g_qual):
@@ -159,25 +167,47 @@ def test_e2g_qual_without_exprecord(sqlengine, e2g_qual):
         e2gqual = db.exec("select * from e2gqual").fetchall()
         assert len(e2gqual) == 0
 
+
 def test_import_genestable(sqlengine, genetable):
+
+    # setup
     importer = importers.GenesImporter(genetable, sqlengine)
     importer.insert_data()
+
     with get_db(sqlengine) as db:
         res = db.exec("select * from gene").fetchall()
+        # import pdb; pdb.set_trace()
         assert len(res) > 0
 
+
 def test_e2g_qual(sqlengine, e2g_qual, genetable):
-    importer = importers.GenesImporter(genetable, sqlengine)
-    importer.insert_data()
-    RECNO = 99999
+
+    # make sure genes table is populated
+    # otherwise no e2g data will be imported
+    # importer = importers.GenesImporter(genetable, sqlengine)
+    # importer.insert_data()
+
+    # now make a rec and runno
+    # TODO move all this to another fixture
+    RECNO = 99995
+    RUNNO = 426
     exp = models.Experiment(recno=RECNO)
     crud.create_experiment(get_db(sqlengine), exp)
-    #crud.create_experiment(sqlengine, exp)
-    model = models.ExperimentRun(runno=643, searchno=6)
+    # crud.create_experiment(sqlengine, exp)
+    model = models.ExperimentRun(runno=RUNNO, searchno=6)
     crud.create_experimentrun(get_db(sqlengine), model, recno=RECNO)
-    #crud.create_experimentrun(sqlengine, model, recno=RECNO)
+    # DONE
+
+    #
+    importer = importers.GenesImporter(genetable, sqlengine)
+    importer.insert_data()
+    #
+
+    # crud.create_experimentrun(sqlengine, model, recno=RECNO)
     # res0 = get_db(sqlengine).exec('select * from experimentrun').fetchall()
     # res = crud.get_exprun_by_recrun(get_db(sqlengine), recno=RECNO,runno=643,searchno=6)
+    # test again, no particular reason
+    # test_import_genestable(sqlengine, genetable)
 
     importer = importers.E2G_QUAL_Importer(e2g_qual, sqlengine)
     importer.insert_data()
@@ -186,7 +216,25 @@ def test_e2g_qual(sqlengine, e2g_qual, genetable):
     assert len(e2gqual) != 0
 
 
-def test_psm_qual(sqlengine, psm_qual):
+def test_psm_qual(sqlengine, psm_qual, genetable, e2g_qual):
+
+    # setup
+    RECNO = 99995
+    RUNNO = 426
+
+    exp = models.Experiment(recno=RECNO)
+    crud.create_exp(get_db(sqlengine), exp)
+    model = models.ExperimentRun(runno=RUNNO, searchno=6)
+    crud.create_experimentrun(get_db(sqlengine), model, recno=99995)
+    #
+    importer = importers.GenesImporter(genetable, sqlengine)
+    importer.insert_data()
+    #test_import_genestable(sqlengine, genetable)
+
+    importer = importers.E2G_QUAL_Importer(e2g_qual, sqlengine)
+    importer.insert_data()
+
+    #
     importer = importers.PSM_QUAL_Importer(psm_qual, sqlengine)
     importer.insert_data()
     with get_db(sqlengine) as db:
@@ -194,10 +242,38 @@ def test_psm_qual(sqlengine, psm_qual):
     assert len(psmqual) != 0
 
 
-def test_psm_qual_wrongfile(sqlengine, psm_quant):
+def test_psm_qual_genes_not_in_db(sqlengine, psm_qual, genetable, e2g_qual):
+    """
+
+    """
+
+    # setup
+    RECNO = 99995
+    RUNNO = 426
+
+    exp = models.Experiment(recno=RECNO)
+    crud.create_exp(get_db(sqlengine), exp)
+    model = models.ExperimentRun(runno=RUNNO, searchno=6)
+    crud.create_experimentrun(get_db(sqlengine), model, recno=99995)
+    #
+    importer = importers.E2G_QUAL_Importer(e2g_qual, sqlengine)
+    importer.insert_data()
+
+    #
+    importer = importers.PSM_QUAL_Importer(psm_qual, sqlengine)
+    importer.insert_data()
+    with get_db(sqlengine) as db:
+        psmqual = db.exec("select * from psmqual").fetchall()
+    assert len(psmqual) != 0
+
+
+def test_psm_qual_wrongfile(sqlengine, psm_quant, genetable):
+    importer = importers.GenesImporter(genetable, sqlengine)
+    importer.insert_data()
     importer = importers.PSM_QUAL_Importer(psm_quant, sqlengine)
-    with pytest.raises(IntegrityError):
-        importer.insert_data()
+    # no more raise inegrity error, instead just make nothing (and this is logged)
+    # with pytest.raises(IntegrityError):
+    #     importer.insert_data()
     # except IntegrityError: #expected
     #     pass
     with get_db(sqlengine) as db:
@@ -205,7 +281,22 @@ def test_psm_qual_wrongfile(sqlengine, psm_quant):
     assert len(psmqual) == 0
 
 
-def test_psm_quant(sqlengine, psm_qual, psm_quant):
+def test_psm_quant(sqlengine, psm_qual, psm_quant, genetable, e2g_qual):
+    # setup
+    RECNO = 99995
+    RUNNO = 426
+
+    exp = models.Experiment(recno=RECNO)
+    crud.create_exp(get_db(sqlengine), exp)
+    model = models.ExperimentRun(runno=RUNNO, searchno=6)
+    crud.create_experimentrun(get_db(sqlengine), model, recno=99995)
+    #
+    importer = importers.GenesImporter(genetable, sqlengine)
+    importer.insert_data()
+    # test_import_genestable(sqlengine, genetable)
+    importer = importers.E2G_QUAL_Importer(e2g_qual, sqlengine)
+    importer.insert_data()
+    #
 
     importer = importers.PSM_QUAL_Importer(psm_qual, sqlengine)
     importer.insert_data()
@@ -219,11 +310,19 @@ def test_psm_quant(sqlengine, psm_qual, psm_quant):
     assert len(psmquant) != 0
 
 
-def test_e2g_quant(sqlengine, e2g_quant, e2g_qual):
-    exp = models.Experiment(recno=99999)
+def test_e2g_quant(sqlengine, e2g_quant, e2g_qual, genetable):
+    # setup
+    RECNO = 99995
+    RUNNO = 426
+
+    exp = models.Experiment(recno=RECNO)
     crud.create_exp(get_db(sqlengine), exp)
-    model = models.ExperimentRun(runno=643, searchno=6)
-    crud.create_experimentrun(get_db(sqlengine), model, recno=99999)
+    model = models.ExperimentRun(runno=RUNNO, searchno=6)
+    crud.create_experimentrun(get_db(sqlengine), model, recno=RECNO)
+
+    importer = importers.GenesImporter(genetable, sqlengine)
+    importer.insert_data()
+    #
 
     importer = importers.E2G_QUAL_Importer(e2g_qual, sqlengine)
     importer.insert_data()

@@ -26,7 +26,7 @@ def get_db():
 
 @app.get("/")
 async def root():
-    #return {"message": "MSPCMonitor"}
+    # return {"message": "MSPCMonitor"}
     content = """
 <body>
 <form action="/upload/" enctype="multipart/form-data" method="post">
@@ -47,6 +47,7 @@ def get_instrument(instrument_id: str):
     instrument = {"instrument_id": instrument_id}
     return instrument
 
+
 @app.get("/instruments/", response_model=List[schemas.Instrument])
 def get_all_instruments(db: Session = Depends(get_db)):
     return crud.get_all_instruments(db=db)
@@ -61,9 +62,11 @@ def create_instrument(
         raise HTTPException(status_code=400, detail="Instrument already exists")
     return crud.create_instrument(db=db, instrument=instrument)
 
+
 @app.post("/upload/")
 async def upload_raw(files: List[UploadFile] = File(...)):
     return {"filename": file.filename for file in files}
+
 
 @app.post("/instrument/{instrument_id}/rawfiles", response_model=schemas.RawFile)
 def create_rawfile(
@@ -72,23 +75,22 @@ def create_rawfile(
     return crud.create_rawfile(db=db, rawfile=rawfile, instrument_id=instrument_id)
 
 
-
 @app.get("/rawfiles/", response_model=List[schemas.RawFile])
 def get_rawfile(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     rawfiles = crud.get_rawfiles(db, skip=skip, limit=limit)
     return rawfiles
 
 
-#import json
-#import asyncio
-#import aiopg
-#from starlette.endpoints import WebSocketEndpoint
-#from fastapi import Depends, FastAPI, HTTPException
-#from starlette.websockets import WebSocket
-#from pydantic import BaseModel
+# import json
+# import asyncio
+# import aiopg
+# from starlette.endpoints import WebSocketEndpoint
+# from fastapi import Depends, FastAPI, HTTPException
+# from starlette.websockets import WebSocket
+# from pydantic import BaseModel
 
-#@app.websocket_route("/status")
-#class WebSocketOrders(WebSocketEndpoint):
+# @app.websocket_route("/status")
+# class WebSocketOrders(WebSocketEndpoint):
 #
 #    encoding = "json"
 #

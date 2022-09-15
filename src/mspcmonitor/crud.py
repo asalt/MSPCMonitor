@@ -1,10 +1,13 @@
 # from sqlalchemy.orm import Session
 from typing import List
 from tqdm import tqdm
+from sqlalchemy import and_, or_
 import sqlmodel
 from sqlmodel import Session
 
 from . import models, schemas
+
+# test
 
 
 def add_and_commit(db: Session, obj):
@@ -13,10 +16,11 @@ def add_and_commit(db: Session, obj):
     db.refresh(obj)
     return obj
 
+
 def add_multiple_and_commit(db: Session, objs):
     # this is not useful actually
-    for obj in tqdm(objs, 'adding objects'):
-        db.add(obj) # is this better than calling commit after adding each object?
+    for obj in tqdm(objs, "adding objects"):
+        db.add(obj)  # is this better than calling commit after adding each object?
     db.commit()
     db.refresh
 
@@ -49,34 +53,44 @@ def get_experiment_by_recno(db: Session, recno: int):
 def get_all_experiments(db: Session):
     return db.query(models.Experiment).all()
 
+
 def get_gene_by_id(db: Session, geneid):
     return db.query(models.Gene).filter(models.Gene.geneid == geneid).first()
 
-def get_all_genes(db:Session):
+
+def get_all_genes(db: Session):
     return db.query(models.Gene).all()
+
 
 def get_all_experimentruns(db: Session):
     return db.query(models.ExperimentRun).join(models.Experiment).all()
 
 
-def get_exprun_by_recrunsearch(db: Session, recno: int, runno: int, searchno:int):
+def get_exprun_by_recrunsearch(db: Session, recno: int, runno: int, searchno: int):
 
     # if not isinstance(recno, int):
     #     raise TypeError(f"recno should be of type int")
     # if not isinstance(runno, int):
     #     raise TypeError(f"recno should be of type int")
 
+    # sqlmodel.select(models.ExperimentRun, models.Experiment)
     statement = (
-        sqlmodel.select(models.ExperimentRun, models.Experiment)
-        .where(models.Experiment.recno == recno and models.ExperimentRun.runno == runno and
-                models.ExperimentRun.searchno == searchno
+        db.query(models.ExperimentRun)
+        .join(models.Experiment)
+        .filter(
+            and_(
+                models.Experiment.recno == recno,
+                models.ExperimentRun.runno == runno,
+                models.ExperimentRun.searchno == searchno,
             )
-            .join(models.ExperimentRun)
+        )
     )
-        #.filter(models.ExperimentRun.runno == runno)
+    # .filter(models.ExperimentRun.runno == runno)
 
-    qq = db.exec(statement)
-    return qq.first()
+    # should be 0 or 1
+    assert len(statement.all()) < 2
+
+    return statement.first()
     # return (
     #     db.query(models.ExperimentRun)
     #     .filter(models.ExperimentRun.recno == recno)
@@ -162,7 +176,7 @@ def get_rawfiles(db: Session, skip: int = 0, limit: int = 100):
 
 
 def create_tables(db: Session):
-    models.create_db_and_tables()
+    models.create_db_and_tables(db)
 
     # db_exp = models.Experiment(recno=exp.recno, label=exp.label)
 

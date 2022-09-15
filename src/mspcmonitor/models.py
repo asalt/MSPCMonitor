@@ -66,7 +66,7 @@ from sqlmodel import Field, Session, SQLModel, Relationship
 from .database import engine
 
 
-def create_db_and_tables():
+def create_db_and_tables(engine):
     SQLModel.metadata.create_all(engine)
 
 
@@ -135,7 +135,7 @@ class RawFile(SQLModel, table=True):
     mtime: datetime
     size: int
     # instrument: str = Field(default=None)
-    #instrument_id: Optional[int] = Field(default=None, foreign_key="instrument.id")
+    # instrument_id: Optional[int] = Field(default=None, foreign_key="instrument.id")
     instrument: str = Field(default=None)
 
     # flags
@@ -144,7 +144,9 @@ class RawFile(SQLModel, table=True):
     # instrument_id: Optional[int] = Field(default=None, foreign_key="instrument.id")
     # instrument: Instrument = Relationship(back_populates="rawfiles")
 
-    experimentrun_id: Optional[int] = Field(default=None, foreign_key="experimentrun.id")
+    experimentrun_id: Optional[int] = Field(
+        default=None, foreign_key="experimentrun.id"
+    )
     experimentrun: "ExperimentRun" = Relationship(back_populates="rawfiles")
     ## =========================================
     def __eq__(self, other):
@@ -259,7 +261,7 @@ class ExperimentRun(SQLModel, table=True):
     class Config:
         schema_extra = {
             "ispec_column_mapping": {
-                #"": "dev_exprun_u2g_check",
+                # "": "dev_exprun_u2g_check",
                 "runno": "exprun_AddedBy",
                 "date": "exprun_CreationTS",
                 # "": "exprun_E2GFile0_expFileName",
@@ -277,13 +279,13 @@ class ExperimentRun(SQLModel, table=True):
                 # "": "exprun_Grouper_StartFLAG",
                 # "": "exprun_Grouper_Version",
                 "is_imported": "exprun_Import_EndFLAG",
-                #"": "exprun_Import_FixFLAG",
-                #"": "exprun_Import_StartFLAG",
-                #"": "exprun_ImportTS",
-                #"": "exprun_InputFileName",
-                #"": "exprun_LabelType",
-                #"": "exprun_ModificationTS",
-                #"": "exprun_MS_Experimenter",
+                # "": "exprun_Import_FixFLAG",
+                # "": "exprun_Import_StartFLAG",
+                # "": "exprun_ImportTS",
+                # "": "exprun_InputFileName",
+                # "": "exprun_LabelType",
+                # "": "exprun_ModificationTS",
+                # "": "exprun_MS_Experimenter",
                 "instrument": "exprun_MS_Instrument",
                 # "": "exprun_MSFFile_expFileName",
                 # "": "exprun_nGeneCount",
@@ -333,47 +335,33 @@ class ExperimentRun(SQLModel, table=True):
     e2gquants: Optional[List["E2GQuant"]] = Relationship(back_populates="experimentrun")
     e2gquals: Optional[List["E2GQual"]] = Relationship(back_populates="experimentrun")
 
-    # id = Column(Integer, primary_key=True)
-    # runno = Column(Integer)
-    # searchno = Column(Integer)
-    # is_plotted = Column(Boolean, default=False)
-    # is_searched = Column(Boolean, default=False)  # make more?
-    # is_validated = Column(Boolean, default=False)  # make more?
-    # is_grouped = Column(Boolean, default=False)  # make more?
-
-    # taxon = Column(String)
-    # refdb = Column(String)
-
-    # # recno = relationship("Experiment", back_populates="experimentruns")
-    # recno_id = Column(Integer, ForeignKey("experiments.id"))
-    # rawfiles = relationship("RawFile")
-    # # , back_populates="experimentruns")
-
 
 class Gene(SQLModel, table=True):
     class Config:
-        schema_extra = {"ispec_column_mapping": {
-
-            "geneid":"GeneID",
-            "symbol":"GeneSymbol",
-            "funcats":"FunCats",
-            "taxonid":"TaxonID",
-            "synonyms":"Synonyms",
-            "description":"GeneDescription",
-            "chromosome":"GeneChromosome",
-            "gi":"gi",
-            "sequence":"sequence",
-            "AAlength":"AAlength",
-            "MW":"MW",
-            "maxMW":"maxMW",
-        }}
+        schema_extra = {
+            "ispec_column_mapping": {
+                "geneid": "GeneID",
+                "symbol": "GeneSymbol",
+                "funcats": "FunCats",
+                "taxonid": "TaxonID",
+                "synonyms": "Synonyms",
+                "description": "GeneDescription",
+                "chromosome": "GeneChromosome",
+                "gi": "gi",
+                "sequence": "sequence",
+                "AAlength": "AAlength",
+                "MW": "MW",
+                "maxMW": "maxMW",
+            }
+        }
 
     class Meta:
         load_instance = True
 
-    #id: Optional[int] = Field(primary_key=True)
+    # id: Optional[int] = Field(primary_key=True)
     geneid: Optional[int] = Field(primary_key=True)
-    #geneid: str = Field()
+    # geneid: str = Field()
+    taxonid: Optional[int] = Field()
     symbol: str = Field()
     funcats: Optional[str] = Field()
     synonyms: Optional[str] = Field()
@@ -400,8 +388,16 @@ class E2GQual(SQLModel, table=True):
                 "peptidecount": "PeptideCount",
                 "peptidecount_u2g": "PeptideCount_u2g",
                 "peptidecount_s_u2g": "PeptideCount_S_u2g",
+                "peptidecount_s": "PeptideCount_S",
                 "peptideprint": "PeptidePrint",
                 "coverage": "Coverage",
+                "gpgroup": "GPGroup",
+                "gpgroups_all": "GPGroups_All",
+                "coverage": "Converage",
+                "coverage_u2g": "Converage_u2g",
+                "psms_u2g": "",
+                "proteingi_gpdgroups": "",
+                "proteinref_gidgroups": "",
             }
         }
 
@@ -416,10 +412,6 @@ class E2GQual(SQLModel, table=True):
     experimentrun_id: Optional[int] = Field(
         default=None, foreign_key="experimentrun.id"
     )
-    #
-    geneid: Optional[Gene] = Relationship(back_populates="e2gquals")
-    geneid_id: Optional[int] = Field(foreign_key="gene.geneid")
-    peptideprint: Optional[str] = Field(default=None)
     #
     e2gquants: Optional[List["E2GQuant"]] = Relationship(back_populates="e2gqual")
     #
@@ -444,19 +436,27 @@ class E2GQual(SQLModel, table=True):
     # coverage: float = Field()
     # proteingis: str = Field()
     # description: str = Field()
-    # psms: int = Field()
     # peptidecount_s: int = Field()
     # proteinrefs: int = Field()
-    # psms_s: int = Field()
-    # psms_s_u2g: int = Field()
 
-    # TODO
-    # homologeneid: str = Field()
+    geneid: Optional[Gene] = Relationship(back_populates="e2gquals")
+    geneid_id: Optional[int] = Field(foreign_key="gene.geneid")
+    #
+    coverage: Optional[float] = Field()
+    coverage_u2g: Optional[float] = Field()
+    idset: Optional[int] = Field()
+    SRA: Optional[str] = Field()
+    #
+    psms: Optional[int] = Field()
+    psms_s: Optional[int] = Field()
+    psms_s_u2g: Optional[int] = Field()
 
+    peptidecount: Optional[int] = Field()
     peptidecount_u2g: Optional[int] = Field()
+    peptidecount_s: Optional[int] = Field()
     # GeneSymbol: str = Field()
-    gpgroup: Optional[int] = Field()
     peptidecount_s_u2g: Optional[int] = Field()
+    gpgroup: Optional[int] = Field()
     peptideprint: Optional[str] = Field()
     psms_u2g: Optional[int] = Field()
     # GeneCapacity: str = Field()
@@ -508,19 +508,16 @@ class PSMQual(SQLModel, table=True):
 
 class E2GQuant(SQLModel, table=True):
     class Config:
-        schema_extra = {"ispec_column_mapping": {
-            "": "",
-            "": "",
-            "": "",
-            "": "",
-            "": "",
-            "": "",
-            "areasum_u2g_0": "AreaSum_u2g_0",
-            "areasum_u2g_all": "AreaSum_u2g_all",
-            "areasum_max": "AreaSum_max",
-            "areasum_dstradj": "AreaSum_dstrAdj",
-            "ibaq_dstradj": "iBAQ_dstrAdj",
-        }}
+        schema_extra = {
+            "ispec_column_mapping": {
+                "label": "LabelFLAG",
+                "areasum_u2g_0": "AreaSum_u2g_0",
+                "areasum_u2g_all": "AreaSum_u2g_all",
+                "areasum_max": "AreaSum_max",
+                "areasum_dstradj": "AreaSum_dstrAdj",
+                "ibaq_dstradj": "iBAQ_dstrAdj",
+            }
+        }
 
     class Meta:
         load_instance = True
