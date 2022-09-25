@@ -9,7 +9,7 @@ def sqlengine():
 
     SQLALCHEMY_DATABASE_URL = "sqlite://"
     engine = create_engine(
-        SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": True}, echo=True
+        SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": True}, echo=False
     )
     SQLModel.metadata.create_all(engine)
     yield engine

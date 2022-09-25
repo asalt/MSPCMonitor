@@ -6,10 +6,11 @@ from fastapi.responses import HTMLResponse
 
 from sqlalchemy.orm import Session
 
-from . import crud, models, schemas
-from .database import SessionLocal, engine
+from . import crud, models, schemas, database
+#from database import SessionLocal, engine
+engine = database.engine
 
-models.Base.metadata.create_all(bind=engine)
+# models.Base.metadata.create_all(bind=engine)
 
 from fastapi import FastAPI
 
