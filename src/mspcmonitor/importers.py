@@ -343,7 +343,7 @@ class ExperimentRuns_Importer(Importer):
         if exprun is not None:
             print(f"{_recno}:{_runno} already exists")
             return
-        import ipdb; ipdb.set_trace()
+        # import ipdb; ipdb.set_trace()
         exprun = models.ExperimentRun(**kws)
         return exprun
 
