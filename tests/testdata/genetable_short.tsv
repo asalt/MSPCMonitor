@@ -1,0 +1,1000 @@
+GeneID	GeneDescription	GeneChromosome	FunCats	GeneSymbol	TaxonID	GeneType
+1	alpha-1-B glycoprotein	19		A1BG	9606	protein-coding
+29974	APOBEC1 complementation factor	10	SPL	A1CF	9606	protein-coding
+54715	RNA binding protein, fox-1 homolog (C. elegans) 1	16	RNA	RBFOX1	9606	protein-coding
+87769	gamma-glutamylamine cyclotransferase	13		GGACT	9606	protein-coding
+2	alpha-2-macroglobulin	12		A2M	9606	protein-coding
+144568	alpha-2-macroglobulin-like 1	12		A2ML1	9606	protein-coding
+127550	alpha 1,3-galactosyltransferase 2	1		A3GALT2	9606	protein-coding
+53947	alpha 1,4-galactosyltransferase	22		A4GALT	9606	protein-coding
+51146	alpha-1,4-N-acetylglucosaminyltransferase	3		A4GNT	9606	protein-coding
+8086	achalasia, adrenocortical insufficiency, alacrimia	12		AAAS	9606	protein-coding
+65985	acetoacetyl-CoA synthetase	12		AACS	9606	protein-coding
+13	arylacetamide deacetylase	3		AADAC	9606	protein-coding
+57552	neutral cholesterol ester hydrolase 1	3		NCEH1	9606	protein-coding
+344752	arylacetamide deacetylase-like 2	3		AADACL2	9606	protein-coding
+126767	arylacetamide deacetylase-like 3	1		AADACL3	9606	protein-coding
+343066	arylacetamide deacetylase-like 4	1		AADACL4	9606	protein-coding
+51166	aminoadipate aminotransferase	4		AADAT	9606	protein-coding
+22848	AP2 associated kinase 1	2	KI-P-Other-NAK-BIKE, PM	AAK1	9606	protein-coding
+14	angio-associated, migratory cell protein	2	PM	AAMP	9606	protein-coding
+15	aralkylamine N-acetyltransferase	17		AANAT	9606	protein-coding
+16	alanyl-tRNA synthetase	16		AARS	9606	protein-coding
+57505	alanyl-tRNA synthetase 2, mitochondrial	6		AARS2	9606	protein-coding
+80755	alanyl-tRNA synthetase domain containing 1	17		AARSD1	9606	protein-coding
+132949	aminoadipate-semialdehyde dehydrogenase	4		AASDH	9606	protein-coding
+60496	aminoadipate-semialdehyde dehydrogenase-phosphopantetheinyl transferase	11		AASDHPPT	9606	protein-coding
+10157	aminoadipate-semialdehyde synthase	7		AASS	9606	protein-coding
+26574	apoptosis antagonizing transcription factor	17	TC	AATF	9606	protein-coding
+9625	apoptosis-associated tyrosine kinase	17	KI-P-TK-Lmr	AATK	9606	protein-coding
+18	4-aminobutyrate aminotransferase	16		ABAT	9606	protein-coding
+19	ATP-binding cassette, sub-family A (ABC1), member 1	9	PM	ABCA1	9606	protein-coding
+10349	ATP-binding cassette, sub-family A (ABC1), member 10	17		ABCA10	9606	protein-coding
+26154	ATP-binding cassette, sub-family A (ABC1), member 12	2		ABCA12	9606	protein-coding
+154664	ATP-binding cassette, sub-family A (ABC1), member 13	7		ABCA13	9606	protein-coding
+20	ATP-binding cassette, sub-family A (ABC1), member 2	9		ABCA2	9606	protein-coding
+21	ATP-binding cassette, sub-family A (ABC1), member 3	16	PM	ABCA3	9606	protein-coding
+24	ATP-binding cassette, sub-family A (ABC1), member 4	1		ABCA4	9606	protein-coding
+23461	ATP-binding cassette, sub-family A (ABC1), member 5	17		ABCA5	9606	protein-coding
+23460	ATP-binding cassette, sub-family A (ABC1), member 6	17		ABCA6	9606	protein-coding
+10347	ATP-binding cassette, sub-family A (ABC1), member 7	19	PM	ABCA7	9606	protein-coding
+10351	ATP-binding cassette, sub-family A (ABC1), member 8	17	PM	ABCA8	9606	protein-coding
+10350	ATP-binding cassette, sub-family A (ABC1), member 9	17		ABCA9	9606	protein-coding
+5243	ATP-binding cassette, sub-family B (MDR/TAP), member 1	7		ABCB1	9606	protein-coding
+23456	ATP-binding cassette, sub-family B (MDR/TAP), member 10	1		ABCB10	9606	protein-coding
+8647	ATP-binding cassette, sub-family B (MDR/TAP), member 11	2	PM	ABCB11	9606	protein-coding
+5244	ATP-binding cassette, sub-family B (MDR/TAP), member 4	7	PM	ABCB4	9606	protein-coding
+340273	ATP-binding cassette, sub-family B (MDR/TAP), member 5	7	PM	ABCB5	9606	protein-coding
+10058	ATP-binding cassette, sub-family B (MDR/TAP), member 6 (Langereis blood group)	2	PM	ABCB6	9606	protein-coding
+22	ATP-binding cassette, sub-family B (MDR/TAP), member 7	X		ABCB7	9606	protein-coding
+11194	ATP-binding cassette, sub-family B (MDR/TAP), member 8	7		ABCB8	9606	protein-coding
+23457	ATP-binding cassette, sub-family B (MDR/TAP), member 9	12	PM	ABCB9	9606	protein-coding
+4363	ATP-binding cassette, sub-family C (CFTR/MRP), member 1	16	PM	ABCC1	9606	protein-coding
+89845	ATP-binding cassette, sub-family C (CFTR/MRP), member 10	6	PM	ABCC10	9606	protein-coding
+85320	ATP-binding cassette, sub-family C (CFTR/MRP), member 11	16		ABCC11	9606	protein-coding
+94160	ATP-binding cassette, sub-family C (CFTR/MRP), member 12	16		ABCC12	9606	protein-coding
+1244	ATP-binding cassette, sub-family C (CFTR/MRP), member 2	10		ABCC2	9606	protein-coding
+8714	ATP-binding cassette, sub-family C (CFTR/MRP), member 3	17	PM	ABCC3	9606	protein-coding
+10257	ATP-binding cassette, sub-family C (CFTR/MRP), member 4	13	PM	ABCC4	9606	protein-coding
+10057	ATP-binding cassette, sub-family C (CFTR/MRP), member 5	3		ABCC5	9606	protein-coding
+368	ATP-binding cassette, sub-family C (CFTR/MRP), member 6	16	PM	ABCC6	9606	protein-coding
+6833	ATP-binding cassette, sub-family C (CFTR/MRP), member 8	11	PM	ABCC8	9606	protein-coding
+10060	ATP-binding cassette, sub-family C (CFTR/MRP), member 9	12		ABCC9	9606	protein-coding
+215	ATP-binding cassette, sub-family D (ALD), member 1	X		ABCD1	9606	protein-coding
+225	ATP-binding cassette, sub-family D (ALD), member 2	12		ABCD2	9606	protein-coding
+5825	ATP-binding cassette, sub-family D (ALD), member 3	1		ABCD3	9606	protein-coding
+5826	ATP-binding cassette, sub-family D (ALD), member 4	14		ABCD4	9606	protein-coding
+6059	ATP-binding cassette, sub-family E (OABP), member 1	4		ABCE1	9606	protein-coding
+23	ATP-binding cassette, sub-family F (GCN20), member 1	6		ABCF1	9606	protein-coding
+10061	ATP-binding cassette, sub-family F (GCN20), member 2	7		ABCF2	9606	protein-coding
+55324	ATP-binding cassette, sub-family F (GCN20), member 3	3		ABCF3	9606	protein-coding
+9619	ATP-binding cassette, sub-family G (WHITE), member 1	21	PM	ABCG1	9606	protein-coding
+9429	ATP-binding cassette, sub-family G (WHITE), member 2 (Junior blood group)	4	PM	ABCG2	9606	protein-coding
+64137	ATP-binding cassette, sub-family G (WHITE), member 4	11		ABCG4	9606	protein-coding
+64240	ATP-binding cassette, sub-family G (WHITE), member 5	2	PM	ABCG5	9606	protein-coding
+64241	ATP-binding cassette, sub-family G (WHITE), member 8	2	PM	ABCG8	9606	protein-coding
+84696	abhydrolase domain containing 1	2		ABHD1	9606	protein-coding
+55347	abhydrolase domain containing 10	3		ABHD10	9606	protein-coding
+83451	abhydrolase domain containing 11	7		ABHD11	9606	protein-coding
+26090	abhydrolase domain containing 12	20		ABHD12	9606	protein-coding
+145447	abhydrolase domain containing 12B	14		ABHD12B	9606	protein-coding
+84945	abhydrolase domain containing 13	13		ABHD13	9606	protein-coding
+25864	abhydrolase domain containing 14A	3		ABHD14A	9606	protein-coding
+84836	abhydrolase domain containing 14B	3		ABHD14B	9606	protein-coding
+116236	abhydrolase domain containing 15	17		ABHD15	9606	protein-coding
+11057	abhydrolase domain containing 2	15		ABHD2	9606	protein-coding
+171586	abhydrolase domain containing 3	18		ABHD3	9606	protein-coding
+63874	abhydrolase domain containing 4	14		ABHD4	9606	protein-coding
+51099	abhydrolase domain containing 5	3		ABHD5	9606	protein-coding
+57406	abhydrolase domain containing 6	3		ABHD6	9606	protein-coding
+79575	abhydrolase domain containing 8	19		ABHD8	9606	protein-coding
+10006	abl-interactor 1	10		ABI1	9606	protein-coding
+10152	abl-interactor 2	2		ABI2	9606	protein-coding
+51225	ABI family, member 3	17		ABI3	9606	protein-coding
+25890	ABI family, member 3 (NESH) binding protein	3		ABI3BP	9606	protein-coding
+25	ABL proto-oncogene 1, non-receptor tyrosine kinase	9	KI-P-TK-Abl	ABL1	9606	protein-coding
+27	ABL proto-oncogene 2, non-receptor tyrosine kinase	1	KI-P-TK-Abl	ABL2	9606	protein-coding
+3983	actin binding LIM protein 1	10		ABLIM1	9606	protein-coding
+84448	actin binding LIM protein family, member 2	4		ABLIM2	9606	protein-coding
+22885	actin binding LIM protein family, member 3	5		ABLIM3	9606	protein-coding
+28	ABO blood group (transferase A, alpha 1-3-N-acetylgalactosaminyltransferase; transferase B, alpha 1-3-galactosyltransferase)	9		ABO	9606	protein-coding
+26	amine oxidase, copper containing 1	7		AOC1	9606	protein-coding
+29	active BCR-related	17	KI-X-Atypical-BCR	ABR	9606	protein-coding
+137735	actin binding Rho activating protein	8	PM	ABRA	9606	protein-coding
+29777	activator of basal transcription 1	6		ABT1	9606	protein-coding
+80325	ankyrin repeat and BTB (POZ) domain containing 1	3	nonDNA-BTB, PM	ABTB1	9606	protein-coding
+25841	ankyrin repeat and BTB (POZ) domain containing 2	11	nonDNA-BTB	ABTB2	9606	protein-coding
+30	acetyl-CoA acyltransferase 1	3		ACAA1	9606	protein-coding
+10449	acetyl-CoA acyltransferase 2	18		ACAA2	9606	protein-coding
+31	acetyl-CoA carboxylase alpha	17		ACACA	9606	protein-coding
+32	acetyl-CoA carboxylase beta	12		ACACB	9606	protein-coding
+80724	acyl-CoA dehydrogenase family, member 10	12		ACAD10	9606	protein-coding
+84129	acyl-CoA dehydrogenase family, member 11	3		ACAD11	9606	protein-coding
+27034	acyl-CoA dehydrogenase family, member 8	11		ACAD8	9606	protein-coding
+28976	acyl-CoA dehydrogenase family, member 9	3		ACAD9	9606	protein-coding
+33	acyl-CoA dehydrogenase, long chain	2		ACADL	9606	protein-coding
+34	acyl-CoA dehydrogenase, C-4 to C-12 straight chain	1		ACADM	9606	protein-coding
+35	acyl-CoA dehydrogenase, C-2 to C-3 short chain	12		ACADS	9606	protein-coding
+36	acyl-CoA dehydrogenase, short/branched chain	10		ACADSB	9606	protein-coding
+37	acyl-CoA dehydrogenase, very long chain	17		ACADVL	9606	protein-coding
+176	aggrecan	15		ACAN	9606	protein-coding
+9744	ArfGAP with coiled-coil, ankyrin repeat and PH domains 1	17		ACAP1	9606	protein-coding
+23527	ArfGAP with coiled-coil, ankyrin repeat and PH domains 2	3		ACAP2	9606	protein-coding
+116983	ArfGAP with coiled-coil, ankyrin repeat and PH domains 3	1		ACAP3	9606	protein-coding
+38	acetyl-CoA acetyltransferase 1	11		ACAT1	9606	protein-coding
+39	acetyl-CoA acetyltransferase 2	6		ACAT2	9606	protein-coding
+64746	acyl-CoA binding domain containing 3	1		ACBD3	9606	protein-coding
+79777	acyl-CoA binding domain containing 4	17		ACBD4	9606	protein-coding
+91452	acyl-CoA binding domain containing 5	10		ACBD5	9606	protein-coding
+84320	acyl-CoA binding domain containing 6	1		ACBD6	9606	protein-coding
+414149	acyl-CoA binding domain containing 7	10		ACBD7	9606	protein-coding
+40	acid sensing (proton gated) ion channel 2	17	PM	ASIC2	9606	protein-coding
+41	acid sensing (proton gated) ion channel 1	12	PM	ASIC1	9606	protein-coding
+9311	acid sensing (proton gated) ion channel 3	7	PM	ASIC3	9606	protein-coding
+55515	acid sensing (proton gated) ion channel family member 4	2		ASIC4	9606	protein-coding
+51802	acid sensing (proton gated) ion channel family member 5	4	PM	ASIC5	9606	protein-coding
+84680	1-aminocyclopropane-1-carboxylate synthase homolog (Arabidopsis)(non-functional)	11		ACCS	9606	protein-coding
+390110	1-aminocyclopropane-1-carboxylate synthase homolog (Arabidopsis)(non-functional)-like	11		ACCSL	9606	protein-coding
+65057	adrenocortical dysplasia homolog (mouse)	16		ACD	9606	protein-coding
+1636	angiotensin I converting enzyme	17	PM	ACE	9606	protein-coding
+59272	angiotensin I converting enzyme 2	X	PM	ACE2	9606	protein-coding
+125981	alkaline ceramidase 1	19		ACER1	9606	protein-coding
+340485	alkaline ceramidase 2	9		ACER2	9606	protein-coding
+55331	alkaline ceramidase 3	11		ACER3	9606	protein-coding
+43	acetylcholinesterase (Yt blood group)	7	PM	ACHE	9606	protein-coding
+22985	apoptotic chromatin condensation inducer 1	14	TC?	ACIN1	9606	protein-coding
+47	ATP citrate lyase	17		ACLY	9606	protein-coding
+130013	aminocarboxymuconate semialdehyde decarboxylase	2		ACMSD	9606	protein-coding
+57001	succinate dehydrogenase complex assembly factor 3	7		SDHAF3	9606	protein-coding
+48	aconitase 1, soluble	9		ACO1	9606	protein-coding
+50	aconitase 2, mitochondrial	22		ACO2	9606	protein-coding
+641371	acyl-CoA thioesterase 1	14		ACOT1	9606	protein-coding
+26027	acyl-CoA thioesterase 11	1		ACOT11	9606	protein-coding
+134526	acyl-CoA thioesterase 12	5		ACOT12	9606	protein-coding
+55856	acyl-CoA thioesterase 13	6		ACOT13	9606	protein-coding
+10965	acyl-CoA thioesterase 2	14		ACOT2	9606	protein-coding
+122970	acyl-CoA thioesterase 4	14		ACOT4	9606	protein-coding
+641372	acyl-CoA thioesterase 6	14		ACOT6	9606	protein-coding
+11332	acyl-CoA thioesterase 7	1		ACOT7	9606	protein-coding
+10005	acyl-CoA thioesterase 8	20		ACOT8	9606	protein-coding
+23597	acyl-CoA thioesterase 9	X		ACOT9	9606	protein-coding
+51	acyl-CoA oxidase 1, palmitoyl	17		ACOX1	9606	protein-coding
+8309	acyl-CoA oxidase 2, branched chain	3		ACOX2	9606	protein-coding
+8310	acyl-CoA oxidase 3, pristanoyl	4		ACOX3	9606	protein-coding
+55289	acyl-CoA oxidase-like	2		ACOXL	9606	protein-coding
+52	acid phosphatase 1, soluble	2		ACP1	9606	protein-coding
+53	acid phosphatase 2, lysosomal	11		ACP2	9606	protein-coding
+54	acid phosphatase 5, tartrate resistant	19		ACP5	9606	protein-coding
+51205	acid phosphatase 6, lysophosphatidic	1		ACP6	9606	protein-coding
+92370	2-phosphoxylose phosphatase 1	3		PXYLP1	9606	protein-coding
+55	acid phosphatase, prostate	3		ACPP	9606	protein-coding
+93650	acid phosphatase, testicular	19		ACPT	9606	protein-coding
+49	acrosin	22		ACR	9606	protein-coding
+84519	acrosin binding protein	12		ACRBP	9606	protein-coding
+93953	acidic repeat containing	X		ACRC	9606	protein-coding
+56	acrosomal vesicle protein 1	11		ACRV1	9606	protein-coding
+23205	acyl-CoA synthetase bubblegum family member 1	15		ACSBG1	9606	protein-coding
+81616	acyl-CoA synthetase bubblegum family member 2	19		ACSBG2	9606	protein-coding
+80221	acyl-CoA synthetase family member 2	17		ACSF2	9606	protein-coding
+197322	acyl-CoA synthetase family member 3	16		ACSF3	9606	protein-coding
+2180	acyl-CoA synthetase long-chain family member 1	4		ACSL1	9606	protein-coding
+2181	acyl-CoA synthetase long-chain family member 3	2		ACSL3	9606	protein-coding
+2182	acyl-CoA synthetase long-chain family member 4	X		ACSL4	9606	protein-coding
+51703	acyl-CoA synthetase long-chain family member 5	10		ACSL5	9606	protein-coding
+23305	acyl-CoA synthetase long-chain family member 6	5	PM	ACSL6	9606	protein-coding
+116285	acyl-CoA synthetase medium-chain family member 1	16		ACSM1	9606	protein-coding
+123876	acyl-CoA synthetase medium-chain family member 2A	16		ACSM2A	9606	protein-coding
+348158	acyl-CoA synthetase medium-chain family member 2B	16		ACSM2B	9606	protein-coding
+6296	acyl-CoA synthetase medium-chain family member 3	16		ACSM3	9606	protein-coding
+341392	acyl-CoA synthetase medium-chain family member 4	12		ACSM4	9606	protein-coding
+54988	acyl-CoA synthetase medium-chain family member 5	16		ACSM5	9606	protein-coding
+84532	acyl-CoA synthetase short-chain family member 1	20		ACSS1	9606	protein-coding
+55902	acyl-CoA synthetase short-chain family member 2	20		ACSS2	9606	protein-coding
+79611	acyl-CoA synthetase short-chain family member 3	12		ACSS3	9606	protein-coding
+58	actin, alpha 1, skeletal muscle	1		ACTA1	9606	protein-coding
+59	actin, alpha 2, smooth muscle, aorta	10		ACTA2	9606	protein-coding
+60	actin, beta	7		ACTB	9606	protein-coding
+345651	actin, beta-like 2	5		ACTBL2	9606	protein-coding
+70	actin, alpha, cardiac muscle 1	15		ACTC1	9606	protein-coding
+71	actin gamma 1	17		ACTG1	9606	protein-coding
+72	actin, gamma 2, smooth muscle, enteric	2		ACTG2	9606	protein-coding
+84	actin-like 4	3pter-q21		ACTL4	9606	protein-coding
+85	actin-like 5			ACTL5	9606	
+86	actin-like 6A	3	PM	ACTL6A	9606	protein-coding
+51412	actin-like 6B	7		ACTL6B	9606	protein-coding
+10881	actin-like 7A	9		ACTL7A	9606	protein-coding
+10880	actin-like 7B	9		ACTL7B	9606	protein-coding
+81569	actin-like 8	1		ACTL8	9606	protein-coding
+284382	actin-like 9	19		ACTL9	9606	protein-coding
+87	actinin, alpha 1	14		ACTN1	9606	protein-coding
+88	actinin, alpha 2	1		ACTN2	9606	protein-coding
+89	actinin, alpha 3 (gene/pseudogene)	11		ACTN3	9606	protein-coding
+81	actinin, alpha 4	19		ACTN4	9606	protein-coding
+55860	actin-related protein 10 homolog (S. cerevisiae)	14		ACTR10	9606	protein-coding
+10121	ARP1 actin-related protein 1 homolog A, centractin alpha (yeast)	10		ACTR1A	9606	protein-coding
+10120	ARP1 actin-related protein 1 homolog B, centractin beta (yeast)	2		ACTR1B	9606	protein-coding
+10097	ARP2 actin-related protein 2 homolog (yeast)	2	KI-X-TKL-STKR-STKR2	ACTR2	9606	protein-coding
+10096	ARP3 actin-related protein 3 homolog (yeast)	2		ACTR3	9606	protein-coding
+57180	ARP3 actin-related protein 3 homolog B (yeast)	7		ACTR3B	9606	protein-coding
+79913	ARP5 actin-related protein 5 homolog (yeast)	20	TC	ACTR5	9606	protein-coding
+64431	ARP6 actin-related protein 6 homolog (yeast)	12		ACTR6	9606	protein-coding
+93973	ARP8 actin-related protein 8 homolog (yeast)	3	TC	ACTR8	9606	protein-coding
+139741	actin-related protein T1	X		ACTRT1	9606	protein-coding
+140625	actin-related protein T2	1		ACTRT2	9606	protein-coding
+90	activin A receptor, type I	2	KI-P-TKL-STKR-STKR1	ACVR1	9606	protein-coding
+91	activin A receptor, type IB	12	KI-P-TKL-STKR-STKR1	ACVR1B	9606	protein-coding
+130399	activin A receptor, type IC	2	KI-P-TKL-STKR-STKR1	ACVR1C	9606	protein-coding
+92	activin A receptor, type IIA	2	KI-P, PM	ACVR2A	9606	protein-coding
+93	activin A receptor, type IIB	3	KI-P-TKL-STKR-STKR2, PM	ACVR2B	9606	protein-coding
+94	activin A receptor type II-like 1	12	KI-P-TKL-STKR-STKR1	ACVRL1	9606	protein-coding
+95	aminoacylase 1	3		ACY1	9606	protein-coding
+91703	aminoacylase 3	11	PM	ACY3	9606	protein-coding
+97	acylphosphatase 1, erythrocyte (common) type	14		ACYP1	9606	protein-coding
+98	acylphosphatase 2, muscle type	2		ACYP2	9606	protein-coding
+100	adenosine deaminase	20	PM	ADA	9606	protein-coding
+132612	adenosine deaminase domain containing 1 (testis-specific)	4		ADAD1	9606	protein-coding
+161931	adenosine deaminase domain containing 2	16	RNA editing	ADAD2	9606	protein-coding
+161823	adenosine deaminase-like	15		ADAL	9606	protein-coding
+102	ADAM metallopeptidase domain 10	15	PM	ADAM10	9606	protein-coding
+4185	ADAM metallopeptidase domain 11	17	PM	ADAM11	9606	protein-coding
+8038	ADAM metallopeptidase domain 12	10	PM	ADAM12	9606	protein-coding
+8751	ADAM metallopeptidase domain 15	1		ADAM15	9606	protein-coding
+6868	ADAM metallopeptidase domain 17	2	PM	ADAM17	9606	protein-coding
+8749	ADAM metallopeptidase domain 18	8		ADAM18	9606	protein-coding
+8728	ADAM metallopeptidase domain 19	5		ADAM19	9606	protein-coding
+2515	ADAM metallopeptidase domain 2	8		ADAM2	9606	protein-coding
+8748	ADAM metallopeptidase domain 20	14		ADAM20	9606	protein-coding
+8747	ADAM metallopeptidase domain 21	14		ADAM21	9606	protein-coding
+53616	ADAM metallopeptidase domain 22	7		ADAM22	9606	protein-coding
+8745	ADAM metallopeptidase domain 23	2	PM	ADAM23	9606	protein-coding
+10863	ADAM metallopeptidase domain 28	8	PM	ADAM28	9606	protein-coding
+11086	ADAM metallopeptidase domain 29	4		ADAM29	9606	protein-coding
+11085	ADAM metallopeptidase domain 30	1		ADAM30	9606	protein-coding
+203102	ADAM metallopeptidase domain 32	8		ADAM32	9606	protein-coding
+80332	ADAM metallopeptidase domain 33	20		ADAM33	9606	protein-coding
+8756	ADAM metallopeptidase domain 7	8	PM	ADAM7	9606	protein-coding
+101	ADAM metallopeptidase domain 8	10		ADAM8	9606	protein-coding
+8754	ADAM metallopeptidase domain 9	8	PM	ADAM9	9606	protein-coding
+27299	ADAM-like, decysin 1	8		ADAMDEC1	9606	protein-coding
+9510	ADAM metallopeptidase with thrombospondin type 1 motif, 1	21		ADAMTS1	9606	protein-coding
+81794	ADAM metallopeptidase with thrombospondin type 1 motif, 10	19		ADAMTS10	9606	protein-coding
+81792	ADAM metallopeptidase with thrombospondin type 1 motif, 12	5		ADAMTS12	9606	protein-coding
+11093	ADAM metallopeptidase with thrombospondin type 1 motif, 13	9		ADAMTS13	9606	protein-coding
+140766	ADAM metallopeptidase with thrombospondin type 1 motif, 14	10		ADAMTS14	9606	protein-coding
+170689	ADAM metallopeptidase with thrombospondin type 1 motif, 15	11		ADAMTS15	9606	protein-coding
+170690	ADAM metallopeptidase with thrombospondin type 1 motif, 16	5		ADAMTS16	9606	protein-coding
+170691	ADAM metallopeptidase with thrombospondin type 1 motif, 17	15		ADAMTS17	9606	protein-coding
+170692	ADAM metallopeptidase with thrombospondin type 1 motif, 18	16		ADAMTS18	9606	protein-coding
+171019	ADAM metallopeptidase with thrombospondin type 1 motif, 19	5		ADAMTS19	9606	protein-coding
+9509	ADAM metallopeptidase with thrombospondin type 1 motif, 2	5		ADAMTS2	9606	protein-coding
+80070	ADAM metallopeptidase with thrombospondin type 1 motif, 20	12		ADAMTS20	9606	protein-coding
+9508	ADAM metallopeptidase with thrombospondin type 1 motif, 3	4		ADAMTS3	9606	protein-coding
+9507	ADAM metallopeptidase with thrombospondin type 1 motif, 4	1		ADAMTS4	9606	protein-coding
+11096	ADAM metallopeptidase with thrombospondin type 1 motif, 5	21		ADAMTS5	9606	protein-coding
+11174	ADAM metallopeptidase with thrombospondin type 1 motif, 6	5		ADAMTS6	9606	protein-coding
+11173	ADAM metallopeptidase with thrombospondin type 1 motif, 7	15		ADAMTS7	9606	protein-coding
+11095	ADAM metallopeptidase with thrombospondin type 1 motif, 8	11		ADAMTS8	9606	protein-coding
+56999	ADAM metallopeptidase with thrombospondin type 1 motif, 9	3		ADAMTS9	9606	protein-coding
+92949	ADAMTS-like 1	9		ADAMTSL1	9606	protein-coding
+9719	ADAMTS-like 2	9		ADAMTSL2	9606	protein-coding
+57188	ADAMTS-like 3	15		ADAMTSL3	9606	protein-coding
+54507	ADAMTS-like 4	1		ADAMTSL4	9606	protein-coding
+339366	ADAMTS-like 5	19		ADAMTSL5	9606	protein-coding
+11033	ArfGAP with dual PH domains 1	7	PM	ADAP1	9606	protein-coding
+55803	ArfGAP with dual PH domains 2	17	PM	ADAP2	9606	protein-coding
+103	adenosine deaminase, RNA-specific	1	RNA editing HTH-W	ADAR	9606	protein-coding
+104	adenosine deaminase, RNA-specific, B1	21	RNA editing	ADARB1	9606	protein-coding
+105	adenosine deaminase, RNA-specific, B2 (non-functional)	10	RNA editing	ADARB2	9606	protein-coding
+23536	adenosine deaminase, tRNA-specific 1	16		ADAT1	9606	protein-coding
+134637	adenosine deaminase, tRNA-specific 2	6		ADAT2	9606	protein-coding
+113179	adenosine deaminase, tRNA-specific 3	19		ADAT3	9606	protein-coding
+113451	antizyme inhibitor 2	1		AZIN2	9606	protein-coding
+57143	aarF domain containing kinase 1	14	KI-P-Atypical-ABC1-ABC1-B	ADCK1	9606	protein-coding
+90956	aarF domain containing kinase 2	7	KI-P-Atypical-ABC1-ABC1-C	ADCK2	9606	protein-coding
+79934	aarF domain containing kinase 4	19	KI-P-Atypical-ABC1-ABC1-A	ADCK4	9606	protein-coding
+203054	aarF domain containing kinase 5	8	KI-P-Atypical-ABC1-ABC1-D	ADCK5	9606	protein-coding
+107	adenylate cyclase 1 (brain)	7	PM	ADCY1	9606	protein-coding
+55811	adenylate cyclase 10 (soluble)	1	PM	ADCY10	9606	protein-coding
+108	adenylate cyclase 2 (brain)	5	PM	ADCY2	9606	protein-coding
+109	adenylate cyclase 3	2	PM	ADCY3	9606	protein-coding
+196883	adenylate cyclase 4	14	PM	ADCY4	9606	protein-coding
+111	adenylate cyclase 5	3	PM	ADCY5	9606	protein-coding
+112	adenylate cyclase 6	12	PM	ADCY6	9606	protein-coding
+113	adenylate cyclase 7	16	PM	ADCY7	9606	protein-coding
+114	adenylate cyclase 8 (brain)	8	PM	ADCY8	9606	protein-coding
+115	adenylate cyclase 9	16	PM	ADCY9	9606	protein-coding
+116	adenylate cyclase activating polypeptide 1 (pituitary)	18		ADCYAP1	9606	protein-coding
+117	adenylate cyclase activating polypeptide 1 (pituitary) receptor type I	7	PM	ADCYAP1R1	9606	protein-coding
+118	adducin 1 (alpha)	4	PM	ADD1	9606	protein-coding
+119	adducin 2 (beta)	2	PM	ADD2	9606	protein-coding
+120	adducin 3 (gamma)	10	PM	ADD3	9606	protein-coding
+123	perilipin 2	9	PM	PLIN2	9606	protein-coding
+124	alcohol dehydrogenase 1A (class I), alpha polypeptide	4		ADH1A	9606	protein-coding
+125	alcohol dehydrogenase 1B (class I), beta polypeptide	4		ADH1B	9606	protein-coding
+126	alcohol dehydrogenase 1C (class I), gamma polypeptide	4		ADH1C	9606	protein-coding
+127	alcohol dehydrogenase 4 (class II), pi polypeptide	4		ADH4	9606	protein-coding
+128	alcohol dehydrogenase 5 (class III), chi polypeptide	4		ADH5	9606	protein-coding
+130	alcohol dehydrogenase 6 (class V)	4		ADH6	9606	protein-coding
+131	alcohol dehydrogenase 7 (class IV), mu or sigma polypeptide	4		ADH7	9606	protein-coding
+137872	alcohol dehydrogenase, iron containing, 1	8		ADHFE1	9606	protein-coding
+55256	acireductone dioxygenase 1	2	PM	ADI1	9606	protein-coding
+149685	adipogenin	20		ADIG	9606	protein-coding
+9370	adiponectin, C1Q and collagen domain containing	3		ADIPOQ	9606	protein-coding
+51094	adiponectin receptor 1	1	PM	ADIPOR1	9606	protein-coding
+79602	adiponectin receptor 2	12		ADIPOR2	9606	protein-coding
+132	adenosine kinase	10	KI-M	ADK	9606	protein-coding
+133	adrenomedullin	11		ADM	9606	protein-coding
+79924	adrenomedullin 2	22		ADM2	9606	protein-coding
+23394	activity-dependent neuroprotector homeobox	20	DBTF HOMEO	ADNP	9606	protein-coding
+22850	ADNP homeobox 2	18	DBTF HOMEO	ADNP2	9606	protein-coding
+84890	2-aminoethanethiol (cysteamine) dioxygenase	10		ADO	9606	protein-coding
+134	adenosine A1 receptor	1	PM	ADORA1	9606	protein-coding
+135	adenosine A2a receptor	22	PM	ADORA2A	9606	protein-coding
+136	adenosine A2b receptor	17	PM	ADORA2B	9606	protein-coding
+140	adenosine A3 receptor	1	PM	ADORA3	9606	protein-coding
+83440	ADP-dependent glucokinase	15		ADPGK	9606	protein-coding
+141	ADP-ribosylarginine hydrolase	3		ADPRH	9606	protein-coding
+113622	ADP-ribosylhydrolase like 1	13		ADPRHL1	9606	protein-coding
+54936	ADP-ribosylhydrolase like 2	1		ADPRHL2	9606	protein-coding
+148	adrenoceptor alpha 1A	8	PM	ADRA1A	9606	protein-coding
+147	adrenoceptor alpha 1B	5	PM	ADRA1B	9606	protein-coding
+146	adrenoceptor alpha 1D	20	PM	ADRA1D	9606	protein-coding
+150	adrenoceptor alpha 2A	10	PM	ADRA2A	9606	protein-coding
+151	adrenoceptor alpha 2B	2	PM	ADRA2B	9606	protein-coding
+152	adrenoceptor alpha 2C	4	PM	ADRA2C	9606	protein-coding
+153	adrenoceptor beta 1	10	PM	ADRB1	9606	protein-coding
+154	adrenoceptor beta 2, surface	5	PM	ADRB2	9606	protein-coding
+155	adrenoceptor beta 3	8	PM	ADRB3	9606	protein-coding
+156	adrenergic, beta, receptor kinase 1	11	KI-P-AGC-GRK-BARK, PM	ADRBK1	9606	protein-coding
+157	adrenergic, beta, receptor kinase 2	22	KI-P-AGC-GRK-BARK	ADRBK2	9606	protein-coding
+11047	adhesion regulating molecule 1	20		ADRM1	9606	protein-coding
+158	adenylosuccinate lyase	22		ADSL	9606	protein-coding
+159	adenylosuccinate synthase	1	PM	ADSS	9606	protein-coding
+122622	adenylosuccinate synthase like 1	14		ADSSL1	9606	protein-coding
+165	AE binding protein 1	7		AEBP1	9606	protein-coding
+121536	AE binding protein 2	12	DBTF ZNF-C2H2	AEBP2	9606	protein-coding
+64782	apoptosis enhancing nuclease	15		AEN	9606	protein-coding
+166	amino-terminal enhancer of split	19	TC	AES	9606	protein-coding
+60312	actin filament associated protein 1	4		AFAP1	9606	protein-coding
+134265	actin filament associated protein 1-like 1	5		AFAP1L1	9606	protein-coding
+84632	actin filament associated protein 1-like 2	10		AFAP1L2	9606	protein-coding
+4299	AF4/FMR2 family, member 1	4	TC	AFF1	9606	protein-coding
+2334	AF4/FMR2 family, member 2	X	TC	AFF2	9606	protein-coding
+3899	AF4/FMR2 family, member 3	2	TC	AFF3	9606	protein-coding
+27125	AF4/FMR2 family, member 4	5	TC	AFF4	9606	protein-coding
+10939	AFG3-like AAA ATPase 2	18		AFG3L2	9606	protein-coding
+173	afamin	4		AFM	9606	protein-coding
+125061	arylformamidase	17		AFMID	9606	protein-coding
+174	alpha-fetoprotein	4		AFP	9606	protein-coding
+54812	aftiphilin	2		AFTPH	9606	protein-coding
+175	aspartylglucosaminidase	4		AGA	9606	protein-coding
+116987	ArfGAP with GTPase domain, ankyrin repeat and PH domain 1	2		AGAP1	9606	protein-coding
+728127	ArfGAP with GTPase domain, ankyrin repeat and PH domain 10	10q11.22		AGAP10	9606	protein-coding
+119385	ankyrin repeat and GTPase domain Arf GTPase activating protein 11	10		AGAP11	9606	protein-coding
+116986	ArfGAP with GTPase domain, ankyrin repeat and PH domain 2	12		AGAP2	9606	protein-coding
+116988	ArfGAP with GTPase domain, ankyrin repeat and PH domain 3	7		AGAP3	9606	protein-coding
+119016	ArfGAP with GTPase domain, ankyrin repeat and PH domain 4	10		AGAP4	9606	protein-coding
+729092	ArfGAP with GTPase domain, ankyrin repeat and PH domain 5	10		AGAP5	9606	protein-coding
+414189	ArfGAP with GTPase domain, ankyrin repeat and PH domain 6	10		AGAP6	9606	protein-coding
+653268	ArfGAP with GTPase domain, ankyrin repeat and PH domain 7, pseudogene	10		AGAP7P	9606	pseudo
+728404	ArfGAP with GTPase domain, ankyrin repeat and PH domain 8	10q11.23		AGAP8	9606	protein-coding
+642517	ArfGAP with GTPase domain, ankyrin repeat and PH domain 9	10		AGAP9	9606	protein-coding
+123624	ATP/GTP binding protein-like 1	15		AGBL1	9606	protein-coding
+79841	ATP/GTP binding protein-like 2	11		AGBL2	9606	protein-coding
+340351	ATP/GTP binding protein-like 3	7		AGBL3	9606	protein-coding
+84871	ATP/GTP binding protein-like 4	1		AGBL4	9606	protein-coding
+60509	ATP/GTP binding protein-like 5	2		AGBL5	9606	protein-coding
+177	advanced glycosylation end product-specific receptor	6	PM	AGER	9606	protein-coding
+3267	ArfGAP with FG repeats 1	2		AGFG1	9606	protein-coding
+3268	ArfGAP with FG repeats 2	7		AGFG2	9606	protein-coding
+55109	angiogenic factor with G patch and FHA domains 1	5		AGGF1	9606	protein-coding
+55750	acylglycerol kinase	7	KI-L	AGK	9606	protein-coding
+178	amylo-alpha-1, 6-glucosidase, 4-alpha-glucanotransferase	1		AGL	9606	protein-coding
+79814	agmatine ureohydrolase (agmatinase)	1		AGMAT	9606	protein-coding
+10554	1-acylglycerol-3-phosphate O-acyltransferase 1	6	metabolism	AGPAT1	9606	protein-coding
+10555	1-acylglycerol-3-phosphate O-acyltransferase 2	9	metabolism	AGPAT2	9606	protein-coding
+56894	1-acylglycerol-3-phosphate O-acyltransferase 3	21	metabolism, PM	AGPAT3	9606	protein-coding
+56895	1-acylglycerol-3-phosphate O-acyltransferase 4	6	metabolism	AGPAT4	9606	protein-coding
+55326	1-acylglycerol-3-phosphate O-acyltransferase 5	8	metabolism	AGPAT5	9606	protein-coding
+137964	glycerol-3-phosphate acyltransferase 4	8	metabolism	GPAT4	9606	protein-coding
+84803	glycerol-3-phosphate acyltransferase 3	4		GPAT3	9606	protein-coding
+123688	hydroxylysine kinase	15	KI-P	HYKK	9606	protein-coding
+8540	alkylglycerone phosphate synthase	2	PM	AGPS	9606	protein-coding
+10551	anterior gradient 2, protein disulphide isomerase family member	7		AGR2	9606	protein-coding
+155465	anterior gradient 3, protein disulphide isomerase family member	7		AGR3	9606	protein-coding
+375790	agrin	1		AGRN	9606	protein-coding
+181	agouti related neuropeptide	16		AGRP	9606	protein-coding
+183	angiotensinogen (serpin peptidase inhibitor, clade A, member 8)	1		AGT	9606	protein-coding
+23287	ATP/GTP binding protein 1	9		AGTPBP1	9606	protein-coding
+185	angiotensin II receptor, type 1	3	PM	AGTR1	9606	protein-coding
+186	angiotensin II receptor, type 2	X	PM	AGTR2	9606	protein-coding
+57085	angiotensin II receptor-associated protein	1	PM	AGTRAP	9606	protein-coding
+189	alanine-glyoxylate aminotransferase	2		AGXT	9606	protein-coding
+64902	alanine--glyoxylate aminotransferase 2	5		AGXT2	9606	protein-coding
+64850	ethanolamine-phosphate phospho-lyase	4		ETNPPL	9606	protein-coding
+85007	5-phosphohydroxy-L-lysine phospho-lyase	5		PHYKPL	9606	protein-coding
+25909	AT hook containing transcription factor 1	1	DBTF ATH	AHCTF1	9606	protein-coding
+191	adenosylhomocysteinase	20		AHCY	9606	protein-coding
+10768	adenosylhomocysteinase-like 1	1		AHCYL1	9606	protein-coding
+23382	adenosylhomocysteinase-like 2	7		AHCYL2	9606	protein-coding
+27245	AT hook, DNA binding motif, containing 1	1	DBTF ATH	AHDC1	9606	protein-coding
+54806	Abelson helper integration site 1	6		AHI1	9606	protein-coding
+79026	AHNAK nucleoprotein	11		AHNAK	9606	protein-coding
+113146	AHNAK nucleoprotein 2	14		AHNAK2	9606	protein-coding
+196	aryl hydrocarbon receptor	7	DBTF HLH	AHR	9606	protein-coding
+57491	aryl-hydrocarbon receptor repressor	5	DBTF HLH	AHRR	9606	protein-coding
+10598	AHA1, activator of heat shock 90kDa protein ATPase homolog 1 (yeast)	14		AHSA1	9606	protein-coding
+130872	AHA1, activator of heat shock 90kDa protein ATPase homolog 2 (yeast)	2		AHSA2	9606	protein-coding
+197	alpha-2-HS-glycoprotein	3		AHSG	9606	protein-coding
+57379	activation-induced cytidine deaminase	12		AICDA	9606	protein-coding
+64853	axin interactor, dorsalization associated	1		AIDA	9606	protein-coding
+199	allograft inflammatory factor 1	6	PM	AIF1	9606	protein-coding
+83543	allograft inflammatory factor 1-like	9	PM	AIF1L	9606	protein-coding
+9131	apoptosis-inducing factor, mitochondrion-associated, 1	X		AIFM1	9606	protein-coding
+84883	apoptosis-inducing factor, mitochondrion-associated, 2	10		AIFM2	9606	protein-coding
+150209	apoptosis-inducing factor, mitochondrion-associated, 3	22	PM	AIFM3	9606	protein-coding
+51390	androgen-induced 1	6		AIG1	9606	protein-coding
+202	absent in melanoma 1	6		AIM1	9606	protein-coding
+55057	absent in melanoma 1-like	1		AIM1L	9606	protein-coding
+9447	absent in melanoma 2	1		AIM2	9606	protein-coding
+9255	aminoacyl tRNA synthetase complex-interacting multifunctional protein 1	4	tRNA	AIMP1	9606	protein-coding
+7965	aminoacyl tRNA synthetase complex-interacting multifunctional protein 2	7		AIMP2	9606	protein-coding
+9049	aryl hydrocarbon receptor interacting protein	11	TC	AIP	9606	protein-coding
+23746	aryl hydrocarbon receptor interacting protein-like 1	17		AIPL1	9606	protein-coding
+326	autoimmune regulator	21	DBTC SAND	AIRE	9606	protein-coding
+55966	adherens junctions associated protein 1	1	PM	AJAP1	9606	protein-coding
+203	adenylate kinase 1	9	KI-M	AK1	9606	protein-coding
+204	adenylate kinase 2	1	KI-M	AK2	9606	protein-coding
+50808	adenylate kinase 3	9	KI-M	AK3	9606	protein-coding
+205	adenylate kinase 4	1	KI-M	AK4	9606	protein-coding
+26289	adenylate kinase 5	1	KI-M	AK5	9606	protein-coding
+122481	adenylate kinase 7	14	KI-M	AK7	9606	protein-coding
+8165	A kinase (PRKA) anchor protein 1	17	RNA?	AKAP1	9606	protein-coding
+11216	A kinase (PRKA) anchor protein 10	17	PM	AKAP10	9606	protein-coding
+11215	A kinase (PRKA) anchor protein 11	13		AKAP11	9606	protein-coding
+9590	A kinase (PRKA) anchor protein 12	6	PM	AKAP12	9606	protein-coding
+11214	A kinase (PRKA) anchor protein 13	15		AKAP13	9606	protein-coding
+158798	A kinase (PRKA) anchor protein 14	X		AKAP14	9606	protein-coding
+11217	A kinase (PRKA) anchor protein 2	9		AKAP2	9606	protein-coding
+10566	A kinase (PRKA) anchor protein 3	12		AKAP3	9606	protein-coding
+8852	A kinase (PRKA) anchor protein 4	X		AKAP4	9606	protein-coding
+9495	A kinase (PRKA) anchor protein 5	14	PM	AKAP5	9606	protein-coding
+9472	A kinase (PRKA) anchor protein 6	14		AKAP6	9606	protein-coding
+9465	A kinase (PRKA) anchor protein 7	6	PM	AKAP7	9606	protein-coding
+10270	A kinase (PRKA) anchor protein 8	19		AKAP8	9606	protein-coding
+26993	A kinase (PRKA) anchor protein 8-like	19		AKAP8L	9606	protein-coding
+10142	A kinase (PRKA) anchor protein 9	7		AKAP9	9606	protein-coding
+221264	adenylate kinase 9	6	KI-M	AK9	9606	protein-coding
+79647	akirin 1	1		AKIRIN1	9606	protein-coding
+55122	akirin 2	6		AKIRIN2	9606	protein-coding
+80709	AT-hook transcription factor	9		AKNA	9606	protein-coding
+10327	aldo-keto reductase family 1, member A1 (aldehyde reductase)	1		AKR1A1	9606	protein-coding
+231	aldo-keto reductase family 1, member B1 (aldose reductase)	7		AKR1B1	9606	protein-coding
+57016	aldo-keto reductase family 1, member B10 (aldose reductase)	7		AKR1B10	9606	protein-coding
+1645	aldo-keto reductase family 1, member C1	10		AKR1C1	9606	protein-coding
+1646	aldo-keto reductase family 1, member C2	10		AKR1C2	9606	protein-coding
+8644	aldo-keto reductase family 1, member C3	10		AKR1C3	9606	protein-coding
+1109	aldo-keto reductase family 1, member C4	10		AKR1C4	9606	protein-coding
+83592	aldo-keto reductase family 1, member E2	10		AKR1E2	9606	protein-coding
+6718	aldo-keto reductase family 1, member D1	7		AKR1D1	9606	protein-coding
+8574	aldo-keto reductase family 7, member A2	1		AKR7A2	9606	protein-coding
+22977	aldo-keto reductase family 7, member A3 (aflatoxin aldehyde reductase)	1		AKR7A3	9606	protein-coding
+246181	aldo-keto reductase family 7-like (gene/pseudogene)	1		AKR7L	9606	pseudo
+207	v-akt murine thymoma viral oncogene homolog 1	14	KI-P-AGC-Akt, PM	AKT1	9606	protein-coding
+84335	AKT1 substrate 1 (proline-rich)	19		AKT1S1	9606	protein-coding
+208	v-akt murine thymoma viral oncogene homolog 2	19	KI-P-AGC-Akt, PM	AKT2	9606	protein-coding
+10000	v-akt murine thymoma viral oncogene homolog 3	1	KI-P-AGC-Akt, PM	AKT3	9606	protein-coding
+64400	AKT interacting protein	16	UBI-E2, PM	AKTIP	9606	protein-coding
+643792	contactin associated protein-like 3 pseudogene	9p11.2-p11.1		LOC643792	9606	pseudo
+210	aminolevulinate dehydratase	9		ALAD	9606	protein-coding
+211	5'-aminolevulinate synthase 1	3		ALAS1	9606	protein-coding
+212	5'-aminolevulinate synthase 2	X		ALAS2	9606	protein-coding
+213	albumin	4		ALB	9606	protein-coding
+214	activated leukocyte cell adhesion molecule	3		ALCAM	9606	protein-coding
+126133	aldehyde dehydrogenase 16 family, member A1	19		ALDH16A1	9606	protein-coding
+5832	aldehyde dehydrogenase 18 family, member A1	10	KI-M	ALDH18A1	9606	protein-coding
+216	aldehyde dehydrogenase 1 family, member A1	9		ALDH1A1	9606	protein-coding
+8854	aldehyde dehydrogenase 1 family, member A2	15		ALDH1A2	9606	protein-coding
+220	aldehyde dehydrogenase 1 family, member A3	15		ALDH1A3	9606	protein-coding
+219	aldehyde dehydrogenase 1 family, member B1	9		ALDH1B1	9606	protein-coding
+10840	aldehyde dehydrogenase 1 family, member L1	3		ALDH1L1	9606	protein-coding
+160428	aldehyde dehydrogenase 1 family, member L2	12		ALDH1L2	9606	protein-coding
+217	aldehyde dehydrogenase 2 family (mitochondrial)	12		ALDH2	9606	protein-coding
+218	aldehyde dehydrogenase 3 family, member A1	17		ALDH3A1	9606	protein-coding
+224	aldehyde dehydrogenase 3 family, member A2	17		ALDH3A2	9606	protein-coding
+221	aldehyde dehydrogenase 3 family, member B1	11		ALDH3B1	9606	protein-coding
+222	aldehyde dehydrogenase 3 family, member B2	11		ALDH3B2	9606	protein-coding
+8659	aldehyde dehydrogenase 4 family, member A1	1		ALDH4A1	9606	protein-coding
+7915	aldehyde dehydrogenase 5 family, member A1	6		ALDH5A1	9606	protein-coding
+4329	aldehyde dehydrogenase 6 family, member A1	14		ALDH6A1	9606	protein-coding
+501	aldehyde dehydrogenase 7 family, member A1	5		ALDH7A1	9606	protein-coding
+64577	aldehyde dehydrogenase 8 family, member A1	6		ALDH8A1	9606	protein-coding
+223	aldehyde dehydrogenase 9 family, member A1	1	PM	ALDH9A1	9606	protein-coding
+226	aldolase A, fructose-bisphosphate	16		ALDOA	9606	protein-coding
+229	aldolase B, fructose-bisphosphate	9	PM	ALDOB	9606	protein-coding
+230	aldolase C, fructose-bisphosphate	17		ALDOC	9606	protein-coding
+233	aldehyde reductase (aldose reductase)-like 2			ALDRL2	9606	
+56052	ALG1, chitobiosyldiphosphodolichol beta-mannosyltransferase	16		ALG1	9606	protein-coding
+84920	ALG10, alpha-1,2-glucosyltransferase	12		ALG10	9606	protein-coding
+144245	ALG10B, alpha-1,2-glucosyltransferase	12	PM	ALG10B	9606	protein-coding
+440138	ALG11, alpha-1,2-mannosyltransferase	13		ALG11	9606	protein-coding
+79087	ALG12, alpha-1,6-mannosyltransferase	22		ALG12	9606	protein-coding
+79868	ALG13, UDP-N-acetylglucosaminyltransferase subunit	X		ALG13	9606	protein-coding
+199857	ALG14, UDP-N-acetylglucosaminyltransferase subunit	1		ALG14	9606	protein-coding
+200810	ALG1, chitobiosyldiphosphodolichol beta-mannosyltransferase-like	3		ALG1L	9606	protein-coding
+85365	ALG2, alpha-1,3/1,6-mannosyltransferase	9		ALG2	9606	protein-coding
+10195	ALG3, alpha-1,3- mannosyltransferase	3		ALG3	9606	protein-coding
+29880	ALG5, dolichyl-phosphate beta-glucosyltransferase	13		ALG5	9606	protein-coding
+29929	ALG6, alpha-1,3-glucosyltransferase	1		ALG6	9606	protein-coding
+79053	ALG8, alpha-1,3-glucosyltransferase	11		ALG8	9606	protein-coding
+79796	ALG9, alpha-1,2-mannosyltransferase	11		ALG9	9606	protein-coding
+238	anaplastic lymphoma receptor tyrosine kinase	2	KI-P-TK-ALK	ALK	9606	protein-coding
+8846	alkB homolog 1, histone H2A dioxygenase	14		ALKBH1	9606	protein-coding
+121642	alkB homolog 2, alpha-ketoglutarate-dependent dioxygenase	12		ALKBH2	9606	protein-coding
+221120	alkB homolog 3, alpha-ketoglutarate-dependent dioxygenase	11		ALKBH3	9606	protein-coding
+54784	alkB homolog 4, lysine demthylase	7		ALKBH4	9606	protein-coding
+54890	alkB homolog 5, RNA demethylase	17		ALKBH5	9606	protein-coding
+84964	alkB homolog 6	19		ALKBH6	9606	protein-coding
+84266	alkB homolog 7	19		ALKBH7	9606	protein-coding
+91801	alkB homolog 8, tRNA methyltransferase	11		ALKBH8	9606	protein-coding
+55821	allantoicase	2		ALLC	9606	protein-coding
+7840	Alstrom syndrome protein 1	2		ALMS1	9606	protein-coding
+239	arachidonate 12-lipoxygenase	17		ALOX12	9606	protein-coding
+242	arachidonate 12-lipoxygenase, 12R type	17		ALOX12B	9606	protein-coding
+246	arachidonate 15-lipoxygenase	17		ALOX15	9606	protein-coding
+247	arachidonate 15-lipoxygenase, type B	17		ALOX15B	9606	protein-coding
+240	arachidonate 5-lipoxygenase	10		ALOX5	9606	protein-coding
+241	arachidonate 5-lipoxygenase-activating protein	13		ALOX5AP	9606	protein-coding
+59344	arachidonate lipoxygenase 3	17		ALOXE3	9606	protein-coding
+248	alkaline phosphatase, intestinal	2	PM	ALPI	9606	protein-coding
+80216	alpha-kinase 1	4	KI-P-Atypical-Alpha-Alpha-Unclassified	ALPK1	9606	protein-coding
+115701	alpha-kinase 2	18	KI-P-Atypical-Alpha-Alpha-Unclassified	ALPK2	9606	protein-coding
+57538	alpha-kinase 3	15	KI-P-Atypical-Alpha-Alpha-Unclassified	ALPK3	9606	protein-coding
+249	alkaline phosphatase, liver/bone/kidney	1	PM	ALPL	9606	protein-coding
+250	alkaline phosphatase, placental	2	PM	ALPP	9606	protein-coding
+251	alkaline phosphatase, placental-like 2	2	PM	ALPPL2	9606	protein-coding
+57679	amyotrophic lateral sclerosis 2 (juvenile)	2		ALS2	9606	protein-coding
+259173	ALS2 C-terminal like	3		ALS2CL	9606	protein-coding
+151254	amyotrophic lateral sclerosis 2 (juvenile) chromosome region, candidate 11	2		ALS2CR11	9606	protein-coding
+130540	amyotrophic lateral sclerosis 2 (juvenile) chromosome region, candidate 12	2		ALS2CR12	9606	protein-coding
+65062	transmembrane protein 237	2		TMEM237	9606	protein-coding
+79800	calcium responsive transcription factor	2	TC	CARF	9606	protein-coding
+8092	ALX homeobox 1	12	DBTF HOMEO	ALX1	9606	protein-coding
+257	ALX homeobox 3	1	DBTF HOMEO	ALX3	9606	protein-coding
+60529	ALX homeobox 4	11	DBTF HOMEO	ALX4	9606	protein-coding
+146861	solute carrier family 35, member G3	17		SLC35G3	9606	protein-coding
+646000	solute carrier family 35, member G4	18		SLC35G4	9606	protein-coding
+83650	solute carrier family 35, member G5	8		SLC35G5	9606	protein-coding
+643664	solute carrier family 35, member G6	17		SLC35G6	9606	protein-coding
+23600	alpha-methylacyl-CoA racemase	5		AMACR	9606	protein-coding
+258	ameloblastin (enamel matrix protein)	4		AMBN	9606	protein-coding
+259	alpha-1-microglobulin/bikunin precursor	9	PM	AMBP	9606	protein-coding
+55626	autophagy/beclin-1 regulator 1	11		AMBRA1	9606	protein-coding
+262	adenosylmethionine decarboxylase 1	6		AMD1	9606	protein-coding
+144193	amidohydrolase domain containing 1	12		AMDHD1	9606	protein-coding
+51005	amidohydrolase domain containing 2	16		AMDHD2	9606	protein-coding
+265	amelogenin, X-linked	X		AMELX	9606	protein-coding
+266	amelogenin, Y-linked	Y		AMELY	9606	protein-coding
+267	autocrine motility factor receptor, E3 ubiquitin protein ligase	16	RING, UBI-E3	AMFR	9606	protein-coding
+268	anti-Mullerian hormone	19	TR-LIG	AMH	9606	protein-coding
+269	anti-Mullerian hormone receptor, type II	12	KI-P-TKL-STKR-STKR2	AMHR2	9606	protein-coding
+120425	adhesion molecule, interacts with CXADR antigen 1	11	PM	AMICA1	9606	protein-coding
+57463	adhesion molecule with Ig-like domain 1	1		AMIGO1	9606	protein-coding
+347902	adhesion molecule with Ig-like domain 2	12	PM	AMIGO2	9606	protein-coding
+386724	adhesion molecule with Ig-like domain 3	3		AMIGO3	9606	protein-coding
+9949	Alport syndrome, mental retardation, midface hypoplasia and elliptocytosis chromosomal region gene 1	X		AMMECR1	9606	protein-coding
+83607	AMMECR1-like	2		AMMECR1L	9606	protein-coding
+81693	amnion associated transmembrane protein	14	PM	AMN	9606	protein-coding
+196394	antagonist of mitotic exit network 1 homolog	12		AMN1	9606	protein-coding
+154796	angiomotin	X		AMOT	9606	protein-coding
+154810	angiomotin like 1	11		AMOTL1	9606	protein-coding
+51421	angiomotin like 2	3		AMOTL2	9606	protein-coding
+270	adenosine monophosphate deaminase 1	1		AMPD1	9606	protein-coding
+271	adenosine monophosphate deaminase 2	1		AMPD2	9606	protein-coding
+272	adenosine monophosphate deaminase 3	11		AMPD3	9606	protein-coding
+273	amphiphysin	7		AMPH	9606	protein-coding
+275	aminomethyltransferase	3		AMT	9606	protein-coding
+401138	amelotin	4		AMTN	9606	protein-coding
+276	amylase, alpha 1A (salivary)	1		AMY1A	9606	protein-coding
+277	amylase, alpha 1B (salivary)	1		AMY1B	9606	protein-coding
+278	amylase, alpha 1C (salivary)	1		AMY1C	9606	protein-coding
+279	amylase, alpha 2A (pancreatic)	1		AMY2A	9606	protein-coding
+280	amylase, alpha 2B (pancreatic)	1		AMY2B	9606	protein-coding
+155185	archaelysin family metallopeptidase 1	7		AMZ1	9606	protein-coding
+51321	archaelysin family metallopeptidase 2	17		AMZ2	9606	protein-coding
+64682	anaphase promoting complex subunit 1	2	DIV	ANAPC1	9606	protein-coding
+10393	anaphase promoting complex subunit 10	4	DIV	ANAPC10	9606	protein-coding
+51529	anaphase promoting complex subunit 11	17	DIV, UBI-E3	ANAPC11	9606	protein-coding
+25847	anaphase promoting complex subunit 13	3	DIV	ANAPC13	9606	protein-coding
+29882	anaphase promoting complex subunit 2	9	DIV HTH-W	ANAPC2	9606	protein-coding
+29945	anaphase promoting complex subunit 4	4	DIV	ANAPC4	9606	protein-coding
+51433	anaphase promoting complex subunit 5	12	DIV	ANAPC5	9606	protein-coding
+51434	anaphase promoting complex subunit 7	12	DIV	ANAPC7	9606	protein-coding
+283	angiogenin, ribonuclease, RNase A family, 5	14		ANG	9606	protein-coding
+23357	angel homolog 1 (Drosophila)	14		ANGEL1	9606	protein-coding
+90806	angel homolog 2 (Drosophila)	1		ANGEL2	9606	protein-coding
+284	angiopoietin 1	8	PM	ANGPT1	9606	protein-coding
+285	angiopoietin 2	8		ANGPT2	9606	protein-coding
+51378	angiopoietin 4	20		ANGPT4	9606	protein-coding
+9068	angiopoietin-like 1	1		ANGPTL1	9606	protein-coding
+23452	angiopoietin-like 2	9		ANGPTL2	9606	protein-coding
+27329	angiopoietin-like 3	1		ANGPTL3	9606	protein-coding
+51129	angiopoietin-like 4	19		ANGPTL4	9606	protein-coding
+253935	angiopoietin-like 5	11		ANGPTL5	9606	protein-coding
+83854	angiopoietin-like 6	19		ANGPTL6	9606	protein-coding
+10218	angiopoietin-like 7	1		ANGPTL7	9606	protein-coding
+286	ankyrin 1, erythrocytic	8	PM	ANK1	9606	protein-coding
+287	ankyrin 2, neuronal	4	PM	ANK2	9606	protein-coding
+288	ankyrin 3, node of Ranvier (ankyrin G)	10		ANK3	9606	protein-coding
+150709	ankyrin and armadillo repeat containing	2		ANKAR	9606	protein-coding
+348094	ankyrin repeat and death domain containing 1A	15		ANKDD1A	9606	protein-coding
+728780	ankyrin repeat and death domain containing 1B	5		ANKDD1B	9606	protein-coding
+162282	ankyrin-repeat and fibronectin type III domain containing 1	17		ANKFN1	9606	protein-coding
+51479	ankyrin repeat and FYVE domain containing 1	17	nonDNA-BTB	ANKFY1	9606	protein-coding
+56172	ANKH inorganic pyrophosphate transport regulator	5	PM	ANKH	9606	protein-coding
+54882	ankyrin repeat and KH domain containing 1	5	RNA?	ANKHD1	9606	protein-coding
+404734	ANKHD1-EIF4EBP3 readthrough	5		ANKHD1-EIF4EBP3	9606	protein-coding
+54467	ankyrin repeat and IBR domain containing 1	7	RING, UBI-E3	ANKIB1	9606	protein-coding
+255239	ankyrin repeat and kinase domain containing 1	11	KI-P-TKL-RIPK	ANKK1	9606	protein-coding
+126549	ankyrin repeat and LEM domain containing 1	19		ANKLE1	9606	protein-coding
+23141	ankyrin repeat and LEM domain containing 2	12		ANKLE2	9606	protein-coding
+51281	ankyrin repeat and MYND domain containing 1	2		ANKMY1	9606	protein-coding
+57037	ankyrin repeat and MYND domain containing 2	7		ANKMY2	9606	protein-coding
+57763	ankyrin repeat, family A (RFXANK-like), 2	5		ANKRA2	9606	protein-coding
+27063	ankyrin repeat domain 1 (cardiac muscle)	10		ANKRD1	9606	protein-coding
+55608	ankyrin repeat domain 10	13		ANKRD10	9606	protein-coding
+29123	ankyrin repeat domain 11	16		ANKRD11	9606	protein-coding
+23253	ankyrin repeat domain 12	18		ANKRD12	9606	protein-coding
+88455	ankyrin repeat domain 13A	12	UPS, UBI-UBD	ANKRD13A	9606	protein-coding
+124930	ankyrin repeat domain 13B	17	UPS, UBI-UBD	ANKRD13B	9606	protein-coding
+81573	ankyrin repeat domain 13C	1		ANKRD13C	9606	protein-coding
+338692	ankyrin repeat domain 13 family, member D	11		ANKRD13D	9606	protein-coding
+54522	ankyrin repeat domain 16	10		ANKRD16	9606	protein-coding
+26057	ankyrin repeat domain 17	4	RNA?	ANKRD17	9606	protein-coding
+253650	ankyrin repeat domain 18A	9		ANKRD18A	9606	protein-coding
+441459	ankyrin repeat domain 18B	9		ANKRD18B	9606	protein-coding
+138649	ankyrin repeat domain 19, pseudogene	9		ANKRD19P	9606	pseudo
+26287	ankyrin repeat domain 2 (stretch responsive muscle)	10		ANKRD2	9606	protein-coding
+84210	ankyrin repeat domain 20 family, member A1	9	PM	ANKRD20A1	9606	protein-coding
+441430	ankyrin repeat domain 20 family, member A2	9		ANKRD20A2	9606	protein-coding
+441425	ankyrin repeat domain 20 family, member A3	9		ANKRD20A3	9606	protein-coding
+728747	ankyrin repeat domain 20 family, member A4	9		ANKRD20A4	9606	protein-coding
+440482	ankyrin repeat domain 20 family, member A5, pseudogene	18		ANKRD20A5P	9606	pseudo
+118932	ankyrin repeat domain 22	10		ANKRD22	9606	protein-coding
+200539	ankyrin repeat domain 23	2		ANKRD23	9606	protein-coding
+170961	ankyrin repeat domain 24	19		ANKRD24	9606	protein-coding
+22852	ankyrin repeat domain 26	10		ANKRD26	9606	protein-coding
+84079	ankyrin repeat domain 27 (VPS9 domain)	19		ANKRD27	9606	protein-coding
+23243	ankyrin repeat domain 28	3		ANKRD28	9606	protein-coding
+147463	ankyrin repeat domain 29	18		ANKRD29	9606	protein-coding
+91074	ankyrin repeat domain 30A	10		ANKRD30A	9606	protein-coding
+374860	ankyrin repeat domain 30B	18		ANKRD30B	9606	protein-coding
+256006	ankyrin repeat domain 31	5		ANKRD31	9606	protein-coding
+84250	SMC5-SMC6 complex localization factor 1	5		SLF1	9606	protein-coding
+341405	ankyrin repeat domain 33	12		ANKRD33	9606	protein-coding
+651746	ankyrin repeat domain 33B	5		ANKRD33B	9606	protein-coding
+284615	ankyrin repeat domain 34A	1		ANKRD34A	9606	protein-coding
+340120	ankyrin repeat domain 34B	5		ANKRD34B	9606	protein-coding
+390616	ankyrin repeat domain 34C	15		ANKRD34C	9606	protein-coding
+148741	ankyrin repeat domain 35	1		ANKRD35	9606	protein-coding
+375248	ankyrin repeat domain 36	2		ANKRD36	9606	protein-coding
+57730	ankyrin repeat domain 36B	2		ANKRD36B	9606	protein-coding
+353322	ankyrin repeat domain 37	4		ANKRD37	9606	protein-coding
+51239	ankyrin repeat domain 39	2		ANKRD39	9606	protein-coding
+91369	ankyrin repeat domain 40	17		ANKRD40	9606	protein-coding
+338699	ankyrin repeat domain 42	11		ANKRD42	9606	protein-coding
+134548	sosondowah ankyrin repeat domain family member A	5		SOWAHA	9606	protein-coding
+91526	ankyrin repeat domain 44	2		ANKRD44	9606	protein-coding
+339416	ankyrin repeat domain 45	1		ANKRD45	9606	protein-coding
+157567	ankyrin repeat domain 46	8		ANKRD46	9606	protein-coding
+54851	ankyrin repeat domain 49	11		ANKRD49	9606	protein-coding
+63926	ankyrin repeat and EF-hand domain containing 1	20		ANKEF1	9606	protein-coding
+57182	ankyrin repeat domain 50	4		ANKRD50	9606	protein-coding
+283373	ankyrin repeat domain 52	12		ANKRD52	9606	protein-coding
+79998	ankyrin repeat domain 53	2		ANKRD53	9606	protein-coding
+129138	ankyrin repeat domain 54	22		ANKRD54	9606	protein-coding
+79722	ankyrin repeat domain 55	5		ANKRD55	9606	protein-coding
+345079	sosondowah ankyrin repeat domain family member B	4		SOWAHB	9606	protein-coding
+65124	sosondowah ankyrin repeat domain family member C	2		SOWAHC	9606	protein-coding
+347454	sosondowah ankyrin repeat domain family member D	X		SOWAHD	9606	protein-coding
+22881	ankyrin repeat domain 6	6		ANKRD6	9606	protein-coding
+140731	ankyrin repeat domain 60	20	UPS?	ANKRD60	9606	protein-coding
+342850	ankyrin repeat domain 62	18		ANKRD62	9606	protein-coding
+56311	ankyrin repeat domain 7	7		ANKRD7	9606	protein-coding
+122416	ankyrin repeat domain 9	14		ANKRD9	9606	protein-coding
+23294	ankyrin repeat and sterile alpha motif domain containing 1A	6		ANKS1A	9606	protein-coding
+56899	ankyrin repeat and sterile alpha motif domain containing 1B	12	PM	ANKS1B	9606	protein-coding
+124401	ankyrin repeat and sterile alpha motif domain containing 3	16		ANKS3	9606	protein-coding
+257629	ankyrin repeat and sterile alpha motif domain containing 4B	16	PM	ANKS4B	9606	protein-coding
+203286	ankyrin repeat and sterile alpha motif domain containing 6	9		ANKS6	9606	protein-coding
+55139	ankyrin repeat and zinc finger domain containing 1	2		ANKZF1	9606	protein-coding
+54443	anillin actin binding protein	7		ANLN	9606	protein-coding
+55107	anoctamin 1, calcium activated chloride channel	11	PM	ANO1	9606	protein-coding
+55129	anoctamin 10	3		ANO10	9606	protein-coding
+57101	anoctamin 2, calcium activated chloride channel	12	PM	ANO2	9606	protein-coding
+63982	anoctamin 3	11		ANO3	9606	protein-coding
+121601	anoctamin 4	12		ANO4	9606	protein-coding
+203859	anoctamin 5	11		ANO5	9606	protein-coding
+196527	anoctamin 6	12		ANO6	9606	protein-coding
+50636	anoctamin 7	2	PM	ANO7	9606	protein-coding
+57719	anoctamin 8	19		ANO8	9606	protein-coding
+338440	anoctamin 9	11		ANO9	9606	protein-coding
+8125	acidic (leucine-rich) nuclear phosphoprotein 32 family, member A	15		ANP32A	9606	protein-coding
+10541	acidic (leucine-rich) nuclear phosphoprotein 32 family, member B	9		ANP32B	9606	protein-coding
+23520	acidic (leucine-rich) nuclear phosphoprotein 32 family, member C	4		ANP32C	9606	protein-coding
+23519	acidic (leucine-rich) nuclear phosphoprotein 32 family, member D	12		ANP32D	9606	protein-coding
+81611	acidic (leucine-rich) nuclear phosphoprotein 32 family, member E	1		ANP32E	9606	protein-coding
+440272	acidic (leucine-rich) nuclear phosphoprotein 32 family, member F	15		ANP32F	9606	unknown
+290	alanyl (membrane) aminopeptidase	15	PM	ANPEP	9606	protein-coding
+84168	anthrax toxin receptor 1	2	PM	ANTXR1	9606	protein-coding
+118429	anthrax toxin receptor 2	4	PM	ANTXR2	9606	protein-coding
+93550	zinc finger, AN1-type domain 4	10	UBI-UBL	ZFAND4	9606	protein-coding
+301	annexin A1	9		ANXA1	9606	protein-coding
+11199	annexin A10	4		ANXA10	9606	protein-coding
+311	annexin A11	10		ANXA11	9606	protein-coding
+312	annexin A13	8	PM	ANXA13	9606	protein-coding
+302	annexin A2	15	PM	ANXA2	9606	protein-coding
+306	annexin A3	4	PM	ANXA3	9606	protein-coding
+307	annexin A4	2		ANXA4	9606	protein-coding
+308	annexin A5	4		ANXA5	9606	protein-coding
+309	annexin A6	5		ANXA6	9606	protein-coding
+310	annexin A7	10		ANXA7	9606	protein-coding
+653145	annexin A8	10		ANXA8	9606	protein-coding
+728113	annexin A8-like 1	10		ANXA8L1	9606	protein-coding
+244	annexin A8-like 2	10q11.22		ANXA8L2	9606	protein-coding
+8416	annexin A9	1		ANXA9	9606	protein-coding
+313	acyloxyacyl hydrolase (neutrophil)	7		AOAH	9606	protein-coding
+314	amine oxidase, copper containing 2 (retina-specific)	17	PM	AOC2	9606	protein-coding
+8639	amine oxidase, copper containing 3	17	PM	AOC3	9606	protein-coding
+221656	lysine (K)-specific demethylase 1B	6	DBTC HOMEO	KDM1B	9606	protein-coding
+316	aldehyde oxidase 1	2		AOX1	9606	protein-coding
+162	adaptor-related protein complex 1, beta 1 subunit	22	SKEL	AP1B1	9606	protein-coding
+164	adaptor-related protein complex 1, gamma 1 subunit	16		AP1G1	9606	protein-coding
+8906	adaptor-related protein complex 1, gamma 2 subunit	14		AP1G2	9606	protein-coding
+11276	synergin, gamma	17		SYNRG	9606	protein-coding
+8907	adaptor-related protein complex 1, mu 1 subunit	19		AP1M1	9606	protein-coding
+10053	adaptor-related protein complex 1, mu 2 subunit	19		AP1M2	9606	protein-coding
+1174	adaptor-related protein complex 1, sigma 1 subunit	7		AP1S1	9606	protein-coding
+8905	adaptor-related protein complex 1, sigma 2 subunit	X		AP1S2	9606	protein-coding
+130340	adaptor-related protein complex 1, sigma 3 subunit	2		AP1S3	9606	protein-coding
+160	adaptor-related protein complex 2, alpha 1 subunit	19	PM	AP2A1	9606	protein-coding
+161	adaptor-related protein complex 2, alpha 2 subunit	11	PM	AP2A2	9606	protein-coding
+163	adaptor-related protein complex 2, beta 1 subunit	17	SKEL, PM	AP2B1	9606	protein-coding
+1173	adaptor-related protein complex 2, mu 1 subunit	3	PM	AP2M1	9606	protein-coding
+1175	adaptor-related protein complex 2, sigma 1 subunit	19	PM	AP2S1	9606	protein-coding
+8546	adaptor-related protein complex 3, beta 1 subunit	5		AP3B1	9606	protein-coding
+8120	adaptor-related protein complex 3, beta 2 subunit	15		AP3B2	9606	protein-coding
+8943	adaptor-related protein complex 3, delta 1 subunit	19		AP3D1	9606	protein-coding
+26985	adaptor-related protein complex 3, mu 1 subunit	10		AP3M1	9606	protein-coding
+10947	adaptor-related protein complex 3, mu 2 subunit	8		AP3M2	9606	protein-coding
+1176	adaptor-related protein complex 3, sigma 1 subunit	5		AP3S1	9606	protein-coding
+10239	adaptor-related protein complex 3, sigma 2 subunit	15		AP3S2	9606	protein-coding
+10717	adaptor-related protein complex 4, beta 1 subunit	1		AP4B1	9606	protein-coding
+23431	adaptor-related protein complex 4, epsilon 1 subunit	15		AP4E1	9606	protein-coding
+9179	adaptor-related protein complex 4, mu 1 subunit	7		AP4M1	9606	protein-coding
+11154	adaptor-related protein complex 4, sigma 1 subunit	14		AP4S1	9606	protein-coding
+317	apoptotic peptidase activating factor 1	12		APAF1	9606	protein-coding
+320	amyloid beta (A4) precursor protein-binding, family A, member 1	9	PM	APBA1	9606	protein-coding
+321	amyloid beta (A4) precursor protein-binding, family A, member 2	15		APBA2	9606	protein-coding
+9546	amyloid beta (A4) precursor protein-binding, family A, member 3	19		APBA3	9606	protein-coding
+322	amyloid beta (A4) precursor protein-binding, family B, member 1 (Fe65)	11	PM	APBB1	9606	protein-coding
+54518	amyloid beta (A4) precursor protein-binding, family B, member 1 interacting protein	10	PM	APBB1IP	9606	protein-coding
+323	amyloid beta (A4) precursor protein-binding, family B, member 2	4		APBB2	9606	protein-coding
+10307	amyloid beta (A4) precursor protein-binding, family B, member 3	5		APBB3	9606	protein-coding
+324	adenomatous polyposis coli	5	PM	APC	9606	protein-coding
+10297	adenomatosis polyposis coli 2	19	PM	APC2	9606	protein-coding
+147495	adenomatosis polyposis coli down-regulated 1	18	PM	APCDD1	9606	protein-coding
+164284	adenomatosis polyposis coli down-regulated 1-like	20		APCDD1L	9606	protein-coding
+325	amyloid P component, serum	1		APCS	9606	protein-coding
+327	acylaminoacyl-peptide hydrolase	3		APEH	9606	protein-coding
+328	APEX nuclease (multifunctional DNA repair enzyme) 1	14	TC	APEX1	9606	protein-coding
+27301	APEX nuclease (apurinic/apyrimidinic endonuclease) 2	X		APEX2	9606	protein-coding
+51107	APH1A gamma secretase subunit	1	PM	APH1A	9606	protein-coding
+83464	APH1B gamma secretase subunit	15	PM	APH1B	9606	protein-coding
+8539	apoptosis inhibitor 5	11		API5	9606	protein-coding
+51074	APAF1 interacting protein	11		APIP	9606	protein-coding
+378708	apoptosis-inducing, TAF9-like domain 1	1		APITD1	9606	protein-coding
+200558	aprataxin and PNKP like factor	2		APLF	9606	protein-coding
+8862	apelin	X		APLN	9606	protein-coding
+187	apelin receptor	11	PM	APLNR	9606	protein-coding
+333	amyloid beta (A4) precursor-like protein 1	19	PM	APLP1	9606	protein-coding
+334	amyloid beta (A4) precursor-like protein 2	11	PM	APLP2	9606	protein-coding
+335	apolipoprotein A-I	11	PM	APOA1	9606	protein-coding
+128240	apolipoprotein A-I binding protein	1		APOA1BP	9606	protein-coding
+336	apolipoprotein A-II	1		APOA2	9606	protein-coding
+337	apolipoprotein A-IV	11		APOA4	9606	protein-coding
+116519	apolipoprotein A-V	11		APOA5	9606	protein-coding
+338	apolipoprotein B	2	PM	APOB	9606	protein-coding
+55911	apolipoprotein B receptor	16	PM	APOBR	9606	protein-coding
+339	apolipoprotein B mRNA editing enzyme, catalytic polypeptide 1	12		APOBEC1	9606	protein-coding
+10930	apolipoprotein B mRNA editing enzyme, catalytic polypeptide-like 2	6		APOBEC2	9606	protein-coding
+200315	apolipoprotein B mRNA editing enzyme, catalytic polypeptide-like 3A	22		APOBEC3A	9606	protein-coding
+9582	apolipoprotein B mRNA editing enzyme, catalytic polypeptide-like 3B	22		APOBEC3B	9606	protein-coding
+27350	apolipoprotein B mRNA editing enzyme, catalytic polypeptide-like 3C	22		APOBEC3C	9606	protein-coding
+140564	apolipoprotein B mRNA editing enzyme, catalytic polypeptide-like 3D	22		APOBEC3D	9606	protein-coding
+200316	apolipoprotein B mRNA editing enzyme, catalytic polypeptide-like 3F	22		APOBEC3F	9606	protein-coding
+60489	apolipoprotein B mRNA editing enzyme, catalytic polypeptide-like 3G	22		APOBEC3G	9606	protein-coding
+164668	apolipoprotein B mRNA editing enzyme, catalytic polypeptide-like 3H	22		APOBEC3H	9606	protein-coding
+403314	apolipoprotein B mRNA editing enzyme, catalytic polypeptide-like 4 (putative)	1		APOBEC4	9606	protein-coding
+341	apolipoprotein C-I	19		APOC1	9606	protein-coding
+344	apolipoprotein C-II	19		APOC2	9606	protein-coding
+345	apolipoprotein C-III	11		APOC3	9606	protein-coding
+346	apolipoprotein C-IV	19		APOC4	9606	protein-coding
+347	apolipoprotein D	3		APOD	9606	protein-coding
+348	apolipoprotein E	19	PM	APOE	9606	protein-coding
+349	apolipoprotein E-like 1			APOEL1	9606	
+319	apolipoprotein F	12		APOF	9606	protein-coding
+350	apolipoprotein H (beta-2-glycoprotein I)	17		APOH	9606	protein-coding
+8542	apolipoprotein L, 1	22		APOL1	9606	protein-coding
+23780	apolipoprotein L, 2	22		APOL2	9606	protein-coding
+80833	apolipoprotein L, 3	22		APOL3	9606	protein-coding
+80832	apolipoprotein L, 4	22		APOL4	9606	protein-coding
+80831	apolipoprotein L, 5	22		APOL5	9606	protein-coding
+80830	apolipoprotein L, 6	22		APOL6	9606	protein-coding
+81575	apolipoprotein L domain containing 1	12	PM	APOLD1	9606	protein-coding
+55937	apolipoprotein M	6		APOM	9606	protein-coding
+79135	apolipoprotein O	X		APOO	9606	protein-coding
+139322	apolipoprotein O-like	X		APOOL	9606	protein-coding
+351	amyloid beta (A4) precursor protein	21	PM	APP	9606	protein-coding
+10513	amyloid beta precursor protein (cytoplasmic tail) binding protein 2	17		APPBP2	9606	protein-coding
+26060	adaptor protein, phosphotyrosine interaction, PH domain and leucine zipper containing 1	3		APPL1	9606	protein-coding
+55198	adaptor protein, phosphotyrosine interaction, PH domain and leucine zipper containing 2	12		APPL2	9606	protein-coding
+353	adenine phosphoribosyltransferase	16		APRT	9606	protein-coding
+54840	aprataxin	9		APTX	9606	protein-coding
+358	aquaporin 1 (Colton blood group)	7	PM	AQP1	9606	protein-coding
+89872	aquaporin 10	1	PM	AQP10	9606	protein-coding
+282679	aquaporin 11	11	PM	AQP11	9606	protein-coding
+375318	aquaporin 12A	2		AQP12A	9606	protein-coding
+653437	aquaporin 12B	2		AQP12B	9606	protein-coding
+359	aquaporin 2 (collecting duct)	12	PM	AQP2	9606	protein-coding
+360	aquaporin 3 (Gill blood group)	9	PM	AQP3	9606	protein-coding
+361	aquaporin 4	18	PM	AQP4	9606	protein-coding
+362	aquaporin 5	12	PM	AQP5	9606	protein-coding
+363	aquaporin 6, kidney specific	12		AQP6	9606	protein-coding
+364	aquaporin 7	9	PM	AQP7	9606	protein-coding
+343	aquaporin 8	16	PM	AQP8	9606	protein-coding
+366	aquaporin 9	15	PM	AQP9	9606	protein-coding
+9716	aquarius intron-binding spliceosomal factor	15	TC?	AQR	9606	protein-coding
+367	androgen receptor	X	DBTF NHR	AR	9606	protein-coding
+369	A-Raf proto-oncogene, serine/threonine kinase	X	KI-P-TKL-RAF-RAF	ARAF	9606	protein-coding
+116985	ArfGAP with RhoGAP domain, ankyrin repeat and PH domain 1	11	PM	ARAP1	9606	protein-coding
+116984	ArfGAP with RhoGAP domain, ankyrin repeat and PH domain 2	4		ARAP2	9606	protein-coding
+64411	ArfGAP with RhoGAP domain, ankyrin repeat and PH domain 3	5	PM	ARAP3	9606	protein-coding
+23237	activity-regulated cytoskeleton-associated protein	8	PM	ARC	9606	protein-coding
+372	archain 1	11		ARCN1	9606	protein-coding
+371	archain 2			ARCN2	9606	
+8260	N(alpha)-acetyltransferase 10, NatA catalytic subunit	X		NAA10	9606	protein-coding
+84779	N(alpha)-acetyltransferase 11, NatA catalytic subunit	4		NAA11	9606	protein-coding
+374	amphiregulin	4		AREG	9606	protein-coding
+727738	amphiregulin B	4q13.3		AREGB	9606	protein-coding
+375	ADP-ribosylation factor 1	1	PM	ARF1	9606	protein-coding
+377	ADP-ribosylation factor 3	12		ARF3	9606	protein-coding
+378	ADP-ribosylation factor 4	3		ARF4	9606	protein-coding
+381	ADP-ribosylation factor 5	7	PM	ARF5	9606	protein-coding
+382	ADP-ribosylation factor 6	14	PM	ARF6	9606	protein-coding
+55738	ADP-ribosylation factor GTPase activating protein 1	20		ARFGAP1	9606	protein-coding
+84364	ADP-ribosylation factor GTPase activating protein 2	11	PM	ARFGAP2	9606	protein-coding
+26286	ADP-ribosylation factor GTPase activating protein 3	22		ARFGAP3	9606	protein-coding
+10565	ADP-ribosylation factor guanine nucleotide-exchange factor 1 (brefeldin A-inhibited)	8		ARFGEF1	9606	protein-coding
+10564	ADP-ribosylation factor guanine nucleotide-exchange factor 2 (brefeldin A-inhibited)	20		ARFGEF2	9606	protein-coding
+27236	ADP-ribosylation factor interacting protein 1	4		ARFIP1	9606	protein-coding
+23647	ADP-ribosylation factor interacting protein 2	11	PM	ARFIP2	9606	protein-coding
+10139	ADP-ribosylation factor related protein 1	20		ARFRP1	9606	protein-coding
+383	arginase 1	6		ARG1	9606	protein-coding
+384	arginase 2	14		ARG2	9606	protein-coding
+503582	arginine-fifty homeobox	3	DBTF HOMEO	ARGFX	9606	protein-coding
+55082	arginine and glutamate rich 1	13		ARGLU1	9606	protein-coding
+392	Rho GTPase activating protein 1	11	PM	ARHGAP1	9606	protein-coding
+79658	Rho GTPase activating protein 10	4	PM	ARHGAP10	9606	protein-coding
+9824	Rho GTPase activating protein 11A	15		ARHGAP11A	9606	protein-coding
+89839	Rho GTPase activating protein 11B	15		ARHGAP11B	9606	protein-coding
+94134	Rho GTPase activating protein 12	10		ARHGAP12	9606	protein-coding
+55843	Rho GTPase activating protein 15	2		ARHGAP15	9606	protein-coding
+55114	Rho GTPase activating protein 17	16		ARHGAP17	9606	protein-coding
+93663	Rho GTPase activating protein 18	6		ARHGAP18	9606	protein-coding
+84986	Rho GTPase activating protein 19	10		ARHGAP19	9606	protein-coding
+57569	Rho GTPase activating protein 20	11		ARHGAP20	9606	protein-coding
+57584	Rho GTPase activating protein 21	10		ARHGAP21	9606	protein-coding
+58504	Rho GTPase activating protein 22	10		ARHGAP22	9606	protein-coding
+57636	Rho GTPase activating protein 23	17		ARHGAP23	9606	protein-coding
+83478	Rho GTPase activating protein 24	4	PM	ARHGAP24	9606	protein-coding
+9938	Rho GTPase activating protein 25	2		ARHGAP25	9606	protein-coding
+23092	Rho GTPase activating protein 26	5		ARHGAP26	9606	protein-coding
+201176	Rho GTPase activating protein 27	17		ARHGAP27	9606	protein-coding
+79822	Rho GTPase activating protein 28	18		ARHGAP28	9606	protein-coding
+9411	Rho GTPase activating protein 29	1		ARHGAP29	9606	protein-coding
+257106	Rho GTPase activating protein 30	1		ARHGAP30	9606	protein-coding
+393	Rho GTPase activating protein 4	X		ARHGAP4	9606	protein-coding
+394	Rho GTPase activating protein 5	14		ARHGAP5	9606	protein-coding
+395	Rho GTPase activating protein 6	X		ARHGAP6	9606	protein-coding
+23779	Rho GTPase activating protein 8	22		ARHGAP8	9606	protein-coding
+64333	Rho GTPase activating protein 9	12		ARHGAP9	9606	protein-coding
+396	Rho GDP dissociation inhibitor (GDI) alpha	17		ARHGDIA	9606	protein-coding
+397	Rho GDP dissociation inhibitor (GDI) beta	12		ARHGDIB	9606	protein-coding
+398	Rho GDP dissociation inhibitor (GDI) gamma	16		ARHGDIG	9606	protein-coding
+9138	Rho guanine nucleotide exchange factor (GEF) 1	19	PM	ARHGEF1	9606	protein-coding
+9639	Rho guanine nucleotide exchange factor (GEF) 10	8		ARHGEF10	9606	protein-coding
+55160	Rho guanine nucleotide exchange factor (GEF) 10-like	1		ARHGEF10L	9606	protein-coding
+9826	Rho guanine nucleotide exchange factor (GEF) 11	1	PM	ARHGEF11	9606	protein-coding
+23365	Rho guanine nucleotide exchange factor (GEF) 12	11		ARHGEF12	9606	protein-coding
+22899	Rho guanine nucleotide exchange factor (GEF) 15	17		ARHGEF15	9606	protein-coding
+27237	Rho guanine nucleotide exchange factor (GEF) 16	1		ARHGEF16	9606	protein-coding
+9828	Rho guanine nucleotide exchange factor (GEF) 17	11		ARHGEF17	9606	protein-coding
+23370	Rho/Rac guanine nucleotide exchange factor (GEF) 18	19		ARHGEF18	9606	protein-coding
+128272	Rho guanine nucleotide exchange factor (GEF) 19	1		ARHGEF19	9606	protein-coding
+9181	Rho/Rac guanine nucleotide exchange factor (GEF) 2	1	PM	ARHGEF2	9606	protein-coding
+50650	Rho guanine nucleotide exchange factor (GEF) 3	3		ARHGEF3	9606	protein-coding
+50649	Rho guanine nucleotide exchange factor (GEF) 4	2	PM	ARHGEF4	9606	protein-coding
+7984	Rho guanine nucleotide exchange factor (GEF) 5	7		ARHGEF5	9606	protein-coding
+445328	Rho guanine nucleotide exchange factor (GEF) 35	7		ARHGEF35	9606	protein-coding
+9459	Rac/Cdc42 guanine nucleotide exchange factor (GEF) 6	X		ARHGEF6	9606	protein-coding
+8874	Rho guanine nucleotide exchange factor (GEF) 7	13		ARHGEF7	9606	protein-coding
+23229	Cdc42 guanine nucleotide exchange factor (GEF) 9	X		ARHGEF9	9606	protein-coding
+8289	AT rich interactive domain 1A (SWI-like)	1	DBTF ARID	ARID1A	9606	protein-coding
+57492	AT rich interactive domain 1B (SWI1-like)	6	DBTF ARID	ARID1B	9606	protein-coding
+196528	AT rich interactive domain 2 (ARID, RFX-like)	12	DBTF ARID	ARID2	9606	protein-coding
+1820	AT rich interactive domain 3A (BRIGHT-like)	19	DBTF ARID	ARID3A	9606	protein-coding
+10620	AT rich interactive domain 3B (BRIGHT-like)	15	DBTF ARID	ARID3B	9606	protein-coding
+138715	AT rich interactive domain 3C (BRIGHT-like)	9	DBTF ARID	ARID3C	9606	protein-coding
+5926	AT rich interactive domain 4A (RBP1-like)	14	DBTC ARID	ARID4A	9606	protein-coding
+51742	AT rich interactive domain 4B (RBP1-like)	1	DBTC ARID	ARID4B	9606	protein-coding
+10865	AT rich interactive domain 5A (MRF1-like)	2	DBTF ARID	ARID5A	9606	protein-coding
+84159	AT rich interactive domain 5B (MRF1-like)	10	DBTF ARID	ARID5B	9606	protein-coding
+25820	ariadne RBR E3 ubiquitin protein ligase 1	15	UBI-E3	ARIH1	9606	protein-coding
+10425	ariadne RBR E3 ubiquitin protein ligase 2	3	UBI-E3	ARIH2	9606	protein-coding
+400	ADP-ribosylation factor-like 1	12		ARL1	9606	protein-coding
+285598	ADP-ribosylation factor-like 10	5		ARL10	9606	protein-coding
+115761	ADP-ribosylation factor-like 11	13		ARL11	9606	protein-coding
+392509	ADP-ribosylation factor-like 13A	X		ARL13A	9606	protein-coding
+200894	ADP-ribosylation factor-like 13B	3		ARL13B	9606	protein-coding
+80117	ADP-ribosylation factor-like 14	3		ARL14	9606	protein-coding
+54622	ADP-ribosylation factor-like 15	5		ARL15	9606	protein-coding
+339231	ADP-ribosylation factor-like 16	17		ARL16	9606	protein-coding
+641522	ADP-ribosylation factor-like 17			ARL17	9606	
+51326	ADP-ribosylation factor-like 17A	17		ARL17A	9606	protein-coding
+402	ADP-ribosylation factor-like 2	11		ARL2	9606	protein-coding
+23568	ADP-ribosylation factor-like 2 binding protein	16		ARL2BP	9606	protein-coding
+399667	ADP-ribosylation factor-like 2 binding protein-like			ARL2BPL	9606	
+403	ADP-ribosylation factor-like 3	10		ARL3	9606	protein-coding
+10124	ADP-ribosylation factor-like 4A	7	PM	ARL4A	9606	protein-coding
+10123	ADP-ribosylation factor-like 4C	2	PM	ARL4C	9606	protein-coding
+379	ADP-ribosylation factor-like 4D	17	PM	ARL4D	9606	protein-coding
+26225	ADP-ribosylation factor-like 5A	2		ARL5A	9606	protein-coding
+221079	ADP-ribosylation factor-like 5B	10		ARL5B	9606	protein-coding
+390790	ADP-ribosylation factor-like 5C	17		ARL5C	9606	protein-coding
+84100	ADP-ribosylation factor-like 6	3	PM	ARL6	9606	protein-coding
+23204	ADP-ribosylation factor-like 6 interacting protein 1	16		ARL6IP1	9606	protein-coding
+51329	ADP-ribosylation factor-like 6 interacting protein 4	12		ARL6IP4	9606	protein-coding
+10550	ADP-ribosylation factor-like 6 interacting protein 5	3		ARL6IP5	9606	protein-coding
+151188	ADP-ribosylation factor-like 6 interacting protein 6	2		ARL6IP6	9606	protein-coding
+127829	ADP-ribosylation factor-like 8A	1		ARL8A	9606	protein-coding
+55207	ADP-ribosylation factor-like 8B	3		ARL8B	9606	protein-coding
+132946	ADP-ribosylation factor-like 9	4		ARL9	9606	protein-coding
+55156	armadillo repeat containing 1	8		ARMC1	9606	protein-coding
+83787	armadillo repeat containing 10	7		ARMC10	9606	protein-coding
+84071	armadillo repeat containing 2	6		ARMC2	9606	protein-coding
+219681	armadillo repeat containing 3	10		ARMC3	9606	protein-coding
+55130	armadillo repeat containing 4	10		ARMC4	9606	protein-coding
+79798	armadillo repeat containing 5	16	nonDNA-BTB	ARMC5	9606	protein-coding
+93436	armadillo repeat containing 6	19		ARMC6	9606	protein-coding
+79637	armadillo repeat containing 7	17		ARMC7	9606	protein-coding
+25852	armadillo repeat containing 8	3	TC	ARMC8	9606	protein-coding
+80210	armadillo repeat containing 9	2		ARMC9	9606	protein-coding
+51309	armadillo repeat containing, X-linked 1	X		ARMCX1	9606	protein-coding
+9823	armadillo repeat containing, X-linked 2	X		ARMCX2	9606	protein-coding
+51566	armadillo repeat containing, X-linked 3	X		ARMCX3	9606	protein-coding
+158947	armadillo repeat containing, X-linked 4			ARMCX4	9606	
+64860	armadillo repeat containing, X-linked 5	X		ARMCX5	9606	protein-coding
+54470	armadillo repeat containing, X-linked 6	X		ARMCX6	9606	protein-coding
+387715	age-related maculopathy susceptibility 2	10		ARMS2	9606	protein-coding
+405	aryl hydrocarbon receptor nuclear translocator	1	DBTF HLH	ARNT	9606	protein-coding
+9915	aryl-hydrocarbon receptor nuclear translocator 2	15	DBTF HLH	ARNT2	9606	protein-coding
+406	aryl hydrocarbon receptor nuclear translocator-like	11	DBTF HLH	ARNTL	9606	protein-coding
+56938	aryl hydrocarbon receptor nuclear translocator-like 2	12	DBTF HLH	ARNTL2	9606	protein-coding
+653857	ARP3 actin-related protein 3 homolog C (yeast)	7		ACTR3C	9606	protein-coding
+10552	actin related protein 2/3 complex, subunit 1A, 41kDa	7		ARPC1A	9606	protein-coding
+10095	actin related protein 2/3 complex, subunit 1B, 41kDa	7		ARPC1B	9606	protein-coding
+10109	actin related protein 2/3 complex, subunit 2, 34kDa	2		ARPC2	9606	protein-coding
+10094	actin related protein 2/3 complex, subunit 3, 21kDa	12		ARPC3	9606	protein-coding
+10093	actin related protein 2/3 complex, subunit 4, 20kDa	3		ARPC4	9606	protein-coding
+10092	actin related protein 2/3 complex, subunit 5, 16kDa	1		ARPC5	9606	protein-coding

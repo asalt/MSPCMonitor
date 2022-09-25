@@ -1,0 +1,117 @@
+GeneID	GeneDescription	GeneChromosome	FunCats	GeneSymbol	TaxonID	GeneType
+13043	cortactin	7		Cttn	10090	protein-coding
+13433	DNA methyltransferase (cytosine-5) 1	9	TC	Dnmt1	10090	protein-coding
+13685	eukaryotic translation initiation factor 4E binding protein 1	8		Eif4ebp1	10090	protein-coding
+15182	histone deacetylase 2	10	TC	Hdac2	10090	protein-coding
+15191	hepatoma-derived growth factor	3	TC?	Hdgf	10090	protein-coding
+15312	high mobility group nucleosomal binding domain 1	16		Hmgn1	10090	protein-coding
+15361	high mobility group AT-hook 1	17	DBTF ATH	Hmga1	10090	protein-coding
+15364	high mobility group AT-hook 2	10	DBTF ATH	Hmga2	10090	protein-coding
+15516	heat shock protein 90 alpha (cytosolic), class B member 1	17		Hsp90ab1	10090	protein-coding
+16765	stathmin 1	4		Stmn1	10090	protein-coding
+16800	rho/rac guanine nucleotide exchange factor (GEF) 2	3		Arhgef2	10090	protein-coding
+16905	lamin A	3		Lmna	10090	protein-coding
+17118	myristoylated alanine rich protein kinase C substrate	10		Marcks	10090	protein-coding
+17216	minichromosome maintenance deficient 2 mitotin (S. cerevisiae)	6	TC??	Mcm2	10090	protein-coding
+17345	antigen identified by monoclonal antibody Ki 67	7		Mki67	10090	protein-coding
+17356	myeloid/lymphoid or mixed-lineage leukemia (trithorax homolog, Drosophila); translocated to, 4	17	PM	Mllt4	10090	protein-coding
+17357	MARCKS-like 1	4	PM	Marcksl1	10090	protein-coding
+17755	microtubule-associated protein 1B	13	PM	Map1b	10090	protein-coding
+17758	microtubule-associated protein 4	9		Map4	10090	protein-coding
+17975	nucleolin	1		Ncl	10090	protein-coding
+18008	nestin	3		Nes	10090	protein-coding
+18028	nuclear factor I/B	4	DBTF CTF-MAD	Nfib	10090	protein-coding
+18148	nucleophosmin 1	11		Npm1	10090	protein-coding
+18432	MYB binding protein (P160) 1a	11		Mybbp1a	10090	protein-coding
+18536	pericentriolar material 1	8		Pcm1	10090	protein-coding
+18810	plectin	15	PM	Plec	10090	protein-coding
+20020	polymerase (RNA) II (DNA directed) polypeptide A	11	POLR2	Polr2a	10090	protein-coding
+20239	ataxin 2	5		Atxn2	10090	protein-coding
+20462	transformer 2 beta homolog (Drosophila)	16	RNA	Tra2b	10090	protein-coding
+20588	SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily c, member 1	9	CBTC HOMEO	Smarcc1	10090	protein-coding
+20602	nuclear receptor co-repressor 2	5	DBTC? HOMEO	Ncor2	10090	protein-coding
+20742	spectrin beta, non-erythrocytic 1	11	PM	Sptbn1	10090	protein-coding
+21453	Treacher Collins Franceschetti syndrome 1, homolog	18	TC?	Tcof1	10090	protein-coding
+21873	tight junction protein 2	19	KI-M, PM	Tjp2	10090	protein-coding
+21917	thymopoietin	10		Tmpo	10090	protein-coding
+21961	tensin 1	1		Tns1	10090	protein-coding
+22240	dihydropyrimidinase-like 3	18		Dpysl3	10090	protein-coding
+22352	vimentin	2		Vim	10090	protein-coding
+22589	alpha thalassemia/mental retardation syndrome X-linked homolog (human)	X	TC, UBI-E3	Atrx	10090	protein-coding
+22608	Y box protein 1	4	DBTF CSD	Ybx1	10090	protein-coding
+22668	splicing factor 1	19	SPL	Sf1	10090	protein-coding
+27223	transformation related protein 53 binding protein 1	2	TC?	Trp53bp1	10090	protein-coding
+27979	eukaryotic translation initiation factor 3, subunit B	5	RIBO	Eif3b	10090	protein-coding
+29810	BCL2-associated athanogene 3	7		Bag3	10090	protein-coding
+51796	serine/arginine repetitive matrix 1	4	SPL	Srrm1	10090	protein-coding
+53761	proline-rich coiled-coil 2A	17		Prrc2a	10090	protein-coding
+55949	eukaryotic translation elongation factor 1 beta 2	1	RIBO	Eef1b2	10090	protein-coding
+56040	ribosomal protein, large, P1	9		Rplp1	10090	protein-coding
+56045	SAM domain and HD domain, 1	2		Samhd1	10090	protein-coding
+56200	DEAD (Asp-Glu-Ala-Asp) box polypeptide 21	10	RNA	Ddx21	10090	protein-coding
+56215	apoptotic chromatin condensation inducer 1	14	TC?	Acin1	10090	protein-coding
+66314	tumor protein D52-like 2	2		Tpd52l2	10090	protein-coding
+66395	AHNAK nucleoprotein (desmoyokin)	19		Ahnak	10090	protein-coding
+66656	eukaryotic translation elongation factor 1 delta (guanine nucleotide exchange protein)	15		Eef1d	10090	protein-coding
+67299	dedicator of cytokinesis 7	4		Dock7	10090	protein-coding
+67302	zinc finger CCCH type containing 13	14	RNA?	Zc3h13	10090	protein-coding
+67788	SWI5 dependent recombination repair 1	19		Sfr1	10090	protein-coding
+67996	serine/arginine-rich splicing factor 6	2	TC RNA	Srsf6	10090	protein-coding
+68028	ribosomal protein L22 like 1	3		Rpl22l1	10090	protein-coding
+69207	serine/arginine-rich splicing factor 11	3	TC RNA	Srsf11	10090	protein-coding
+70497	Rho GTPase activating protein 17	7		Arhgap17	10090	protein-coding
+71175	Nipped-B homolog (Drosophila)	15		Nipbl	10090	protein-coding
+72567	BCL2-associated transcription factor 1	10	TC	Bclaf1	10090	protein-coding
+73158	La ribonucleoprotein domain family, member 1	11	RNA	Larp1	10090	protein-coding
+73473	IWS1 homolog (S. cerevisiae)	18		Iws1	10090	protein-coding
+74383	ubiquitin-associated protein 2-like	3	UBI-UBD	Ubap2l	10090	protein-coding
+75705	eukaryotic translation initiation factor 4B	15	RIBO	Eif4b	10090	protein-coding
+75956	serine/arginine repetitive matrix 2	17		Srrm2	10090	protein-coding
+76014	zinc finger CCCH-type containing 18	8	RNA?	Zc3h18	10090	protein-coding
+76707	CLIP associating protein 1	1		Clasp1	10090	protein-coding
+77300	Ras association (RalGDS/AF-6) and pleckstrin homology domains 1	1	PM	Raph1	10090	protein-coding
+81898	splicing factor 3b, subunit 1	1	TC RNA	Sf3b1	10090	protein-coding
+83701	serrate RNA effector molecule homolog (Arabidopsis)	5		Srrt	10090	protein-coding
+83925	trichorhinophalangeal syndrome I (human)	15	DBTF ZNF-GATA	Trps1	10090	protein-coding
+98415	nuclear casein kinase and cyclin-dependent kinase substrate 1	1		Nucks1	10090	protein-coding
+100710	PDS5, regulator of cohesion maintenance, homolog B (S. cerevisiae)	5	DBTF ATH	Pds5b	10090	protein-coding
+101214	transformer 2 alpha homolog (Drosophila)	6	RNA	Tra2a	10090	protein-coding
+101706	nuclear mitotic apparatus protein 1	7		Numa1	10090	protein-coding
+101994	chromosome alignment maintaining phosphoprotein 1	8	DBTF ZNF-C2H2	Champ1	10090	protein-coding
+102693	pleckstrin homology-like domain, family B, member 1	9		Phldb1	10090	protein-coding
+104027	synaptopodin	18	PM	Synpo	10090	protein-coding
+192176	filamin, alpha	X	PM	Flna	10090	protein-coding
+208643	eukaryotic translation initiation factor 4, gamma 1	16		Eif4g1	10090	protein-coding
+215051	BUD13 homolog (yeast)	9		Bud13	10090	protein-coding
+225115	supervillin	18	PM	Svil	10090	protein-coding
+226982	eukaryotic translation initiation factor 5B	1	RIBO	Eif5b	10090	protein-coding
+228005	peptidyl-prolyl isomerase G (cyclophilin G)	2		Ppig	10090	protein-coding
+228140	tankyrase 1 binding protein 1	2	TC	Tnks1bp1	10090	protein-coding
+229279	heterogeneous nuclear ribonucleoprotein A3	2	TC RNA	Hnrnpa3	10090	protein-coding
+229700	RNA binding motif protein 15	3	RNA	Rbm15	10090	protein-coding
+230753	thyroid hormone receptor associated protein 3	4	TC	Thrap3	10090	protein-coding
+233871	ataxin 2-like	7		Atxn2l	10090	protein-coding
+233977	protein tyrosine phosphatase, receptor type, f polypeptide (PTPRF), interacting protein (liprin), alpha 1	7		Ppfia1	10090	protein-coding
+238330	interferon regulatory factor 2 binding protein-like	12	TC	Irf2bpl	10090	protein-coding
+244895	pseudopodium-enriched atypical kinase 1	9	KI-P-Other-NKF3	Peak1	10090	protein-coding
+270110	interferon regulatory factor 2 binding protein 2	8	TC	Irf2bp2	10090	protein-coding
+319876	Cobl-like 1	2		Cobll1	10090	protein-coding
+545389	centrosomal protein 170	1		Cep170	10090	protein-coding
+665775	biorientation of chromosomes in cell division 1-like	5		Bod1l	10090	protein-coding
+8669	eukaryotic translation initiation factor 3, subunit J	15		EIF3J	9606	protein-coding
+55705	importin 9	1		IPO9	9606	protein-coding
+8106	poly(A) binding protein, nuclear 1	14	RNA	PABPN1	9606	protein-coding
+6124	ribosomal protein L4	15		RPL4	9606	protein-coding
+93190	chromosome 1 open reading frame 158	1		C1orf158	9606	protein-coding
+3190	heterogeneous nuclear ribonucleoprotein K	9	TC RNA	HNRNPK	9606	protein-coding
+79868	ALG13, UDP-N-acetylglucosaminyltransferase subunit	X		ALG13	9606	protein-coding
+79026	AHNAK nucleoprotein	11		AHNAK	9606	protein-coding
+105379026	uncharacterized LOC105379026	5		LOC105379026	9606	ncRNA
+106479026	NECAP endocytosis associated 1 pseudogene 2	2		NECAP1P2	9606	pseudo
+60	actin, beta	7		ACTB	9606	protein-coding
+641371	acyl-CoA thioesterase 1	14		ACOT1	9606	protein-coding
+71	actin gamma 1	17		ACTG1	9606	protein-coding
+2316	filamin A, alpha	X	PM	FLNA	9606	protein-coding
+2316	filamin A, alpha	X	PM	FLNA	9606	protein-coding
+1915	eukaryotic translation elongation factor 1 alpha 1	6	RIBO	EEF1A1	9606	protein-coding
+2317	filamin B, beta	3	PM	FLNB	9606	protein-coding
