@@ -13,8 +13,8 @@ from mspcmonitor import importers, crud
 import sqlmodel
 from sqlmodel import Session, SQLModel, create_engine
 from io import StringIO
-from . import importers, models
-from .importers import Experiments_Importer, get_db
+from mspcmonitor import importers, models
+from mspcmonitor.importers import Experiments_Importer, get_db
 
 # tmp_path = Path("PYTEST_TMPDIR/test_create_file0")
 
