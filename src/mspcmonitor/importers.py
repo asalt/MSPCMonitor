@@ -16,7 +16,7 @@ import logging
 from .logging_config import get_logger
 
 logger = get_logger(__name__)
-logger.setLevel(logging.ERROR)
+logger.setLevel(logging.INFO)
 # logging.basicConfig(level=0)
 
 # Efrom .database import engine
@@ -39,17 +39,17 @@ def get_db(engine=database.engine):
         db.close()
 
 
-# @lru_cache()
-# def _get_recnos(key="default"):
-#     exps = crud.get_all_experiments(get_db())
-#     _recnos = [x.recno for x in exps]
-#     return _recnos
-#
-#
-# def check_if_recno_exists(recno):
-#     recnos = _get_recnos()
-#     return recno in recnos
-#
+@lru_cache()
+def get_all_recnos(engine=database.engine, key="default"):
+    exps = crud.get_all_experiments(get_db(engine))
+    _recnos = [x.recno for x in exps]
+    return _recnos
+
+
+def check_if_recno_exists(recno, **kwargs):
+    recnos = get_all_recnos(**kwargs)
+    return recno in recnos
+
 
 def _make_inmemory_db_and_get_engine():
 
@@ -220,7 +220,7 @@ class Importer:
         with get_db(self.engine) as db:
             # here we can change the order of when things happen
             # right now all models are made, then added 1 by 1
-            models = self.make_models(data, db=db)
+            models = self.make_models(data=data, db=db)
             if models is None:
                 return
             for model in tqdm(models, desc=f"writing to database"):
@@ -235,9 +235,6 @@ class Importer:
 
 class ImporterWithChecker(Importer):
     def post_get_data(self, data: pd.DataFrame):
-        import pdb
-
-        pdb.set_trace()
         if "EXPRecNo" not in data.columns:
             return
         _recno = data.iloc[0]["EXPRecNo"]
@@ -256,7 +253,7 @@ class ImporterCreateMissingGenes(Importer):
             raise ValueError(f"{self.__class__} : must pass open db")
         # kwargs = dict()
         # add all values
-        logger.info(f"{self.__class__} : making models")
+        # logger.info(f"{self.__class__} : making models")
 
         geneid = row["GeneID"]
 
@@ -283,7 +280,6 @@ class ImporterCreateMissingGenes(Importer):
         # import pdb; pdb.set_trace()
         model = super().make_model(row=row, db=db, **kwargs)
         # model = self.model(**kwargs)
-        # import ipdb; ipdb.set_trace()
         return model
 
 
@@ -315,8 +311,9 @@ class Experiments_Importer(Importer):
 
         # print(len(data))
         # print(data.columns)
-        _res = crud.get_all_experiments(get_db(self.engine))
-        _existing_recnos = [x.recno for x in _res]
+        # _res = crud.get_all_experiments(get_db(self.engine))
+        # _existing_recnos = [x.recno for x in _res]
+        _existing_recnos  = get_all_recnos(engine=self.engine)
         return data[
             (~data.exp_EXPRecNo.isna()) & (~data.exp_EXPRecNo.isin(_existing_recnos))
         ].sort_values(by="exp_EXPRecNo", ascending=False)
@@ -343,7 +340,7 @@ class ExperimentRuns_Importer(Importer):
             logger.warning(f"could not find `exprun_EXPRecNo` column. Check data file")
             logger.warning(f"exiting")
             return
-        _existing_recnos = _get_recnos()
+        _existing_recnos = get_all_recnos(engine=self.engine)
         return data[data.exprun_EXPRecNo.isin(_existing_recnos)]
 
     def make_model(self, row, **kwargs):
@@ -364,12 +361,9 @@ class ExperimentRuns_Importer(Importer):
         _runno = row["exprun_EXPRunNo"]
         _searchno = row["exprun_EXPSearchNo"]
         #
-        if check_if_recno_exists(_recno) == False:
-            print(f"{_recno} does not exist")
-            return
         experiment = crud.get_experiment_by_recno(get_db(), _recno)
         if experiment is None:
-            print(f"{_recno} does not exist")
+            logger.warning(f"{_recno} does not exist")
             return
         #
         #
@@ -391,14 +385,15 @@ class ExperimentRuns_Importer(Importer):
         #     # exprun = models.ExperimentRun(recno=recno,runno=runno,searchno=searchno, experiment=experiment, instrument=instrument, is_imported=is_imported, is_grouped=is_grouped)
         # =======
         # this is new
-        kws["experiment_id"] = experiment.id
+        kwargs["experiment_id"] = experiment.id
         exprun = crud.get_exprun_by_recrunsearch(get_db(), _recno, _runno, _searchno)
         #print(kws)
+        # if exprun.runno==426:
+        #     import ipdb; ipdb.set_trace()
         if exprun is not None:
             print(f"{_recno}:{_runno} already exists")
             return
-        # import ipdb; ipdb.set_trace()
-        exprun = models.ExperimentRun(**kws)
+        exprun = models.ExperimentRun(**kwargs)
         # >>>>>>> 05
         return exprun
 
@@ -425,12 +420,19 @@ class E2G_QUAL_Importer(ImporterCreateMissingGenes):
         if exprun is None:
             logger.warning(f"{self.__class__} : {recno}_{runno}_{searchno} not found")
             return
+        if exprun.is_imported == True:
+            logger.warning(f"{self.__class__} : {recno}_{runno}_{searchno} has already been imported")
+            return
         exprun  # , exp = res
         kwargs = dict(
             experimentrun=exprun,
-            experimentrun_id=exprun.id,
+            # experimentrun_id=exprun.id,
+            experiment=exprun.experiment
         )
         models = super().make_models(data, db=db, **kwargs)
+
+        # exprun.is_imported = True
+        # crud.add_and_commit(db, exprun)
 
         return models
 
@@ -512,6 +514,25 @@ class E2G_QUANT_Importer(E2G_QUAL_Importer):
 
     def post_make_model(self, model):
         return model
+    def make_models(self, db=None, **kwargs):
+    #def make_models(self, data: pd.DataFrame, db=None):
+        models = super().make_models(db=db, **kwargs)
+        if models is None:
+            return
+        expruns = [model.experimentrun for model in models]
+        exprun0 = expruns[0]
+        # grab exprun
+        if not all(exprun == exprun0 for exprun in expruns):
+            raise ValueError("Got more than one exprun after making models")
+        else:
+            exprun = exprun0
+
+        logger.info(f"Setting {exprun.experiment.recno}_{exprun.runno}_{exprun.searchno} import flag to True")
+        # TODO this needs to be done separately for e2g and psms tables,
+        # TODO make separate flag for each of these data levels
+        exprun.is_imported = True
+        crud.add_and_commit(db, exprun)
+
 
 
 @dataclass(frozen=True)

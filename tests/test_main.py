@@ -2,9 +2,9 @@
 from pathlib import Path
 from re import M
 import pytest
-from .test_fixtures import sqlengine
-from . import models
-
+# from .test_fixtures import sqlengine
+from mspcmonitor import models
+#
 from sqlmodel import Session
 
 

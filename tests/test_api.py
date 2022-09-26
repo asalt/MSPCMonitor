@@ -2,7 +2,7 @@
 
 from fastapi.testclient import TestClient
 
-from .api import app
+from mspcmonitor.api import app
 
 client = TestClient(app)
 

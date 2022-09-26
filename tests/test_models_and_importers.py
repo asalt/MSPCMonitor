@@ -27,18 +27,16 @@ def sqlengine():
 
     from sqlmodel import create_engine, SQLModel
 
-
-    #SQLALCHEMY_DATABASE_URL = "sqlite:///ispec.db"
+    # SQLALCHEMY_DATABASE_URL = "sqlite:///ispec.db"
     SQLALCHEMY_DATABASE_URL = "sqlite:///"
     engine = create_engine(
         SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}, echo=False
     )
 
-
     # if not Path("ispec.db").exists() or True: # TODO separate teardown ?
     #     # import pdb; pdb.set_trace()
     #     SQLModel.metadata.create_all(engine)
-        # crud.create_tables(get_db(SQLALCHEMY_DATABASE_URL))
+    # crud.create_tables(get_db(SQLALCHEMY_DATABASE_URL))
 
     SQLModel.metadata.create_all(engine)
     yield engine
@@ -52,25 +50,33 @@ def genetable():
 
 @pytest.fixture(scope="module")
 def e2g_qual():
-    f = Path(__file__).parent.joinpath("testdata/99995_426_6_labelnone_e2g_QUAL_short.tsv")
+    f = Path(__file__).parent.joinpath(
+        "testdata/99995_426_6_labelnone_e2g_QUAL_short.tsv"
+    )
     return f
 
 
 @pytest.fixture(scope="module")
 def psm_qual():
-    f = Path(__file__).parent.joinpath("testdata/99995_426_6_labelnone_psms_QUAL_short.tsv")
+    f = Path(__file__).parent.joinpath(
+        "testdata/99995_426_6_labelnone_psms_QUAL_short.tsv"
+    )
     return f
 
 
 @pytest.fixture(scope="module")
 def psm_quant():
-    f = Path(__file__).parent.joinpath("testdata/99995_426_6_labelnone_0_psms_QUANT_short.tsv")
+    f = Path(__file__).parent.joinpath(
+        "testdata/99995_426_6_labelnone_0_psms_QUANT_short.tsv"
+    )
     return f
 
 
 @pytest.fixture(scope="module")
 def e2g_quant():
-    f = Path(__file__).parent.joinpath("testdata/99995_426_6_labelnone_e2g_QUANT_short.tsv")
+    f = Path(__file__).parent.joinpath(
+        "testdata/99995_426_6_labelnone_e2g_QUANT_short.tsv"
+    )
     return f
 
 
@@ -229,7 +235,7 @@ def test_psm_qual(sqlengine, psm_qual, genetable, e2g_qual):
     #
     importer = importers.GenesImporter(genetable, sqlengine)
     importer.insert_data()
-    #test_import_genestable(sqlengine, genetable)
+    # test_import_genestable(sqlengine, genetable)
 
     importer = importers.E2G_QUAL_Importer(e2g_qual, sqlengine)
     importer.insert_data()
@@ -243,9 +249,7 @@ def test_psm_qual(sqlengine, psm_qual, genetable, e2g_qual):
 
 
 def test_psm_qual_genes_not_in_db(sqlengine, psm_qual, genetable, e2g_qual):
-    """
-
-    """
+    """ """
 
     # setup
     RECNO = 99995

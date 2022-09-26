@@ -61,7 +61,7 @@ def create(
         logger.info("ispec.db already exists")
         return
 
-    crud.create_tables(get_db())
+    models.create_db_and_tables(engine)
     logger.info("created new database")
     #
 
@@ -83,10 +83,15 @@ def add_exp_table(ispec_export_file: Path):
     return
 
 
-@app.command("add-expruns-table")
+@app.command("add-experimentruns-table")
 def add_exprun_table(ispec_export_file: Path):
     # import_ispec_expruns(ispec_export_file)
+    importers.ExperimentRuns_Importer(ispec_export_file).insert_data(data_kwargs=dict())
+    return
 
+@app.command("add-experimentruns-table")
+def add_exprun_table(ispec_export_file: Path):
+    # import_ispec_expruns(ispec_export_file)
     importers.ExperimentRuns_Importer(ispec_export_file).insert_data(data_kwargs=dict())
     return
 
@@ -95,7 +100,15 @@ def add_exprun_table(ispec_export_file: Path):
 def add_e2g_table(e2g_qual_file: Path, e2g_quant_file: Path):
     # these importers does not make any foreign keys yet
     importers.E2G_QUAL_Importer(e2g_qual_file).insert_data(data_kwargs=dict())
-    # importers.E2G_QUANT_Importer(e2g_quant_file).insert_data(data_kwargs=dict())
+    importers.E2G_QUANT_Importer(e2g_quant_file).insert_data(data_kwargs=dict())
+    # import_e2g(e2g_qual_file=e2g_qual, e2g_quant_file=e2g_quant_file)
+    return
+
+@app.command("add-psm-table")
+def add_e2g_table(psm_qual_file: Path, psm_quant_file: Path):
+    # these importers does not make any foreign keys yet
+    importers.PSM_QUAL_Importer(psm_qual_file).insert_data(data_kwargs=dict())
+    importers.PSM_QUANT_Importer(psm_quant_file).insert_data(data_kwargs=dict())
     # import_e2g(e2g_qual_file=e2g_qual, e2g_quant_file=e2g_quant_file)
     return
 

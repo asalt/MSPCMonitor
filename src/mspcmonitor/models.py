@@ -12,6 +12,8 @@ from sqlalchemy import (
     Float,
     SmallInteger,
 )
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.orm import relationship
 from typing import List, Optional, Dict, Any, Union, Tuple
 from sqlmodel import create_engine
@@ -67,6 +69,7 @@ from .database import engine
 
 
 def create_db_and_tables(engine):
+    engine.begin()
     SQLModel.metadata.create_all(engine)
 
 
