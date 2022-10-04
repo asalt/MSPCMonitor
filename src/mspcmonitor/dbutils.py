@@ -1,6 +1,9 @@
 # dbutils.py
 from dataclasses import dataclass
+from collections import defaultdict
 import sys
+import re
+from typing import List
 
 from functools import lru_cache
 from matplotlib.pyplot import get
@@ -12,7 +15,8 @@ import sqlmodel
 from sqlmodel import Session
 
 from . import crud, models, schemas
-from .database import engine, get_engine
+from mspcmonitor.database import engine, get_engine
+from mspcmonitor import importers
 
 app = typer.Typer(name="db", result_callback=None)
 
@@ -41,6 +45,107 @@ def check_if_recno_exists(recno):
     recnos = _get_recnos()
     return recno in recnos
 
+@app.command('autoimport')
+def autoimport(
+    dry: bool = typer.Option(
+        False, "--dry", '-d', help="Dry run, do not actually execute commands"
+    ),
+    recursive: bool = typer.Option(
+        True,
+        "--recursive", "-r"
+    ),
+    path: Path = typer.Argument(
+        default=Path('.'),
+        help="Root path to monitor",
+    ),
+    ):
+    """
+    this is an autoupload script for bulk insert of ispec tables
+    new functionality will be added later
+    """
+    logger.info(f"searching {path} for new tables")
+    globstr = "*[e2g|psm]*tsv"
+    if recursive is True:
+        _attr  = 'rglob'
+    else:
+        _attr = 'glob'
+    globstr = f"**/{globstr}"
+    files = list(getattr(path, _attr)(globstr))
+    file_groups = get_groups("\d{5,}_\d{1,}_\d{1,}", files)
+    # import ipdb; ipdb.set_trace()
+
+    if len(file_groups) == 0:
+        logger.warning(f"No filegroups identified")
+
+    list(map(lambda fg: logger.info(f"Found filegroup {fg}"), file_groups))
+
+    files_grouped_dict = group_files(file_groups, files)
+
+    _fgd = files_grouped_dict
+    for group in _fgd.keys():
+        for filetype in _fgd[group].keys():
+            for qtype in _fgd[group][filetype].keys():
+                logger.info(f"{group}")
+                logger.info("-"*4+f" filetype: {filetype}")
+                qtype_val = _fgd[group][filetype][qtype]
+                logger.info("-"*6+f" qtype: {qtype}")
+                logger.info('-'*8+f" files: {qtype_val}")
+            #logger.info(f"{group}")
+    # list(map(lambda fg: logger.info(f"Grouped files {fg}\n\n"), files_grouped_dict.items()))
+
+    # for fg in filegroups:
+    #     logger.info(f"Found filegroup {fg}")
+    #     print(fg)
+
+
+    return
+
+def get_groups(pat, inputs):
+    """
+    inputs : List[Path]
+    Get all the groups we have.
+    """
+    p = re.compile(pat)
+    groups = set(m.group() for m in
+                 [p.search(i.name) for i in inputs]
+                 if m)
+    return groups
+
+def get_file_datatype(p:Path, qtype=False):
+    if 'psm' in p.name and not qtype:
+        return 'psm'
+    elif 'e2g' in p.name and not qtype:
+        return 'e2g'
+    elif not qtype:
+        return p.name
+    if qtype:
+        if "QUANT" in p.name:
+            return 'QUANT'
+        elif "QUAL" in p.name:
+            return 'QUAL'
+        else:
+            return p.name
+
+def group_files(groups:set, files:list) -> dict:
+    """
+    {group : [e2g|psm][QUAL|QUANT] = files }
+    """
+    out = defaultdict(lambda: defaultdict(lambda: defaultdict(list) )) # nested x3
+
+    for group in groups:
+        pat = re.compile(f".*{group}.*")
+        #import ipdb; ipdb.set_trace()
+        targets = [x for x in files if pat.search(x.name)]
+        for target in targets:
+            psm_or_e2g = get_file_datatype(target)
+            qual_or_quant = get_file_datatype(target, qtype=True)
+            out[group][psm_or_e2g][qual_or_quant].append(target)
+
+        #out[group] = targets
+    return out
+
+
+
 
 @app.command(
     "create",
@@ -66,7 +171,6 @@ def create(
     #
 
 
-from . import importers
 
 
 @app.command("add-metadata")
