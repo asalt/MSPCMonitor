@@ -67,7 +67,7 @@ def psm_qual():
 @pytest.fixture(scope="module")
 def psm_quant():
     f = Path(__file__).parent.joinpath(
-        "testdata/99995_426_6_labelnone_0_psms_QUANT_short.tsv"
+        "testdata/99995_426_6_labelnone_psms_QUANT_short.tsv"
     )
     return f
 

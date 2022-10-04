@@ -89,6 +89,7 @@ def add_exprun_table(ispec_export_file: Path):
     importers.ExperimentRuns_Importer(ispec_export_file).insert_data(data_kwargs=dict())
     return
 
+
 @app.command("add-experimentruns-table")
 def add_exprun_table(ispec_export_file: Path):
     # import_ispec_expruns(ispec_export_file)
@@ -104,8 +105,9 @@ def add_e2g_table(e2g_qual_file: Path, e2g_quant_file: Path):
     # import_e2g(e2g_qual_file=e2g_qual, e2g_quant_file=e2g_quant_file)
     return
 
+
 @app.command("add-psm-table")
-def add_e2g_table(psm_qual_file: Path, psm_quant_file: Path):
+def add_psm_table(psm_qual_file: Path, psm_quant_file: Path):
     # these importers does not make any foreign keys yet
     importers.PSM_QUAL_Importer(psm_qual_file).insert_data(data_kwargs=dict())
     importers.PSM_QUANT_Importer(psm_quant_file).insert_data(data_kwargs=dict())

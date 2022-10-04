@@ -242,6 +242,8 @@ class Experiment(SQLModel, table=True):
     )
     e2gquals: Optional[List["E2GQual"]] = Relationship(back_populates="experiment")
     e2gquants: Optional[List["E2GQuant"]] = Relationship(back_populates="experiment")
+    # psmquals: Optional[List["PSMQual"]] = Relationship(back_populates="experiment")
+    # psmquants: Optional[List["PSMQuant"]] = Relationship(back_populates="experiment")
     #
     # =======================================================================
     # many to many relationship, do it later or not at all
@@ -320,7 +322,8 @@ class ExperimentRun(SQLModel, table=True):
     tic: bool = Field(default=False)
     is_searched: bool = Field(default=False)
     is_grouped: bool = Field(default=False)
-    is_imported: bool = Field(default=False)
+    is_imported_e2g: bool = Field(default=False)
+    is_imported_psm: bool = Field(default=False)
     refdb: Optional[str] = Field(default=None)
     # is_validated: bool = False
     date: str = Field(default=None)
@@ -337,6 +340,8 @@ class ExperimentRun(SQLModel, table=True):
     rawfiles: Optional[List["RawFile"]] = Relationship(back_populates="experimentrun")
     e2gquants: Optional[List["E2GQuant"]] = Relationship(back_populates="experimentrun")
     e2gquals: Optional[List["E2GQual"]] = Relationship(back_populates="experimentrun")
+    psmquals: Optional[List["PSMQual"]] = Relationship(back_populates="experimentrun")
+    psmquants: Optional[List["PSMQuant"]] = Relationship(back_populates="experimentrun")
 
 
 class Gene(SQLModel, table=True):
@@ -383,6 +388,9 @@ class Gene(SQLModel, table=True):
     e2gquals: Optional[List["E2GQual"]] = Relationship(back_populates="geneid")
     e2gquants: Optional[List["E2GQuant"]] = Relationship(back_populates="geneid")
 
+    psmquals: Optional[List["PSMQual"]] = Relationship(back_populates="geneid")
+    psmquants: Optional[List["PSMQuant"]] = Relationship(back_populates="geneid")
+
 
 class E2GQual(SQLModel, table=True):
     class Config:
@@ -408,7 +416,10 @@ class E2GQual(SQLModel, table=True):
         load_instance = True
 
     id: Optional[int] = Field(primary_key=True)
+    geneid: Optional[Gene] = Relationship(back_populates="e2gquals")
+    geneid_id: Optional[int] = Field(foreign_key="gene.geneid")
     #
+
     experiment: Optional[Experiment] = Relationship(back_populates="e2gquals")
     experiment_id: Optional[int] = Field(default=None, foreign_key="experiment.id")
     experimentrun: Optional[ExperimentRun] = Relationship(back_populates="e2gquals")
@@ -478,9 +489,15 @@ class PSMQuant(SQLModel, table=True):
         }
 
     id: Optional[int] = Field(primary_key=True)
+    geneid: Optional[Gene] = Relationship(back_populates="psmquants")
+    geneid_id: Optional[int] = Field(foreign_key="gene.geneid")
+
+    #
     label: str = Field(default=None)
     reporter_ion_intensity: Optional[float] = Field()
     precursor_ion_auc: Optional[float] = Field()
+    experimentrun: ExperimentRun = Relationship(back_populates="psmquants")
+    experimentrun_id: int = Field(default=None, foreign_key="experimentrun.id")
 
 
 class PSMQual(SQLModel, table=True):
@@ -497,6 +514,14 @@ class PSMQual(SQLModel, table=True):
         }
 
     id: Optional[int] = Field(primary_key=True)
+    geneid: Optional[Gene] = Relationship(back_populates="psmquals")
+    geneid_id: Optional[int] = Field(foreign_key="gene.geneid")
+    experimentrun: ExperimentRun = Relationship(back_populates="psmquals")
+    experimentrun_id: int = Field(default=None, foreign_key="experimentrun.id")
+    #
+    geneid: Optional[Gene] = Relationship(back_populates="psmquals")
+    geneid_id: Optional[int] = Field(foreign_key="gene.geneid")
+    #
     sequence: str = Field(default=None)
     rt: float = Field()
     charge: int = Field()

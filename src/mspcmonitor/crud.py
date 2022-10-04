@@ -5,6 +5,10 @@ from sqlalchemy import and_, or_
 import sqlmodel
 from sqlmodel import Session
 
+from mspcmonitor.logging_config import get_logger
+
+logger = get_logger(__name__)
+
 from . import models, schemas
 
 # test
@@ -54,8 +58,12 @@ def get_all_experiments(db: Session):
     return db.query(models.Experiment).all()
 
 
+def get_all_experimentruns(db: Session):
+    return db.query(models.ExperimentRuns).all()
+
+
 def get_gene_by_id(db: Session, geneid):
-    return db.query(models.Gene).filter(models.Gene.geneid == geneid).first()
+    res = db.query(models.Gene).filter(models.Gene.geneid == geneid).first()
 
 
 def get_all_genes(db: Session):
@@ -64,6 +72,34 @@ def get_all_genes(db: Session):
 
 def get_all_experimentruns(db: Session):
     return db.query(models.ExperimentRun).join(models.Experiment).all()
+
+
+def get_e2gqual(db: Session, recno: int, runno: int, searchno: int, gene: models.Gene):
+
+    # if not isinstance(recno, int):
+    #     raise TypeError(f"recno should be of type int")
+    # if not isinstance(runno, int):
+    #     raise TypeError(f"recno should be of type int")
+
+    # sqlmodel.select(models.ExperimentRun, models.Experiment)
+    statement = (
+        db.query(models.ExperimentRun)
+        .join(models.Experiment)
+        .filter(
+            and_(
+                models.Experiment.recno == recno,
+                models.ExperimentRun.runno == runno,
+                models.ExperimentRun.searchno == searchno,
+            )
+        )
+    )
+    # .filter(models.ExperimentRun.runno == runno)
+
+    # should be 0 or 1
+    assert len(statement.all()) < 2
+
+    return statement.first()
+    # return (
 
 
 def get_exprun_by_recrunsearch(db: Session, recno: int, runno: int, searchno: int):
